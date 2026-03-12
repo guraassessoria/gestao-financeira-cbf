@@ -1,0 +1,73 @@
+name: Verificar Arquivos Não Utilizados
+
+on:
+  schedule:
+    # Executa toda segunda-feira às 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  
+  # Permite disparo manual
+  workflow_dispatch:
+  
+  # Executa em pull requests
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'backend/**'
+      - 'supabase/**'
+
+jobs:
+  check-unused:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Instalar dependências
+        run: npm ci
+      
+      - name: Verificar arquivos não utilizados
+        run: node find-unused-files.js
+      
+      - name: Upload relatório como artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: unused-files-report
+          path: unused-files-report.json
+          retention-days: 30
+      
+      - name: Exibir relatório
+        if: always()
+        run: |
+          echo "=== RELATÓRIO DE ARQUIVOS NÃO UTILIZADOS ==="
+          if [ -f unused-files-report.json ]; then
+            cat unused-files-report.json
+          fi
+      
+      - name: Comentar no PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            if (fs.existsSync('unused-files-report.json')) {
+              const report = JSON.parse(fs.readFileSync('unused-files-report.json', 'utf8'));
+              
+              if (report.unusedCount > 0) {
+                const files = report.unusedFiles.map(f => `- ${f}`).join('\n');
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: `⚠️ **Arquivos não utilizados encontrados (${report.unusedCount})**\n\n${files}\n\nConsidere organizar com: \`npm run organize-unused\``
+                });
+              }
+            }

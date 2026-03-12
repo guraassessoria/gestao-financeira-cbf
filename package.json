@@ -7,9 +7,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "vercel:setup": "node scripts/js/vercel-setup.js",
+    "vercel:login": "npx vercel login",
+    "vercel:link": "npx vercel link",
+    "supabase:connect": "node scripts/js/supabase-connect.js",
     "supabase:link": "supabase link --project-ref ifsyeqzodimustnxgwyt",
     "supabase:push": "supabase db push",
-    "supabase:migrations": "supabase migration list"
+    "supabase:migrations": "supabase migration list",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:status": "supabase status",
+    "supabase:types": "supabase gen types typescript --linked --schema public > src/types/database.ts",
+    "check-unused": "node scripts/js/find-unused-files.js",
+    "organize-unused": "node scripts/js/organize-unused-files.js",
+    "cleanup": "npm run check-unused && npm run organize-unused",
+    "sync": "powershell -ExecutionPolicy Bypass -File scripts/commit.ps1"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.15.0",
@@ -29,7 +41,9 @@
     "eslint": "^9.29.0",
     "eslint-config-next": "15.5.12",
     "postcss": "^8.5.3",
+    "supabase": "^2.78.1",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vercel": "^50.32.3"
   }
 }

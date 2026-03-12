@@ -48,3 +48,8 @@ ENV/
 
 # Supabase CLI local metadata
 supabase/.temp/
+
+# Gerados automaticamente
+unused-files-report.json
+unused-files/
+.vercel-config.json

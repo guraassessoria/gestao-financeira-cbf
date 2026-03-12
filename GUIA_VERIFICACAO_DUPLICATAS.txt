@@ -1,0 +1,129 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║               VERIFICAÇÃO DE DUPLICATAS - GUIA MANUAL                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Para verificar se há linhas duplicadas no banco, execute as queries abaixo no
+Supabase Dashboard > SQL Editor:
+
+────────────────────────────────────────────────────────────────────────────────
+[QUERY 1] LANÇAMENTOS CONTÁBEIS (CT2) - Procurar por duplicatas
+────────────────────────────────────────────────────────────────────────────────
+
+SELECT 
+  filial,
+  numero_lote,
+  sub_lote,
+  tipo_lcto,
+  cta_debito,
+  cta_credito,
+  COUNT(*) as total_duplicados,
+  ARRAY_AGG(id ORDER BY created_at DESC) as ids
+FROM lancamentos_contabeis
+WHERE numero_lote IS NOT NULL
+GROUP BY filial, numero_lote, sub_lote, tipo_lcto, cta_debito, cta_credito
+HAVING COUNT(*) > 1
+ORDER BY total_duplicados DESC;
+
+RESULTADO ESPERADO:
+  ❌ Se retornar linhas → há duplicatas em CT2
+  ✓ Se retornar 0 linhas → sem duplicatas
+
+────────────────────────────────────────────────────────────────────────────────
+[QUERY 2] DE-PARA DRE - Procurar por duplicatas
+────────────────────────────────────────────────────────────────────────────────
+
+SELECT
+  codigo_conta_contabil,
+  codigo_centro_custo,
+  COUNT(*) as total_duplicados,
+  ARRAY_AGG(id ORDER BY created_at DESC) as ids
+FROM de_para_dre
+GROUP BY codigo_conta_contabil, codigo_centro_custo
+HAVING COUNT(*) > 1
+ORDER BY total_duplicados DESC;
+
+RESULTADO ESPERADO:
+  ❌ Se retornar linhas → há duplicatas em De-Para DRE
+  ✓ Se retornar 0 linhas → sem duplicatas
+
+────────────────────────────────────────────────────────────────────────────────
+[QUERY 3] ESTRUTURA DRE - Procurar por duplicatas
+────────────────────────────────────────────────────────────────────────────────
+
+SELECT
+  codigo_conta,
+  COUNT(*) as total_duplicados,
+  ARRAY_AGG(id ORDER BY created_at DESC) as ids
+FROM estrutura_dre
+GROUP BY codigo_conta
+HAVING COUNT(*) > 1
+ORDER BY total_duplicados DESC;
+
+RESULTADO ESPERADO:
+  ❌ Se retornar linhas → há duplicatas em Estrutura DRE
+  ✓ Se retornar 0 linhas → sem duplicatas
+
+────────────────────────────────────────────────────────────────────────────────
+[QUERY 4] CONTAR TOTAL DE REGISTROS POR TABELA
+────────────────────────────────────────────────────────────────────────────────
+
+SELECT 
+  'lancamentos_contabeis' as tabela,
+  COUNT(*) as total
+FROM lancamentos_contabeis
+UNION ALL
+SELECT 'de_para_dre' as tabela, COUNT(*) as total
+FROM de_para_dre
+UNION ALL
+SELECT 'estrutura_dre' as tabela, COUNT(*) as total
+FROM estrutura_dre
+UNION ALL
+SELECT 'contas_contabeis' as tabela, COUNT(*) as total
+FROM contas_contabeis
+UNION ALL
+SELECT 'centros_custo' as tabela, COUNT(*) as total
+FROM centros_custo
+ORDER BY total DESC;
+
+────────────────────────────────────────────────────────────────────────────────
+[LIMPEZA] Se houver duplicatas, remova os registros antigos
+────────────────────────────────────────────────────────────────────────────────
+
+-- ⚠ CUIDADO: Isso APAGARÁ registros duplicados mantendo o mais recente
+
+DELETE FROM lancamentos_contabeis
+WHERE id NOT IN (
+  SELECT MAX(id)
+  FROM lancamentos_contabeis
+  WHERE numero_lote IS NOT NULL
+  GROUP BY filial, numero_lote, sub_lote, tipo_lcto, cta_debito, cta_credito
+)
+AND numero_lote IS NOT NULL;
+
+DELETE FROM de_para_dre
+WHERE id NOT IN (
+  SELECT MAX(id)
+  FROM de_para_dre
+  GROUP BY codigo_conta_contabil, codigo_centro_custo
+);
+
+DELETE FROM estrutura_dre
+WHERE id NOT IN (
+  SELECT MAX(id)
+  FROM estrutura_dre
+  GROUP BY codigo_conta
+);
+
+────────────────────────────────────────────────────────────────────────────────
+PRÓXIMAS AÇÕES
+────────────────────────────────────────────────────────────────────────────────
+
+1. Execute a QUERY 1, 2, 3 para identificar duplicatas
+2. Anote os resultados encontrados
+3. Se houver duplicatas, execute os comandos DELETE correspondentes
+4. Depois execute a QUERY 4 para confirmar os totais
+5. Aplique a migration 006 que cria os UNIQUE constraints:
+   
+   supabase db push -p <PASSWORD>
+
+Isso vai prevenir futuras duplicações dos mesmos lançamentos.

@@ -1,0 +1,9 @@
+codigo_conta_contabil;codigo_linha_dre;codigo_centro_custo;observacao
+1.01.01;1.1.1;001;Receita de consultoria - sede principal
+1.01.01;1.1.1;002;Receita de consultoria - unidade regional
+1.01.02;1.1.2;001;Receita de servicos de treinamento
+1.02.01;1.2.1;001;Juros de conta corrente
+2.01.01;2.1.1;;Folha de pagamento consolidada
+2.01.02;2.1.2;001;Materiais acesso administrativo
+2.02.01;2.2.1;;Aluguel sala operacional
+2.02.02;2.2.2;001;Energia eletrica

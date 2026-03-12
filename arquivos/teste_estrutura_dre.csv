@@ -1,0 +1,15 @@
+codigo_conta;descricao_conta;codigo_cta_superior;descricao_superior;nivel;nivel_visualizacao
+1;RECEITA BRUTA;;;;;1;1
+1.1;Receita com Venda de Serviços;1;RECEITA BRUTA;2;2
+1.1.1;Receita - Consultoria;1.1;Receita com Venda de Serviços;3;3
+1.1.2;Receita - Treinamento;1.1;Receita com Venda de Serviços;3;3
+1.2;Receita Financeira;1;RECEITA BRUTA;2;2
+1.2.1;Juros Recebidos;1.2;Receita Financeira;3;3
+2;CUSTOS E DESPESAS;;;;;1;1
+2.1;Custos Diretos;2;CUSTOS E DESPESAS;2;2
+2.1.1;Folha de Pagamento;2.1;Custos Diretos;3;3
+2.1.2;Materiais;2.1;Custos Diretos;3;3
+2.2;Despesas Operacionais;2;CUSTOS E DESPESAS;2;2
+2.2.1;Aluguel;2.2;Despesas Operacionais;3;3
+2.2.2;Utilitários;2.2;Despesas Operacionais;3;3
+3;RESULTADO LÍQUIDO;;;;;1;1

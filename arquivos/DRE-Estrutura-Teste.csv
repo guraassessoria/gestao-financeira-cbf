@@ -1,0 +1,25 @@
+codigo_conta;descricao_conta;nivel;nivel_visualizacao
+3000;RECEITAS OPERACIONAIS;1;1
+3100;Receita de Vendas;2;2
+3110;Vendas Produto A;3;3
+3120;Vendas Produto B;3;3
+3200;Receita de Prestacao de Servicos;2;2
+3210;Consultoria;3;3
+3220;Suporte Tecnico;3;3
+4000;CUSTOS OPERACIONAIS;1;1
+4100;Custo de Vendas;2;2
+4110;Custo Produto A;3;3
+4120;Custo Produto B;3;3
+4200;Custo de Servicos;2;2
+4210;Custo Consultoria;3;3
+5000;DESPESAS OPERACIONAIS;1;1
+5100;Despesas Administrativas;2;2
+5110;Salarios;3;3
+5120;Aluguel;3;3
+5200;Despesas Comerciais;2;2
+5210;Publicidade;3;3
+6000;RECEITAS E DESPESAS NAO OPERACIONAIS;1;1
+6100;Receitas Financeiras;2;2
+6110;Juros Recebidos;3;3
+6200;Despesas Financeiras;2;2
+6210;Juros Pagos;3;3

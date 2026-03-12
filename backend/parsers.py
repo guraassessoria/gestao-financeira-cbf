@@ -37,19 +37,20 @@ def _parse_valor(val: str) -> float:
         return 0.0
 
 
-def _parse_date(val: str) -> str | None:
-    """Converte 'DD/MM/AAAA' para 'YYYY-MM-DD'. Retorna None se inválido."""
+def _parse_date(val: str) -> str:
+    """Converte 'DD/MM/AAAA' para 'YYYY-MM-DD'. Usa hoje se inválido."""
     val = val.strip()
     try:
         return datetime.strptime(val, "%d/%m/%Y").strftime("%Y-%m-%d")
     except ValueError:
-        return None
+        # Retorna data de hoje como fallback
+        return datetime.now().strftime("%Y-%m-%d")
 
 
-def _periodo(date_str: str | None) -> str | None:
+def _periodo(date_str: str) -> str:
     """Extrai 'YYYY-MM' de 'YYYY-MM-DD'."""
     if not date_str:
-        return None
+        return datetime.now().strftime("%Y-%m")
     return date_str[:7]
 
 

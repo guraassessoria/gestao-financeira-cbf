@@ -32,6 +32,7 @@ function DREList() {
   const [periodoAtual, setPeriodoAtual] = React.useState<string>('')
   const [periodoComparativo, setPeriodoComparativo] = React.useState<string | null>(null)
   const [visao, setVisao] = React.useState<VisaoPeriodo>('anual')
+  const [expandedRows, setExpandedRows] = React.useState<Record<string, boolean>>({})
   const [mensagem, setMensagem] = React.useState<string>('')
   const [erro, setErro] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
@@ -60,6 +61,9 @@ function DREList() {
       setPeriodoAtual(data.periodo || '')
       setPeriodoComparativo(data.periodoComparativo || null)
       setVisao(data.visao || 'anual')
+      setExpandedRows(
+        Object.fromEntries((data.linhas || []).filter((linha) => linha.temFilhos).map((linha) => [linha.codigoConta, true]))
+      )
       setMensagem(data.mensagem || '')
     } catch {
       setErro('Falha de comunicação ao carregar a DRE')
@@ -72,6 +76,38 @@ function DREList() {
   React.useEffect(() => {
     void carregarDRE()
   }, [carregarDRE])
+
+  const linhasByCodigo = React.useMemo(() => {
+    return new Map(linhas.map((linha) => [linha.codigoConta, linha]))
+  }, [linhas])
+
+  const linhasVisiveis = React.useMemo(() => {
+    const isVisible = (linha: LinhaDRECalculada) => {
+      let codigoSuperior = linha.codigoSuperior
+
+      while (codigoSuperior) {
+        const superior = linhasByCodigo.get(codigoSuperior)
+        if (!superior) {
+          break
+        }
+        if (superior.temFilhos && expandedRows[superior.codigoConta] === false) {
+          return false
+        }
+        codigoSuperior = superior.codigoSuperior
+      }
+
+      return true
+    }
+
+    return linhas.filter(isVisible)
+  }, [expandedRows, linhas, linhasByCodigo])
+
+  const toggleRow = React.useCallback((codigoConta: string) => {
+    setExpandedRows((current) => ({
+      ...current,
+      [codigoConta]: current[codigoConta] === false,
+    }))
+  }, [])
 
   if (loading) {
     return <div className="bg-white rounded-lg border border-slate-200 p-6 text-slate-600">Carregando DRE...</div>
@@ -139,8 +175,13 @@ function DREList() {
             </div>
 
             <div className="divide-y divide-slate-100">
-              {linhas.map((linha) => (
-                <DREOrderedRow key={linha.codigoConta} node={linha} />
+              {linhasVisiveis.map((linha) => (
+                <DREOrderedRow
+                  key={linha.codigoConta}
+                  node={linha}
+                  expanded={expandedRows[linha.codigoConta] !== false}
+                  onToggle={toggleRow}
+                />
               ))}
             </div>
           </>
@@ -150,7 +191,15 @@ function DREList() {
   )
 }
 
-function DREOrderedRow({ node }: { node: LinhaDRECalculada }) {
+function DREOrderedRow({
+  node,
+  expanded,
+  onToggle,
+}: {
+  node: LinhaDRECalculada
+  expanded: boolean
+  onToggle: (codigoConta: string) => void
+}) {
   const isResultadoFinal = node.codigoConta === '1854'
   const isGrupo = Boolean(node.temFilhos)
   const paddingLeft = Math.max(0, (node.nivel - 1) * 18)
@@ -168,11 +217,35 @@ function DREOrderedRow({ node }: { node: LinhaDRECalculada }) {
         !isResultadoFinal && !isGrupo ? 'bg-white' : '',
       ].join(' ')}
     >
-      <div className="min-w-0" style={{ paddingLeft: `${paddingLeft}px` }}>
-        <p className={`truncate ${isResultadoFinal || isGrupo ? 'font-semibold' : 'font-medium'} ${isResultadoFinal ? 'text-white' : 'text-slate-800'}`}>
-          {node.descricao}
-        </p>
-        <p className={`text-xs mt-1 ${isResultadoFinal ? 'text-blue-100' : 'text-slate-500'}`}>Código: {node.codigoConta}</p>
+      <div className="min-w-0 flex items-start gap-2" style={{ paddingLeft: `${paddingLeft}px` }}>
+        {isGrupo ? (
+          <button
+            type="button"
+            onClick={() => onToggle(node.codigoConta)}
+            className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded transition-colors ${
+              isResultadoFinal ? 'hover:bg-blue-800 text-white' : 'hover:bg-blue-100 text-slate-600'
+            }`}
+            aria-label={expanded ? 'Recolher linha' : 'Expandir linha'}
+          >
+            <svg
+              className={`h-4 w-4 transition-transform ${expanded ? 'rotate-90' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        ) : (
+          <div className="h-5 w-5 flex-shrink-0" />
+        )}
+
+        <div className="min-w-0">
+          <p className={`truncate ${isResultadoFinal || isGrupo ? 'font-semibold' : 'font-medium'} ${isResultadoFinal ? 'text-white' : 'text-slate-800'}`}>
+            {node.descricao}
+          </p>
+          <p className={`text-xs mt-1 ${isResultadoFinal ? 'text-blue-100' : 'text-slate-500'}`}>Código: {node.codigoConta}</p>
+        </div>
       </div>
 
       <div className={`text-right font-semibold tabular-nums ${isResultadoFinal ? 'text-white' : 'text-slate-900'}`}>

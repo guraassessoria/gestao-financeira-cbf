@@ -4,29 +4,6 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "env": [
-    {
-      "key": "NEXT_PUBLIC_SUPABASE_URL",
-      "description": "URL da instância Supabase"
-    },
-    {
-      "key": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-      "description": "Chave anônima do Supabase"
-    },
-    {
-      "key": "SUPABASE_SERVICE_ROLE_KEY",
-      "description": "Chave de serviço do Supabase",
-      "value": ""
-    },
-    {
-      "key": "NEXTAUTH_SECRET",
-      "description": "Secret para NextAuth"
-    },
-    {
-      "key": "NEXTAUTH_URL",
-      "description": "URL de produção para NextAuth"
-    }
-  ],
   "functions": {
     "src/app/api/**/*.ts": {
       "maxDuration": 30

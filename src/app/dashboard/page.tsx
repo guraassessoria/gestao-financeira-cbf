@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, DollarSign, PieChart } from 'lucide-react'
+import { TrendingUp, DollarSign, PieChart } from 'lucide-react'
 import { KPICard, KPIGrid } from '@/components/dashboard/KPICard'
 
 export default function DashboardPage() {

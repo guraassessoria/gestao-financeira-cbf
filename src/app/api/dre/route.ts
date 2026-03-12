@@ -38,6 +38,8 @@ type SaldoContaEntidadeEntry = {
   saldo: Saldo
 }
 
+type VisaoPeriodo = 'anual' | 'mensal'
+
 function normalizeCode(value: string | null | undefined): string {
   return String(value || '').trim().replace(/[^0-9A-Za-z]/g, '')
 }
@@ -68,6 +70,10 @@ function periodToDate(periodo: string): Date {
   return new Date(y, (m || 1) - 1, 1)
 }
 
+function normalizeVisaoPeriodo(value: string | null): VisaoPeriodo {
+  return value === 'mensal' ? 'mensal' : 'anual'
+}
+
 function getSaldoNatureza(
   saldo: Saldo,
   condNormal: string | null | undefined
@@ -84,7 +90,7 @@ function addSaldo(map: Map<string, Saldo>, key: string, tipo: 'debito' | 'credit
   map.set(key, atual)
 }
 
-function montarArvore(estrutura: NoDRE[]): NoDRE[] {
+function montarArvore(estrutura: NoDRE[]): { raizes: NoDRE[]; byCodigo: Map<string, NoDRE> } {
   const byCodigo = new Map<string, NoDRE>()
 
   for (const linha of estrutura) {
@@ -93,15 +99,17 @@ function montarArvore(estrutura: NoDRE[]): NoDRE[] {
 
   const raizes: NoDRE[] = []
 
-  for (const linha of byCodigo.values()) {
-    if (linha.codigoSuperior && byCodigo.has(linha.codigoSuperior)) {
-      byCodigo.get(linha.codigoSuperior)!.filhos.push(linha)
+  for (const linha of estrutura) {
+    const no = byCodigo.get(linha.codigoConta)!
+
+    if (no.codigoSuperior && byCodigo.has(no.codigoSuperior)) {
+      byCodigo.get(no.codigoSuperior)!.filhos.push(no)
     } else {
-      raizes.push(linha)
+      raizes.push(no)
     }
   }
 
-  return raizes
+  return { raizes, byCodigo }
 }
 
 function consolidarValores(no: NoDRE): { atual: number; anterior: number } {
@@ -134,11 +142,12 @@ function toLinhaDRE(no: NoDRE): LinhaDRECalculada {
     nivel: no.nivel,
     nivelVisualizacao: no.nivelVisualizacao,
     codigoSuperior: no.codigoSuperior,
+    temFilhos: no.filhos.length > 0,
     valor: no.valorAtualBase,
     valorAnterior,
     variacaoAbsoluta,
     variacaoPercentual,
-    filhos: no.filhos.map(toLinhaDRE),
+    filhos: [],
   }
 }
 
@@ -152,6 +161,7 @@ export async function GET(request: NextRequest) {
     const supabase = createServiceClient()
     const url = new URL(request.url)
     const requestedPeriod = url.searchParams.get('periodo')
+    const visao = normalizeVisaoPeriodo(url.searchParams.get('visao'))
 
     const { data: periodRows, error: periodError } = await supabase
       .from('lancamentos_contabeis')
@@ -175,6 +185,7 @@ export async function GET(request: NextRequest) {
           periodosDisponiveis: [],
           periodo: null,
           periodoComparativo: null,
+          visao,
           linhas: [],
           mensagem: 'Nenhum lançamento contábil encontrado. Faça upload do CT2.',
         },
@@ -182,20 +193,28 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const periodoAtual =
-      requestedPeriod && periodosDisponiveis.includes(requestedPeriod)
-        ? requestedPeriod
-        : periodosDisponiveis[0]
+    const periodosExibicao = visao === 'mensal' ? periodosMensaisDisponiveis : periodosDisponiveis
 
-    const idxAtual = periodosDisponiveis.indexOf(periodoAtual)
-    const periodoComparativo = idxAtual >= 0 && idxAtual < periodosDisponiveis.length - 1
-      ? periodosDisponiveis[idxAtual + 1]
+    const periodoAtual =
+      requestedPeriod && periodosExibicao.includes(requestedPeriod)
+        ? requestedPeriod
+        : periodosExibicao[0]
+
+    const idxAtual = periodosExibicao.indexOf(periodoAtual)
+    const periodoComparativo = idxAtual >= 0 && idxAtual < periodosExibicao.length - 1
+      ? periodosExibicao[idxAtual + 1]
       : null
 
-    const periodosConsultaAtual = periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoAtual}-`))
-    const periodosConsultaComparativo = periodoComparativo
-      ? periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoComparativo}-`))
-      : []
+    const periodosConsultaAtual = visao === 'mensal'
+      ? [periodoAtual]
+      : periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoAtual}-`))
+
+    const periodosConsultaComparativo = !periodoComparativo
+      ? []
+      : visao === 'mensal'
+        ? [periodoComparativo]
+        : periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoComparativo}-`))
+
     const periodosConsulta = [...new Set([...periodosConsultaAtual, ...periodosConsultaComparativo])]
 
     const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes] = await Promise.all([
@@ -248,9 +267,10 @@ export async function GET(request: NextRequest) {
     if (estrutura.length === 0) {
       return NextResponse.json(
         {
-          periodosDisponiveis,
+          periodosDisponiveis: periodosExibicao,
           periodo: periodoAtual,
           periodoComparativo,
+          visao,
           linhas: [],
           mensagem: 'Estrutura DRE não carregada. Faça upload do arquivo Estrutura DRE.',
         },
@@ -261,9 +281,10 @@ export async function GET(request: NextRequest) {
     if (dePara.length === 0) {
       return NextResponse.json(
         {
-          periodosDisponiveis,
+          periodosDisponiveis: periodosExibicao,
           periodo: periodoAtual,
           periodoComparativo,
+          visao,
           linhas: [],
           mensagem: 'De-Para DRE não carregado. Faça upload do arquivo De-Para DRE.',
         },
@@ -480,17 +501,18 @@ export async function GET(request: NextRequest) {
       filhos: [],
     }))
 
-    const arvore = montarArvore(nosBase)
-    for (const raiz of arvore) {
+    const { raizes, byCodigo } = montarArvore(nosBase)
+    for (const raiz of raizes) {
       consolidarValores(raiz)
     }
 
-    const linhas = arvore.map(toLinhaDRE)
+    const linhas = estrutura.map((linha) => toLinhaDRE(byCodigo.get(linha.codigo_conta)!))
 
     return NextResponse.json({
-      periodosDisponiveis,
+      periodosDisponiveis: periodosExibicao,
       periodo: periodoAtual,
       periodoComparativo,
+      visao,
       linhas,
     })
   } catch (error) {

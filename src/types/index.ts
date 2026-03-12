@@ -101,6 +101,7 @@ export interface LinhaDRECalculada {
   nivel: number
   nivelVisualizacao: 1 | 2 | 3
   codigoSuperior: string | null
+  temFilhos?: boolean
   valor: number
   valorAnterior: number | null
   variacaoAbsoluta: number | null

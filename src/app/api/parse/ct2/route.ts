@@ -68,7 +68,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const lancamentos = result.data as LancamentoContabil[]
+    // Extrair array de lancamentos do resultado do parser
+    const parseResult = result.data as any
+    const lancamentos = (parseResult.lancamentos || []) as LancamentoContabil[]
+
+    if (lancamentos.length === 0) {
+      return NextResponse.json(
+        { error: 'Nenhum lançamento válido encontrado no arquivo' },
+        { status: 400 }
+      )
+    }
 
     // Criar cliente Supabase com service role (pode inserir sem RLS)
     const supabase = createServiceClient()

@@ -20,6 +20,20 @@ type NoDRE = {
   filhos: NoDRE[]
 }
 
+function normalizeCode(value: string | null | undefined): string {
+  return String(value || '').trim().replace(/[^0-9A-Za-z]/g, '')
+}
+
+function fixMojibake(value: string | null | undefined): string {
+  const text = String(value || '')
+  if (!/[ÃÂ]/.test(text)) return text
+  try {
+    return Buffer.from(text, 'latin1').toString('utf8')
+  } catch {
+    return text
+  }
+}
+
 function periodToDate(periodo: string): Date {
   const [y, m] = periodo.split('-').map(Number)
   return new Date(y, (m || 1) - 1, 1)
@@ -58,15 +72,6 @@ function montarArvore(estrutura: NoDRE[]): NoDRE[] {
     }
   }
 
-  const sortRec = (nos: NoDRE[]) => {
-    nos.sort((a, b) => {
-      if (a.nivel !== b.nivel) return a.nivel - b.nivel
-      return a.codigoConta.localeCompare(b.codigoConta)
-    })
-    for (const no of nos) sortRec(no.filhos)
-  }
-
-  sortRec(raizes)
   return raizes
 }
 
@@ -158,10 +163,11 @@ export async function GET(request: NextRequest) {
       ? [periodoAtual, periodoComparativo]
       : [periodoAtual]
 
-    const [estruturaRes, deParaRes, contasRes, lancamentosRes] = await Promise.all([
+    const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes] = await Promise.all([
       supabase
         .from('estrutura_dre')
-        .select('codigo_conta, descricao_conta, codigo_cta_superior, nivel, nivel_visualizacao'),
+        .select('id, codigo_conta, descricao_conta, codigo_cta_superior, nivel, nivel_visualizacao')
+        .order('id', { ascending: true }),
       supabase
         .from('de_para_dre')
         .select('codigo_linha_dre, codigo_conta_contabil, codigo_centro_custo'),
@@ -172,17 +178,37 @@ export async function GET(request: NextRequest) {
         .from('lancamentos_contabeis')
         .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, valor')
         .in('periodo', periodosConsulta),
+      supabase
+        .from('entidades_dre')
+        .select('codigo, descricao'),
     ])
 
     if (estruturaRes.error) return NextResponse.json({ error: estruturaRes.error.message }, { status: 500 })
     if (deParaRes.error) return NextResponse.json({ error: deParaRes.error.message }, { status: 500 })
     if (contasRes.error) return NextResponse.json({ error: contasRes.error.message }, { status: 500 })
     if (lancamentosRes.error) return NextResponse.json({ error: lancamentosRes.error.message }, { status: 500 })
+    if (entidadesRes.error) return NextResponse.json({ error: entidadesRes.error.message }, { status: 500 })
 
     const estrutura = estruturaRes.data || []
     const dePara = deParaRes.data || []
     const contas = contasRes.data || []
     const lancamentos = lancamentosRes.data || []
+    const entidades = entidadesRes.data || []
+
+    const estruturaByCodeNormalized = new Map<string, string>()
+    for (const e of estrutura) {
+      estruturaByCodeNormalized.set(normalizeCode(e.codigo_conta), e.codigo_conta)
+    }
+
+    const linhaFromEntidadeByCodigo = new Map<string, string>()
+    for (const entidade of entidades) {
+      const codigoEntidade = normalizeCode(entidade.codigo)
+      const descricao = fixMojibake(entidade.descricao)
+      const match = descricao.match(/^\s*(\d+)\s*-\|-\s*/)
+      if (codigoEntidade && match?.[1]) {
+        linhaFromEntidadeByCodigo.set(codigoEntidade, match[1])
+      }
+    }
 
     if (estrutura.length === 0) {
       return NextResponse.json(
@@ -212,7 +238,7 @@ export async function GET(request: NextRequest) {
 
     const condNormalByConta = new Map<string, string>()
     for (const c of contas) {
-      condNormalByConta.set(c.cod_conta, c.cond_normal || 'Credora')
+      condNormalByConta.set(normalizeCode(c.cod_conta), c.cond_normal || 'Credora')
     }
 
     const saldoContaPeriodo = new Map<string, Saldo>()
@@ -223,16 +249,28 @@ export async function GET(request: NextRequest) {
       const valor = Number(l.valor || 0)
 
       if (l.cta_debito) {
-        addSaldo(saldoContaPeriodo, `${periodo}|${l.cta_debito}`, 'debito', valor)
+        const contaDeb = normalizeCode(l.cta_debito)
+        addSaldo(saldoContaPeriodo, `${periodo}|${contaDeb}`, 'debito', valor)
         if (l.c_custo_deb) {
-          addSaldo(saldoContaCcPeriodo, `${periodo}|${l.cta_debito}|${l.c_custo_deb}`, 'debito', valor)
+          addSaldo(
+            saldoContaCcPeriodo,
+            `${periodo}|${contaDeb}|${normalizeCode(l.c_custo_deb)}`,
+            'debito',
+            valor
+          )
         }
       }
 
       if (l.cta_credito) {
-        addSaldo(saldoContaPeriodo, `${periodo}|${l.cta_credito}`, 'credito', valor)
+        const contaCred = normalizeCode(l.cta_credito)
+        addSaldo(saldoContaPeriodo, `${periodo}|${contaCred}`, 'credito', valor)
         if (l.c_custo_crd) {
-          addSaldo(saldoContaCcPeriodo, `${periodo}|${l.cta_credito}|${l.c_custo_crd}`, 'credito', valor)
+          addSaldo(
+            saldoContaCcPeriodo,
+            `${periodo}|${contaCred}|${normalizeCode(l.c_custo_crd)}`,
+            'credito',
+            valor
+          )
         }
       }
     }
@@ -245,9 +283,23 @@ export async function GET(request: NextRequest) {
     }
 
     for (const m of dePara) {
-      const conta = m.codigo_conta_contabil
-      const linha = m.codigo_linha_dre
-      const cc = m.codigo_centro_custo
+      const conta = normalizeCode(m.codigo_conta_contabil)
+      const linhaNorm = normalizeCode(m.codigo_linha_dre)
+
+      let linha = estruturaByCodeNormalized.get(linhaNorm)
+      if (!linha) {
+        const linhaViaEntidade = linhaFromEntidadeByCodigo.get(linhaNorm)
+        if (linhaViaEntidade) {
+          linha = estruturaByCodeNormalized.get(normalizeCode(linhaViaEntidade))
+        }
+      }
+
+      const cc = normalizeCode(m.codigo_centro_custo)
+
+      if (!linha) {
+        continue
+      }
+
       const condNormal = condNormalByConta.get(conta)
 
       const saldoAtual = cc
@@ -268,7 +320,7 @@ export async function GET(request: NextRequest) {
 
     const nosBase: NoDRE[] = estrutura.map((e) => ({
       codigoConta: e.codigo_conta,
-      descricao: e.descricao_conta,
+      descricao: fixMojibake(e.descricao_conta),
       nivel: e.nivel,
       nivelVisualizacao: (e.nivel_visualizacao as 1 | 2 | 3) || 1,
       codigoSuperior: e.codigo_cta_superior,

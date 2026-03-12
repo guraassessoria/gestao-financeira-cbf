@@ -69,7 +69,9 @@ function findHeaderRow(rows: string[][], expectedCol: string): number {
 
 async function readCsv(path: string): Promise<{ headers: string[]; records: Record<string, string>[] }> {
   const buffer = await readFile(path)
-  const content = buffer.toString('latin1')
+  const utf8Content = buffer.toString('utf8')
+  const replacementCount = (utf8Content.match(/\uFFFD/g) || []).length
+  const content = replacementCount === 0 ? utf8Content : buffer.toString('latin1')
   const delimiter = detectDelimiter(content)
   const rows = content
     .split(/\r?\n/)
@@ -296,7 +298,24 @@ export async function parseDeParaDRETS(path: string): Promise<PythonResult<DePar
 
     records.forEach((r, index) => {
       const conta = pick(r, ['codigo_conta_contabil', 'codigo conta contabil', 'conta_protheus', 'cod_conta', 'conta'])
-      const linhaDre = pick(r, ['codigo_linha_dre', 'codigo linha dre', 'codigo_dre', 'linha_dre', 'cod_dre'])
+      const descricaoContaDre = pick(r, ['descricao conta dre', 'descricao conta'])
+
+      let linhaDre = pick(
+        r,
+        [
+          'codigo_linha_dre',
+          'codigo linha dre',
+          'codigo_dre',
+          'linha_dre',
+          'cod_dre',
+          'codigo de para',
+        ]
+      )
+
+      const matchDescricao = descricaoContaDre.match(/^\s*(\d+)\s*-\|-\s*/)
+      if (matchDescricao?.[1]) {
+        linhaDre = matchDescricao[1]
+      }
 
       if (!conta || !linhaDre) {
         erros.push(`Linha ${index + 1}: codigo_conta_contabil/codigo_linha_dre obrigatórios`)

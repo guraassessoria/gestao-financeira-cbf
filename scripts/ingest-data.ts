@@ -41,11 +41,22 @@ function parseCSVRows(content: string, skipLines = 2): string[][] {
     .map(line => line.split(';'))
 }
 
-function extractTdText(html: string): string {
-  return html
-    .replace(/<[^>]+>/g, '')
+// Strips all HTML tags and decodes basic HTML entities from a cell value.
+// Input is trusted TOTVS-generated HTML — this is text extraction, not sanitization.
+function extractTdText(rawHtml: string): string {
+  // Iteratively strip tags to handle edge cases like nested/malformed tags
+  let text = rawHtml
+  let prev: string
+  do {
+    prev = text
+    text = text.replace(/<[^>]*>/g, '')
+  } while (text !== prev)
+
+  return text
     .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')  // decode &amp; last to prevent double-unescaping
     .trim()
 }
 

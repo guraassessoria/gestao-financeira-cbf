@@ -19,7 +19,7 @@ const perguntas = [
 export default function RelatoriosPage() {
   const [ano, setAno] = useState(2025)
   const [tipoRelatorio, setTipoRelatorio] = useState('diretoria')
-  const [respostas, setRespostas] = useState<Record<string, string>>({})
+  const [answers, setAnswers] = useState<Record<string, string>>({})
   const [gerado, setGerado] = useState(false)
 
   const handleGerar = () => {
@@ -76,9 +76,9 @@ export default function RelatoriosPage() {
                 <textarea
                   className="w-full border rounded-md p-2 text-sm min-h-[80px] resize-y"
                   placeholder={p.placeholder}
-                  value={respostas[p.id] || ''}
+                  value={answers[p.id] || ''}
                   onChange={(e) =>
-                    setRespostas((prev) => ({ ...prev, [p.id]: e.target.value }))
+                    setAnswers((prev) => ({ ...prev, [p.id]: e.target.value }))
                   }
                 />
               </div>
@@ -107,13 +107,13 @@ export default function RelatoriosPage() {
                 <p className="font-semibold text-base">
                   Relatório para {tipoRelatorio === 'diretoria' ? 'Reunião de Diretoria' : tipoRelatorio === 'notas' ? 'Notas Explicativas' : 'Sumário Executivo'} — Exercício {ano}
                 </p>
-                {perguntas.map((p) => respostas[p.id] ? (
+                {perguntas.map((p) => answers[p.id] ? (
                   <div key={p.id}>
                     <p className="font-medium">{p.label}</p>
-                    <p className="text-muted-foreground mt-1">{respostas[p.id]}</p>
+                    <p className="text-muted-foreground mt-1">{answers[p.id]}</p>
                   </div>
                 ) : null)}
-                {Object.keys(respostas).length === 0 && (
+                {Object.keys(answers).length === 0 && (
                   <p className="text-muted-foreground italic">Nenhuma narrativa preenchida ainda.</p>
                 )}
               </div>

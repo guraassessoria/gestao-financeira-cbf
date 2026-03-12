@@ -24,7 +24,7 @@ function formatPercent(value: number | null): string {
 
 function LinhaRow({ linha, moeda, nivel = 0 }: { linha: LinhaFinanceira; moeda: 'BRL' | 'USD'; nivel?: number }) {
   const isSintetica = linha.tipo === 'sintetica'
-  const variacaoPositiva = linha.variacao_absoluta >= 0
+  const isPositiveVariation = linha.variacao_absoluta >= 0
   
   return (
     <>
@@ -42,10 +42,10 @@ function LinhaRow({ linha, moeda, nivel = 0 }: { linha: LinhaFinanceira; moeda: 
         <TableCell className="text-right font-mono text-muted-foreground">
           {formatCurrency(linha.valor_anterior, moeda)}
         </TableCell>
-        <TableCell className={cn('text-right font-mono', variacaoPositiva ? 'text-green-600' : 'text-red-600')}>
+        <TableCell className={cn('text-right font-mono', isPositiveVariation ? 'text-green-600' : 'text-red-600')}>
           {formatCurrency(linha.variacao_absoluta, moeda)}
         </TableCell>
-        <TableCell className={cn('text-right font-mono', variacaoPositiva ? 'text-green-600' : 'text-red-600')}>
+        <TableCell className={cn('text-right font-mono', isPositiveVariation ? 'text-green-600' : 'text-red-600')}>
           {formatPercent(linha.variacao_percentual)}
         </TableCell>
       </TableRow>

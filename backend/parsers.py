@@ -79,6 +79,36 @@ def _read_csv(path: str) -> tuple[list[str], list[dict]]:
     return headers, records
 
 
+def _normalizar_classe_conta(val: str) -> str:
+    """Normaliza variações de 'Analítica'/'Sintética' vindas do TOTVS."""
+    v = val.strip().lower()
+    if v in ("analitica", "analítica", "analitico", "analítico"):
+        return "Analítica"
+    if v in ("sintetica", "sintética", "sintetico", "sintético"):
+        return "Sintética"
+    return val.strip()
+
+
+def _normalizar_classe_cc(val: str) -> str:
+    """Normaliza variações de 'Analítico'/'Sintético' para centros de custo."""
+    v = val.strip().lower()
+    if v in ("analitico", "analítico", "analitica", "analítica"):
+        return "Analítico"
+    if v in ("sintetico", "sintético", "sintetica", "sintética"):
+        return "Sintético"
+    return val.strip()
+
+
+def _normalizar_classe_cv0(val: str) -> str:
+    """Normaliza variações de 'Analítica'/'Sintética' para entidades CV0."""
+    v = val.strip().lower()
+    if v in ("analitica", "analítica"):
+        return "Analítica"
+    if v in ("sintetica", "sintética"):
+        return "Sintética"
+    return val.strip()
+
+
 # ─────────────────────────────────────────────
 # CT1 — Plano de Contas
 # ─────────────────────────────────────────────
@@ -95,7 +125,7 @@ def parse_ct1(path: str) -> list[dict[str, Any]]:
             "filial":       r.get("Filial", "01"),
             "cod_conta":    cod,
             "descricao":    r.get("Desc Moeda 1", ""),
-            "classe":       r.get("Classe Conta", "Analítica"),
+            "classe":       _normalizar_classe_conta(r.get("Classe Conta", "Analítica")),
             "cond_normal":  r.get("Cond Normal", "Devedora"),
             "cta_superior": r.get("Cta Superior", "") or None,
             "aceita_cc":    r.get("Aceita CC", "N").upper() == "S",
@@ -122,8 +152,8 @@ def parse_ctt(path: str) -> list[dict[str, Any]]:
             "filial":      r.get("Filial", "01"),
             "cod_cc":      cod,
             "descricao":   r.get("Desc Moeda 1", ""),
-            "classe":      r.get("Classe", "Analítico"),
-            "cond_normal": r.get("Cond Normal", "Despesa"),
+            "classe":      _normalizar_classe_cc(r.get("Classe", "Analítico")),
+            "cond_normal": r.get("Cond Normal", "Despesa") if r.get("Cond Normal", "") in ("Receita", "Despesa") else "Despesa",
             "cc_superior": r.get("CC Superior", "") or None,
             "bloqueado":   r.get("CC Bloq", "").lower() in ("s", "sim", "bloqueado", "1"),
         })
@@ -148,7 +178,7 @@ def parse_cv0(path: str) -> list[dict[str, Any]]:
             "item":         r.get("Item", ""),
             "codigo":       cod,
             "descricao":    r.get("Descrição", r.get("Descricao", "")),
-            "classe":       r.get("Classe", "Analítica"),
+            "classe":       _normalizar_classe_cv0(r.get("Classe", "Analítica")),
             "cond_normal":  r.get("Cond Normal", "Devedora"),
             "bloqueada":    r.get("Bloqueada", "").lower() in ("s", "sim", "1"),
         })

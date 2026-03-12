@@ -145,7 +145,9 @@ export async function POST(request: NextRequest) {
 
       const { error: insertError } = await supabase
         .from('lancamentos_contabeis')
-        .insert(lancamentoRecords)
+        .upsert(lancamentoRecords, {
+          onConflict: 'filial,numero_lote,sub_lote,tipo_lcto,cta_debito,cta_credito'
+        })
 
       if (insertError) {
         // Atualizar upload_logs com erro

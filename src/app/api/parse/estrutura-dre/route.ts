@@ -43,9 +43,18 @@ export async function POST(request: NextRequest) {
 
     const supabase = createServiceClient()
 
+    const { error: deleteError } = await supabase
+      .from('estrutura_dre')
+      .delete()
+      .not('id', 'is', null)
+
+    if (deleteError) {
+      return NextResponse.json({ error: `Erro ao limpar estrutura DRE anterior: ${deleteError.message}` }, { status: 500 })
+    }
+
     const { error } = await supabase
       .from('estrutura_dre')
-      .upsert(linhas, { onConflict: 'codigo_conta' })
+      .insert(linhas)
 
     if (error) {
       return NextResponse.json({ error: `Erro ao salvar estrutura DRE: ${error.message}` }, { status: 500 })

@@ -20,8 +20,30 @@ type NoDRE = {
   filhos: NoDRE[]
 }
 
+type SaldoContaEntry = {
+  conta: string
+  saldo: Saldo
+}
+
+type SaldoContaCcEntry = {
+  conta: string
+  cc: string
+  saldo: Saldo
+}
+
 function normalizeCode(value: string | null | undefined): string {
   return String(value || '').trim().replace(/[^0-9A-Za-z]/g, '')
+}
+
+function normalizeComparableCode(value: string | null | undefined): string {
+  return normalizeCode(value).replace(/^0+(?=\d)/, '')
+}
+
+function codesMatch(left: string | null | undefined, right: string | null | undefined): boolean {
+  const a = normalizeComparableCode(left)
+  const b = normalizeComparableCode(right)
+  if (!a || !b) return false
+  return a === b || a.startsWith(b) || b.startsWith(a)
 }
 
 function fixMojibake(value: string | null | undefined): string {
@@ -53,6 +75,19 @@ function addSaldo(map: Map<string, Saldo>, key: string, tipo: 'debito' | 'credit
   const atual = map.get(key) || { debito: 0, credito: 0 }
   atual[tipo] += Number(valor || 0)
   map.set(key, atual)
+}
+
+function compareCodigoConta(a: string, b: string): number {
+  return a.localeCompare(b, 'pt-BR', { numeric: true, sensitivity: 'base' })
+}
+
+function sortTree(nodes: NoDRE[]) {
+  nodes.sort((a, b) => compareCodigoConta(a.codigoConta, b.codigoConta))
+  for (const node of nodes) {
+    if (node.filhos.length > 0) {
+      sortTree(node.filhos)
+    }
+  }
 }
 
 function montarArvore(estrutura: NoDRE[]): NoDRE[] {
@@ -238,7 +273,7 @@ export async function GET(request: NextRequest) {
 
     const condNormalByConta = new Map<string, string>()
     for (const c of contas) {
-      condNormalByConta.set(normalizeCode(c.cod_conta), c.cond_normal || 'Credora')
+      condNormalByConta.set(normalizeComparableCode(c.cod_conta), c.cond_normal || 'Credora')
     }
 
     const saldoContaPeriodo = new Map<string, Saldo>()
@@ -275,6 +310,24 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    const saldoContaEntriesByPeriodo = new Map<string, SaldoContaEntry[]>()
+    for (const [key, saldo] of saldoContaPeriodo.entries()) {
+      const [periodo, conta] = key.split('|')
+      if (!saldoContaEntriesByPeriodo.has(periodo)) {
+        saldoContaEntriesByPeriodo.set(periodo, [])
+      }
+      saldoContaEntriesByPeriodo.get(periodo)!.push({ conta, saldo })
+    }
+
+    const saldoContaCcEntriesByPeriodo = new Map<string, SaldoContaCcEntry[]>()
+    for (const [key, saldo] of saldoContaCcPeriodo.entries()) {
+      const [periodo, conta, cc] = key.split('|')
+      if (!saldoContaCcEntriesByPeriodo.has(periodo)) {
+        saldoContaCcEntriesByPeriodo.set(periodo, [])
+      }
+      saldoContaCcEntriesByPeriodo.get(periodo)!.push({ conta, cc, saldo })
+    }
+
     const acumuladoPorLinhaAtual = new Map<string, number>()
     const acumuladoPorLinhaAnterior = new Map<string, number>()
 
@@ -282,8 +335,57 @@ export async function GET(request: NextRequest) {
       mapa.set(key, (mapa.get(key) || 0) + valor)
     }
 
+    const getValorMapeamento = (periodo: string, contaRaw: string, ccRaw: string): number => {
+      const conta = normalizeComparableCode(contaRaw)
+      const cc = normalizeComparableCode(ccRaw)
+
+      if (cc) {
+        const saldoCcExato = saldoContaCcPeriodo.get(`${periodo}|${normalizeCode(contaRaw)}|${normalizeCode(ccRaw)}`)
+        if (saldoCcExato) {
+          const cond = condNormalByConta.get(conta)
+          return getSaldoNatureza(saldoCcExato, cond)
+        }
+
+        const entries = saldoContaCcEntriesByPeriodo.get(periodo) || []
+        let total = 0
+
+        for (const entry of entries) {
+          if (!codesMatch(entry.conta, conta) || !codesMatch(entry.cc, cc)) {
+            continue
+          }
+          const cond =
+            condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
+            condNormalByConta.get(conta)
+          total += getSaldoNatureza(entry.saldo, cond)
+        }
+
+        return total
+      }
+
+      const saldoContaExato = saldoContaPeriodo.get(`${periodo}|${normalizeCode(contaRaw)}`)
+      if (saldoContaExato) {
+        const cond = condNormalByConta.get(conta)
+        return getSaldoNatureza(saldoContaExato, cond)
+      }
+
+      const entries = saldoContaEntriesByPeriodo.get(periodo) || []
+      let total = 0
+
+      for (const entry of entries) {
+        if (!codesMatch(entry.conta, conta)) {
+          continue
+        }
+        const cond =
+          condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
+          condNormalByConta.get(conta)
+        total += getSaldoNatureza(entry.saldo, cond)
+      }
+
+      return total
+    }
+
     for (const m of dePara) {
-      const conta = normalizeCode(m.codigo_conta_contabil)
+      const conta = normalizeComparableCode(m.codigo_conta_contabil)
       const linhaNorm = normalizeCode(m.codigo_linha_dre)
 
       let linha = estruturaByCodeNormalized.get(linhaNorm)
@@ -294,26 +396,17 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      const cc = normalizeCode(m.codigo_centro_custo)
+      const cc = normalizeComparableCode(m.codigo_centro_custo)
 
       if (!linha) {
         continue
       }
 
-      const condNormal = condNormalByConta.get(conta)
-
-      const saldoAtual = cc
-        ? saldoContaCcPeriodo.get(`${periodoAtual}|${conta}|${cc}`) || { debito: 0, credito: 0 }
-        : saldoContaPeriodo.get(`${periodoAtual}|${conta}`) || { debito: 0, credito: 0 }
-
-      const valorAtual = getSaldoNatureza(saldoAtual, condNormal)
+      const valorAtual = getValorMapeamento(periodoAtual, conta, cc)
       somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtual)
 
       if (periodoComparativo) {
-        const saldoAnterior = cc
-          ? saldoContaCcPeriodo.get(`${periodoComparativo}|${conta}|${cc}`) || { debito: 0, credito: 0 }
-          : saldoContaPeriodo.get(`${periodoComparativo}|${conta}`) || { debito: 0, credito: 0 }
-        const valorAnterior = getSaldoNatureza(saldoAnterior, condNormal)
+        const valorAnterior = getValorMapeamento(periodoComparativo, conta, cc)
         somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnterior)
       }
     }
@@ -330,6 +423,7 @@ export async function GET(request: NextRequest) {
     }))
 
     const arvore = montarArvore(nosBase)
+    sortTree(arvore)
     for (const raiz of arvore) {
       consolidarValores(raiz)
     }

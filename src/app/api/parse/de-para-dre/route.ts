@@ -43,9 +43,18 @@ export async function POST(request: NextRequest) {
 
     const supabase = createServiceClient()
 
+    const { error: deleteError } = await supabase
+      .from('de_para_dre')
+      .delete()
+      .not('id', 'is', null)
+
+    if (deleteError) {
+      return NextResponse.json({ error: `Erro ao limpar de-para DRE anterior: ${deleteError.message}` }, { status: 500 })
+    }
+
     const { error } = await supabase
       .from('de_para_dre')
-      .upsert(mappings, { onConflict: 'codigo_conta_contabil,codigo_centro_custo' })
+      .insert(mappings)
 
     if (error) {
       return NextResponse.json({ error: `Erro ao salvar de-para DRE: ${error.message}` }, { status: 500 })

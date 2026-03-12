@@ -106,6 +106,8 @@ export interface LinhaDRECalculada {
   valorAnterior: number | null
   variacaoAbsoluta: number | null
   variacaoPercentual: number | null
+  valoresMensaisAtual?: number[]
+  valoresMensaisAnterior?: number[]
   filhos: LinhaDRECalculada[]
 }
 

@@ -20,6 +20,8 @@ type NoDRE = {
   ordem: number
   valorAtualBase: number
   valorAnteriorBase: number
+  valoresMensaisAtualBase: number[]
+  valoresMensaisAnteriorBase: number[]
   filhos: NoDRE[]
 }
 
@@ -41,6 +43,7 @@ type SaldoContaEntidadeEntry = {
 }
 
 type VisaoPeriodo = 'anual' | 'mensal'
+const MONTH_KEYS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 
 function normalizeCode(value: string | null | undefined): string {
   return String(value || '').trim().replace(/[^0-9A-Za-z]/g, '')
@@ -117,15 +120,23 @@ function montarArvore(estrutura: NoDRE[]): { raizes: NoDRE[]; byCodigo: Map<stri
 function consolidarValores(no: NoDRE): { atual: number; anterior: number } {
   let atual = no.valorAtualBase
   let anterior = no.valorAnteriorBase
+  const mensalAtual = [...no.valoresMensaisAtualBase]
+  const mensalAnterior = [...no.valoresMensaisAnteriorBase]
 
   for (const filho of no.filhos) {
     const totals = consolidarValores(filho)
     atual += totals.atual
     anterior += totals.anterior
+    for (let i = 0; i < MONTH_KEYS.length; i++) {
+      mensalAtual[i] += filho.valoresMensaisAtualBase[i] || 0
+      mensalAnterior[i] += filho.valoresMensaisAnteriorBase[i] || 0
+    }
   }
 
   no.valorAtualBase = atual
   no.valorAnteriorBase = anterior
+  no.valoresMensaisAtualBase = mensalAtual
+  no.valoresMensaisAnteriorBase = mensalAnterior
 
   return { atual, anterior }
 }
@@ -149,6 +160,8 @@ function toLinhaDRE(no: NoDRE): LinhaDRECalculada {
     valorAnterior,
     variacaoAbsoluta,
     variacaoPercentual,
+    valoresMensaisAtual: no.valoresMensaisAtualBase,
+    valoresMensaisAnterior: no.valoresMensaisAnteriorBase,
     filhos: [],
   }
 }
@@ -256,7 +269,7 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const periodosExibicao = visao === 'mensal' ? periodosMensaisDisponiveis : periodosDisponiveis
+    const periodosExibicao = periodosDisponiveis
 
     const periodoAtual =
       requestedPeriod && periodosExibicao.includes(requestedPeriod)
@@ -268,15 +281,11 @@ export async function GET(request: NextRequest) {
       ? periodosExibicao[idxAtual + 1]
       : null
 
-    const periodosConsultaAtual = visao === 'mensal'
-      ? [periodoAtual]
-      : periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoAtual}-`))
+    const periodosConsultaAtual = periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoAtual}-`))
 
     const periodosConsultaComparativo = !periodoComparativo
       ? []
-      : visao === 'mensal'
-        ? [periodoComparativo]
-        : periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoComparativo}-`))
+      : periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoComparativo}-`))
 
     const periodosConsulta = [...new Set([...periodosConsultaAtual, ...periodosConsultaComparativo])]
 
@@ -476,9 +485,17 @@ export async function GET(request: NextRequest) {
 
     const acumuladoPorLinhaAtual = new Map<string, number>()
     const acumuladoPorLinhaAnterior = new Map<string, number>()
+    const acumuladoPorLinhaMensalAtual = new Map<string, number[]>()
+    const acumuladoPorLinhaMensalAnterior = new Map<string, number[]>()
 
     const somarNoMapa = (mapa: Map<string, number>, key: string, valor: number) => {
       mapa.set(key, (mapa.get(key) || 0) + valor)
+    }
+
+    const somarNoMapaMensal = (mapa: Map<string, number[]>, key: string, monthIndex: number, valor: number) => {
+      const arr = mapa.get(key) || Array.from({ length: MONTH_KEYS.length }, () => 0)
+      arr[monthIndex] = (arr[monthIndex] || 0) + valor
+      mapa.set(key, arr)
     }
 
     const getValorMapeamento = (periodo: string, contaRaw: string, ccRaw: string): number => {
@@ -573,18 +590,40 @@ export async function GET(request: NextRequest) {
         continue
       }
 
-      let valorAtualTotal = 0
-      for (const periodo of periodosConsultaAtual) {
-        valorAtualTotal += getValorMapeamento(periodo, conta, cc)
-      }
-      somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
-
-      if (periodoComparativo) {
-        let valorAnteriorTotal = 0
-        for (const periodo of periodosConsultaComparativo) {
-          valorAnteriorTotal += getValorMapeamento(periodo, conta, cc)
+      if (visao === 'mensal') {
+        let valorAtualTotal = 0
+        for (let i = 0; i < MONTH_KEYS.length; i++) {
+          const periodoMes = `${periodoAtual}-${MONTH_KEYS[i]}`
+          const valorMes = getValorMapeamento(periodoMes, conta, cc)
+          valorAtualTotal += valorMes
+          somarNoMapaMensal(acumuladoPorLinhaMensalAtual, linha, i, valorMes)
         }
-        somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
+        somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
+
+        if (periodoComparativo) {
+          let valorAnteriorTotal = 0
+          for (let i = 0; i < MONTH_KEYS.length; i++) {
+            const periodoMesAnterior = `${periodoComparativo}-${MONTH_KEYS[i]}`
+            const valorMesAnterior = getValorMapeamento(periodoMesAnterior, conta, cc)
+            valorAnteriorTotal += valorMesAnterior
+            somarNoMapaMensal(acumuladoPorLinhaMensalAnterior, linha, i, valorMesAnterior)
+          }
+          somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
+        }
+      } else {
+        let valorAtualTotal = 0
+        for (const periodo of periodosConsultaAtual) {
+          valorAtualTotal += getValorMapeamento(periodo, conta, cc)
+        }
+        somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
+
+        if (periodoComparativo) {
+          let valorAnteriorTotal = 0
+          for (const periodo of periodosConsultaComparativo) {
+            valorAnteriorTotal += getValorMapeamento(periodo, conta, cc)
+          }
+          somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
+        }
       }
     }
 
@@ -597,6 +636,8 @@ export async function GET(request: NextRequest) {
       ordem: e.id,
       valorAtualBase: acumuladoPorLinhaAtual.get(e.codigo_conta) || 0,
       valorAnteriorBase: acumuladoPorLinhaAnterior.get(e.codigo_conta) || 0,
+      valoresMensaisAtualBase: acumuladoPorLinhaMensalAtual.get(e.codigo_conta) || Array.from({ length: MONTH_KEYS.length }, () => 0),
+      valoresMensaisAnteriorBase: acumuladoPorLinhaMensalAnterior.get(e.codigo_conta) || Array.from({ length: MONTH_KEYS.length }, () => 0),
       filhos: [],
     }))
 

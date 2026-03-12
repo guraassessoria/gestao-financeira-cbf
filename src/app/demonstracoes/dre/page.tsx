@@ -16,6 +16,7 @@ type DREApiResponse = {
 }
 
 const EPSILON = 0.005
+const MONTH_LABELS = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
 function hasDisplayValue(node: LinhaDRECalculada): boolean {
   return Math.abs(node.valor) > EPSILON || Math.abs(node.valorAnterior || 0) > EPSILON
@@ -111,6 +112,9 @@ function DREList() {
     return linhasComValor.filter(isVisible)
   }, [expandedRows, linhasByCodigo, linhasComValor])
 
+  const rotuloAtual = 'Atual'
+  const rotuloComparativo = 'Comparativo'
+
   const toggleRow = React.useCallback((codigoConta: string) => {
     setExpandedRows((current) => ({
       ...current,
@@ -175,28 +179,126 @@ function DREList() {
         {linhasVisiveis.length === 0 ? (
           <p className="text-slate-600 p-6">Nenhuma linha de DRE calculada para o período selecionado.</p>
         ) : (
-          <>
-            <div className="grid grid-cols-[1fr_180px_180px_120px] gap-3 px-5 py-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 border-b border-slate-200 bg-slate-50">
-              <div>Conta</div>
-              <div className="text-right">Atual</div>
-              <div className="text-right">Comparativo</div>
-              <div className="text-right">Variação</div>
+          visao === 'mensal' ? (
+            <div className="overflow-x-auto">
+              <table className="min-w-[2000px] w-full border-collapse text-sm">
+                <thead className="bg-slate-50 text-slate-600 uppercase text-[11px] tracking-wide">
+                  <tr>
+                    <th rowSpan={2} className="text-left px-4 py-2 border-b border-slate-200">Conta</th>
+                    <th colSpan={12} className="text-center px-3 py-2 border-b border-slate-200">{periodoAtual || 'ano'}</th>
+                    <th colSpan={12} className="text-center px-3 py-2 border-b border-slate-200">{periodoComparativo || 'ano-1'}</th>
+                  </tr>
+                  <tr>
+                    {MONTH_LABELS.map((mes) => (
+                      <th key={`atual-${mes}`} className="text-right px-3 py-2 border-b border-slate-200">{mes}</th>
+                    ))}
+                    {MONTH_LABELS.map((mes) => (
+                      <th key={`anterior-${mes}`} className="text-right px-3 py-2 border-b border-slate-200">{mes}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {linhasVisiveis.map((linha) => (
+                    <DREMonthlyRow
+                      key={linha.codigoConta}
+                      node={linha}
+                      expanded={expandedRows[linha.codigoConta] !== false}
+                      onToggle={toggleRow}
+                    />
+                  ))}
+                </tbody>
+              </table>
             </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-[1fr_180px_180px_120px] gap-3 px-5 py-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 border-b border-slate-200 bg-slate-50">
+                <div>Conta</div>
+                <div className="text-right">{rotuloAtual}</div>
+                <div className="text-right">{rotuloComparativo}</div>
+                <div className="text-right">Variação</div>
+              </div>
 
-            <div className="divide-y divide-slate-100">
-              {linhasVisiveis.map((linha) => (
-                <DREOrderedRow
-                  key={linha.codigoConta}
-                  node={linha}
-                  expanded={expandedRows[linha.codigoConta] !== false}
-                  onToggle={toggleRow}
-                />
-              ))}
-            </div>
-          </>
+              <div className="divide-y divide-slate-100">
+                {linhasVisiveis.map((linha) => (
+                  <DREOrderedRow
+                    key={linha.codigoConta}
+                    node={linha}
+                    expanded={expandedRows[linha.codigoConta] !== false}
+                    onToggle={toggleRow}
+                  />
+                ))}
+              </div>
+            </>
+          )
         )}
       </div>
     </div>
+  )
+}
+
+function DREMonthlyRow({
+  node,
+  expanded,
+  onToggle,
+}: {
+  node: LinhaDRECalculada
+  expanded: boolean
+  onToggle: (codigoConta: string) => void
+}) {
+  const isResultadoFinal = node.codigoConta === '1854'
+  const isGrupo = Boolean(node.temFilhos)
+  const paddingLeft = Math.max(0, (node.nivel - 1) * 14)
+  const monthlyAtual = node.valoresMensaisAtual || Array.from({ length: 12 }, () => 0)
+  const monthlyAnterior = node.valoresMensaisAnterior || Array.from({ length: 12 }, () => 0)
+
+  return (
+    <tr className={[
+      isResultadoFinal ? 'bg-blue-900 text-white' : '',
+      !isResultadoFinal && isGrupo ? 'bg-blue-50/70' : '',
+      !isResultadoFinal && !isGrupo ? 'bg-white' : '',
+    ].join(' ')}>
+      <td className="px-4 py-2 min-w-[360px]">
+        <div className="min-w-0 flex items-start gap-2" style={{ paddingLeft: `${paddingLeft}px` }}>
+          {isGrupo ? (
+            <button
+              type="button"
+              onClick={() => onToggle(node.codigoConta)}
+              className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded transition-colors ${
+                isResultadoFinal ? 'hover:bg-blue-800 text-white' : 'hover:bg-blue-100 text-slate-600'
+              }`}
+              aria-label={expanded ? 'Recolher linha' : 'Expandir linha'}
+            >
+              <svg
+                className={`h-4 w-4 transition-transform ${expanded ? 'rotate-90' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          ) : (
+            <div className="h-5 w-5 flex-shrink-0" />
+          )}
+
+          <p className={`truncate text-sm ${isResultadoFinal || isGrupo ? 'font-semibold' : 'font-medium'} ${isResultadoFinal ? 'text-white' : 'text-slate-800'}`}>
+            {node.descricao}
+          </p>
+        </div>
+      </td>
+
+      {monthlyAtual.map((valor, idx) => (
+        <td key={`ma-${node.codigoConta}-${idx}`} className={`px-3 py-2 text-right tabular-nums ${isResultadoFinal ? 'text-white' : 'text-slate-900'}`}>
+          {formatCurrency(valor)}
+        </td>
+      ))}
+
+      {monthlyAnterior.map((valor, idx) => (
+        <td key={`mb-${node.codigoConta}-${idx}`} className={`px-3 py-2 text-right tabular-nums ${isResultadoFinal ? 'text-blue-100' : 'text-slate-600'}`}>
+          {formatCurrency(valor)}
+        </td>
+      ))}
+    </tr>
   )
 }
 

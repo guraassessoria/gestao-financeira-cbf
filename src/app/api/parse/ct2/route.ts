@@ -6,7 +6,6 @@ import { getServerSession } from 'next-auth'
 import { parseCT2 } from '@/lib/python-runner'
 import { createServiceClient } from '@/lib/supabase'
 import { authOptions } from '@/lib/auth'
-import type { LancamentoContabil } from '@/types'
 
 export const config = {
   api: {
@@ -69,8 +68,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Extrair array de lancamentos do resultado do parser
+    // Python retorna snake_case; usamos any[] para acessar os campos diretamente
     const parseResult = result.data as any
-    const lancamentos = (parseResult.lancamentos || []) as LancamentoContabil[]
+    const lancamentos = (parseResult.lancamentos || []) as any[]
 
     if (lancamentos.length === 0) {
       return NextResponse.json(
@@ -87,10 +87,10 @@ export async function POST(request: NextRequest) {
       nome_arquivo: file.name,
       tipo_arquivo: 'CT2',
       periodos: JSON.stringify(
-        [...new Set(lancamentos.map((l) => l.periodo))].sort()
+        [...new Set(lancamentos.map((l: any) => l.periodo))].sort()
       ),
       total_lancamentos: lancamentos.length,
-      total_valor: lancamentos.reduce((sum, l) => sum + l.valor, 0),
+      total_valor: lancamentos.reduce((sum: number, l: any) => sum + (l.valor || 0), 0),
       status: 'processando',
       uploaded_by: userId,
     }
@@ -120,25 +120,25 @@ export async function POST(request: NextRequest) {
     }
 
     for (const chunk of chunks) {
-      const lancamentoRecords = chunk.map((l) => ({
+      const lancamentoRecords = chunk.map((l: any) => ({
         filial: l.filial,
-        data_lcto: l.dataLcto instanceof Date ? l.dataLcto.toISOString().split('T')[0] : l.dataLcto,
+        data_lcto: l.data_lcto,
         periodo: l.periodo,
-        numero_lote: l.numeroLote,
-        sub_lote: l.subLote,
-        numero_doc: l.numeroDoc,
+        numero_lote: l.numero_lote,
+        sub_lote: l.sub_lote,
+        numero_doc: l.numero_doc,
         moeda: l.moeda || '01',
-        tipo_lcto: l.tipoLcto,
-        cta_debito: l.ctaDebito,
-        cta_credito: l.ctaCredito,
+        tipo_lcto: l.tipo_lcto,
+        cta_debito: l.cta_debito,
+        cta_credito: l.cta_credito,
         valor: l.valor,
-        hist_pad: l.histPad,
-        hist_lanc: l.histLanc,
-        c_custo_deb: l.cCustoDeb,
-        c_custo_crd: l.cCustoCrd,
-        ocorren_deb: l.ocorrenDeb,
-        ocorren_crd: l.ocorrenCrd,
-        valor_moeda1: l.valorMoeda1,
+        hist_pad: l.hist_pad,
+        hist_lanc: l.hist_lanc,
+        c_custo_deb: l.c_custo_deb,
+        c_custo_crd: l.c_custo_crd,
+        ocorren_deb: l.ocorren_deb,
+        ocorren_crd: l.ocorren_crd,
+        valor_moeda1: l.valor_moeda1,
         origem: 'upload',
         upload_id: uploadId,
       }))
@@ -188,7 +188,7 @@ export async function POST(request: NextRequest) {
       success: true,
       uploadId,
       totalLancamentos: lancamentos.length,
-      totalValor: lancamentos.reduce((sum, l) => sum + l.valor, 0),
+      totalValor: lancamentos.reduce((sum: number, l: any) => sum + (l.valor || 0), 0),
     })
   } catch (error) {
     // Marcar upload como erro se foi criado

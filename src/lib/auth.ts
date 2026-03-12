@@ -1,6 +1,28 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import type { NextAuthOptions } from 'next-auth'
 
+// Usuários demo: em produção estes viram do banco (tabela usuarios)
+const DEMO_USERS = [
+  {
+    id: 'user-001',
+    email: process.env.DEMO_ADMIN_EMAIL || 'admin@cbf.org.br',
+    name: 'Administrador',
+    password: process.env.DEMO_ADMIN_PASSWORD || 'admin123',
+  },
+  {
+    id: 'user-002',
+    email: process.env.DEMO_CONTADOR_EMAIL || 'contador@cbf.org.br',
+    name: 'Contador',
+    password: process.env.DEMO_CONTADOR_PASSWORD || 'contador123',
+  },
+  {
+    id: 'user-003',
+    email: process.env.DEMO_AUDITOR_EMAIL || 'auditor@cbf.org.br',
+    name: 'Auditor',
+    password: process.env.DEMO_AUDITOR_PASSWORD || 'auditor123',
+  },
+]
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -10,33 +32,11 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        // Demo users para Sprint 2
-        const demoUsers = [
-          {
-            id: 'user-001',
-            email: 'admin@cbf.org.br',
-            name: 'Administrador',
-            password: 'admin123',
-          },
-          {
-            id: 'user-002',
-            email: 'contador@cbf.org.br',
-            name: 'Contador',
-            password: 'contador123',
-          },
-          {
-            id: 'user-003',
-            email: 'auditor@cbf.org.br',
-            name: 'Auditor',
-            password: 'auditor123',
-          },
-        ]
-
         if (!credentials?.email || !credentials?.password) {
           return null
         }
 
-        const user = demoUsers.find(
+        const user = DEMO_USERS.find(
           (u) => u.email === credentials.email && u.password === credentials.password
         )
 
@@ -69,5 +69,5 @@ export const authOptions: NextAuthOptions = {
       return token
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || 'cbf-secret-key-dev',
+  secret: process.env.NEXTAUTH_SECRET,
 }

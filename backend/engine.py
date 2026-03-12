@@ -130,7 +130,7 @@ def montar_arvore_dre(
     for e in estrutura:
         superior = e.get("codigo_cta_superior")
         if superior:
-            filhos[super].append(e["codigo_conta"])
+            filhos[superior].append(e["codigo_conta"])
 
     def _montar_no(cod: str) -> dict[str, Any]:
         linha = idx.get(cod, {})

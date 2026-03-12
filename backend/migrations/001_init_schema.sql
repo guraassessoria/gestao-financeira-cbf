@@ -181,7 +181,42 @@ CREATE TABLE IF NOT EXISTS estrutura_dre (
 );
 
 -- ─────────────────────────────────────────────
--- 8. Políticas Row-Level Security (RLS)
+-- 8. Tabela de Entidades DRE (CV0)
+-- ─────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS entidades_dre (
+  id BIGSERIAL PRIMARY KEY,
+  filial VARCHAR(2) NOT NULL,
+  plano_contab VARCHAR(20),
+  item VARCHAR(20),
+  codigo VARCHAR(20) NOT NULL,
+  descricao TEXT NOT NULL,
+  classe VARCHAR(20) NOT NULL DEFAULT 'Analítica',
+  cond_normal VARCHAR(20) NOT NULL DEFAULT 'Devedora',
+  bloqueada BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+  UNIQUE(filial, codigo)
+);
+
+-- ─────────────────────────────────────────────
+-- 9. Tabela De-Para DRE (mapeamento conta → linha DRE)
+-- ─────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS de_para_dre (
+  id BIGSERIAL PRIMARY KEY,
+  codigo_conta_contabil VARCHAR(20) NOT NULL,
+  codigo_linha_dre VARCHAR(20) NOT NULL REFERENCES estrutura_dre(codigo_conta),
+  codigo_centro_custo VARCHAR(20),
+  observacao TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+  UNIQUE(codigo_conta_contabil, codigo_centro_custo)
+);
+
+-- ─────────────────────────────────────────────
+-- 10. Políticas Row-Level Security (RLS)
 -- ─────────────────────────────────────────────
 
 ALTER TABLE usuarios ENABLE ROW LEVEL SECURITY;

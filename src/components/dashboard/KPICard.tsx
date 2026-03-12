@@ -13,11 +13,12 @@ const colorStyles = {
   amber: 'bg-amber-50 border-amber-200',
 }
 
-const changeColorStyles = {
-  blue: 'text-blue-600',
-  green: 'text-green-600',
-  red: 'text-red-600',
-  amber: 'text-amber-600',
+export function KPIGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {children}
+    </div>
+  )
 }
 
 export function KPICard({
@@ -45,18 +46,6 @@ export function KPICard({
         </div>
         {icon && <div className="text-slate-400">{icon}</div>}
       </div>
-    </div>
-  )
-}
-
-interface KPIGridProps {
-  children: React.ReactNode
-}
-
-export function KPIGrid({ children }: KPIGridProps) {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {children}
     </div>
   )
 }

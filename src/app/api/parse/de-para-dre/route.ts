@@ -43,18 +43,27 @@ export async function POST(request: NextRequest) {
 
     const supabase = createServiceClient()
 
+    // Alguns ambientes não possuem constraint UNIQUE compatível com ON CONFLICT.
+    // Para garantir carga idempotente, substituímos o conteúdo completo da tabela.
+    const dedupedMap = new Map<string, any>()
+    for (const mapping of mappings) {
+      const key = `${mapping.codigo_conta_contabil}::${mapping.codigo_centro_custo ?? ''}`
+      dedupedMap.set(key, mapping)
+    }
+    const dedupedMappings = Array.from(dedupedMap.values())
+
     const { error: deleteError } = await supabase
       .from('de_para_dre')
       .delete()
       .not('id', 'is', null)
 
     if (deleteError) {
-      return NextResponse.json({ error: `Erro ao limpar de-para DRE anterior: ${deleteError.message}` }, { status: 500 })
+      return NextResponse.json({ error: `Erro ao limpar de-para DRE: ${deleteError.message}` }, { status: 500 })
     }
 
     const { error } = await supabase
       .from('de_para_dre')
-      .insert(mappings)
+      .insert(dedupedMappings)
 
     if (error) {
       return NextResponse.json({ error: `Erro ao salvar de-para DRE: ${error.message}` }, { status: 500 })
@@ -63,7 +72,7 @@ export async function POST(request: NextRequest) {
     await supabase.from('upload_logs').insert({
       nome_arquivo: file.name,
       tipo_arquivo: 'DPDRE',
-      total_lancamentos: mappings.length,
+      total_lancamentos: dedupedMappings.length,
       status: 'ok',
       uploaded_by: session.user.id,
       erros: JSON.stringify(parsed.erros || []),
@@ -71,7 +80,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      totalDePara: mappings.length,
+      totalDePara: dedupedMappings.length,
       erros: parsed.erros || [],
     })
   } catch (error) {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, unlink } from 'fs/promises'
 import { tmpdir } from 'os'
 import { join } from 'path'
+import { createHash } from 'crypto'
 import { getServerSession } from 'next-auth'
 import { parseCT2TS } from '@/lib/csv-parsers'
 import { createServiceClient } from '@/lib/supabase'
@@ -54,6 +55,7 @@ export async function POST(request: NextRequest) {
     // Salvar arquivo temporário
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
+    const fileHash = createHash('sha256').update(buffer).digest('hex')
     const parsedTempDir = tmpdir()
     tempPath = join(parsedTempDir, `ct2-${Date.now()}.csv`)
 
@@ -83,16 +85,43 @@ export async function POST(request: NextRequest) {
 
     // Criar cliente Supabase com service role (pode inserir sem RLS)
     const supabase = createServiceClient()
+    const periodosUpload = [...new Set(lancamentos.map((l: any) => l.periodo).filter(Boolean))].sort()
+
+    // Evita duplicação somente de reenvio do mesmo arquivo (hash idêntico).
+    const { data: existingUpload, error: existingUploadError } = await supabase
+      .from('upload_logs')
+      .select('id, created_at')
+      .eq('tipo_arquivo', 'CT2')
+      .eq('arquivo_hash', fileHash)
+      .eq('status', 'ok')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    if (existingUploadError) {
+      return NextResponse.json(
+        { error: `Erro ao verificar duplicidade de arquivo: ${existingUploadError.message}` },
+        { status: 500 }
+      )
+    }
+
+    if (existingUpload?.id) {
+      return NextResponse.json({
+        success: true,
+        skipped: true,
+        uploadId: existingUpload.id,
+        message: 'Arquivo já foi processado anteriormente. Nenhum lançamento foi duplicado.',
+      })
+    }
 
     // 1. Criar registro de upload com status 'processando'
     const uploadInsert = {
       nome_arquivo: file.name,
       tipo_arquivo: 'CT2',
-      periodos: JSON.stringify(
-        [...new Set(lancamentos.map((l: any) => l.periodo))].sort()
-      ),
+      periodos: JSON.stringify(periodosUpload),
       total_lancamentos: lancamentos.length,
       total_valor: lancamentos.reduce((sum: number, l: any) => sum + (l.valor || 0), 0),
+      arquivo_hash: fileHash,
       status: 'processando',
       uploaded_by: userId,
     }

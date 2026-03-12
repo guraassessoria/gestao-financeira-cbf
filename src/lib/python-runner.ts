@@ -100,3 +100,19 @@ export async function parseCV0(filePath: string) {
   const scriptPath = Path.join(process.cwd(), 'backend', 'parsers.py')
   return runPythonScript(scriptPath, ['cv0', filePath])
 }
+
+/**
+ * Faz parse de arquivo de Estrutura DRE
+ */
+export async function parseEstruturaDRE(filePath: string) {
+  const scriptPath = Path.join(process.cwd(), 'backend', 'parsers.py')
+  return runPythonScript(scriptPath, ['estrutura_dre', filePath])
+}
+
+/**
+ * Faz parse de arquivo de De-Para DRE
+ */
+export async function parseDeParaDRE(filePath: string) {
+  const scriptPath = Path.join(process.cwd(), 'backend', 'parsers.py')
+  return runPythonScript(scriptPath, ['de_para_dre', filePath])
+}

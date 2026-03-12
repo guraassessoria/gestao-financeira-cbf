@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS upload_logs (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 
   CONSTRAINT valid_status CHECK (status IN ('processando', 'ok', 'erro')),
-  CONSTRAINT valid_tipo_arquivo CHECK (tipo_arquivo IN ('CT1', 'CT2', 'CTT', 'CV0'))
+  CONSTRAINT valid_tipo_arquivo CHECK (tipo_arquivo IN ('CT1', 'CT2', 'CTT', 'CV0', 'EDRE', 'DPDRE'))
 );
 
 -- ─────────────────────────────────────────────

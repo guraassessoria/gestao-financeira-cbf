@@ -62,13 +62,25 @@ def _find_header_row(rows: list[list[str]], expected_col: str) -> int:
     return 0
 
 
+def _detectar_delimitador(content: str) -> str:
+    """Detecta delimitador simples entre ';' e ','."""
+    first_lines = "\n".join(content.splitlines()[:10])
+    return ";" if first_lines.count(";") >= first_lines.count(",") else ","
+
+
 def _read_csv(path: str) -> tuple[list[str], list[dict]]:
-    """Lê arquivo CSV com separador ';' e encoding latin-1."""
+    """Lê arquivo CSV com encoding latin-1 e delimitador detectado automaticamente."""
     with open(path, encoding=ENCODING, errors="replace") as f:
         content = f.read()
 
-    rows = list(csv.reader(content.splitlines(), delimiter=SEP))
+    delimiter = _detectar_delimitador(content)
+    rows = list(csv.reader(content.splitlines(), delimiter=delimiter))
     header_idx = _find_header_row(rows, "Filial")
+
+    # Para arquivos sem coluna "Filial", assume primeira linha como cabeçalho
+    if header_idx == 0 and rows and "Filial" not in rows[0]:
+        header_idx = 0
+
     headers = [h.strip() for h in rows[header_idx]]
     records = []
     for row in rows[header_idx + 1 :]:
@@ -77,6 +89,23 @@ def _read_csv(path: str) -> tuple[list[str], list[dict]]:
         rec = {headers[i]: row[i].strip() if i < len(row) else "" for i in range(len(headers))}
         records.append(rec)
     return headers, records
+
+
+def _pick(r: dict[str, str], keys: list[str], default: str = "") -> str:
+    """Retorna primeiro campo existente entre aliases possíveis."""
+    normalized = {k.strip().lower(): v for k, v in r.items()}
+    for key in keys:
+        val = normalized.get(key.lower())
+        if val is not None and str(val).strip() != "":
+            return str(val).strip()
+    return default
+
+
+def _to_int(val: str, default: int = 0) -> int:
+    try:
+        return int(str(val).strip())
+    except (ValueError, TypeError):
+        return default
 
 
 def _normalizar_classe_conta(val: str) -> str:
@@ -186,6 +215,83 @@ def parse_cv0(path: str) -> list[dict[str, Any]]:
 
 
 # ─────────────────────────────────────────────
+# Estrutura DRE
+# ─────────────────────────────────────────────
+
+def parse_estrutura_dre(path: str) -> dict[str, Any]:
+    """Parseia estrutura da DRE e retorna linhas para tabela estrutura_dre."""
+    _, records = _read_csv(path)
+    linhas = []
+    erros = []
+
+    for i, r in enumerate(records, start=1):
+        codigo = _pick(r, ["codigo_conta", "codigo conta", "cod_conta", "codigo", "cod"]) 
+        descricao = _pick(r, ["descricao_conta", "descricao conta", "descricao", "desc_conta", "conta"]) 
+
+        if not codigo or not descricao:
+            erros.append(f"Linha {i}: codigo_conta/descricao_conta obrigatórios")
+            continue
+
+        superior = _pick(r, ["codigo_cta_superior", "codigo cta superior", "cta_superior", "conta_superior"], "")
+        desc_superior = _pick(r, ["descricao_superior", "descricao cta superior", "desc_superior"], "")
+        nivel = _to_int(_pick(r, ["nivel", "nível"], "1"), 1)
+        nivel_viz = _to_int(_pick(r, ["nivel_visualizacao", "nivel visualizacao", "nivel_viz"], "1"), 1)
+
+        if nivel_viz not in (1, 2, 3):
+            nivel_viz = 1
+
+        linhas.append({
+            "codigo_conta": codigo,
+            "descricao_conta": descricao,
+            "codigo_cta_superior": superior or None,
+            "descricao_superior": desc_superior or None,
+            "nivel": nivel,
+            "nivel_visualizacao": nivel_viz,
+        })
+
+    return {
+        "linhas": linhas,
+        "total_linhas": len(linhas),
+        "erros": erros,
+    }
+
+
+# ─────────────────────────────────────────────
+# De-Para DRE
+# ─────────────────────────────────────────────
+
+def parse_de_para_dre(path: str) -> dict[str, Any]:
+    """Parseia de-para DRE e retorna mapeamentos para tabela de_para_dre."""
+    _, records = _read_csv(path)
+    mappings = []
+    erros = []
+
+    for i, r in enumerate(records, start=1):
+        conta = _pick(r, ["codigo_conta_contabil", "codigo conta contabil", "conta_protheus", "cod_conta", "conta"]) 
+        linha_dre = _pick(r, ["codigo_linha_dre", "codigo linha dre", "codigo_dre", "linha_dre", "cod_dre"]) 
+
+        if not conta or not linha_dre:
+            erros.append(f"Linha {i}: codigo_conta_contabil/codigo_linha_dre obrigatórios")
+            continue
+
+        cc = _pick(r, ["codigo_centro_custo", "codigo centro custo", "cod_cc", "centro_custo"], "")
+        observacao = _pick(r, ["observacao", "obs", "descricao"], "")
+
+        mappings.append({
+            "codigo_conta_contabil": conta,
+            "codigo_linha_dre": linha_dre,
+            "codigo_centro_custo": cc or None,
+            "observacao": observacao or None,
+        })
+
+    return {
+        "mappings": mappings,
+        "total_mappings": len(mappings),
+        "erros": erros,
+    }
+
+
+# ─────────────────────────────────────────────
 # CT2 — Lançamentos Contábeis
 # ─────────────────────────────────────────────
 
@@ -267,7 +373,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 3:
         print("Uso: python parsers.py <tipo> <arquivo.csv>")
-        print("Tipos: ct1 | ctt | cv0 | ct2")
+        print("Tipos: ct1 | ctt | cv0 | ct2 | estrutura_dre | de_para_dre")
         sys.exit(1)
 
     tipo = sys.argv[1].lower()
@@ -278,6 +384,8 @@ if __name__ == "__main__":
         "ctt":  parse_ctt,
         "cv0":  parse_cv0,
         "ct2":  parse_ct2,
+        "estrutura_dre": parse_estrutura_dre,
+        "de_para_dre": parse_de_para_dre,
     }
 
     if tipo not in parsers_map:

@@ -3,7 +3,7 @@ import { writeFile, unlink } from 'fs/promises'
 import { tmpdir } from 'os'
 import { join } from 'path'
 import { getServerSession } from 'next-auth'
-import { parseEstruturaDRE } from '@/lib/python-runner'
+import { parseEstruturaDRETS } from '@/lib/csv-parsers'
 import { createServiceClient } from '@/lib/supabase'
 import { authOptions } from '@/lib/auth'
 
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     tempPath = join(tmpdir(), `estrutura-dre-${Date.now()}.csv`)
     await writeFile(tempPath, Buffer.from(await file.arrayBuffer()))
 
-    const result = await parseEstruturaDRE(tempPath)
+    const result = await parseEstruturaDRETS(tempPath)
     if (!result.success) {
       return NextResponse.json({ error: result.error }, { status: 400 })
     }

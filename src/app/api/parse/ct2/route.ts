@@ -3,7 +3,7 @@ import { writeFile, unlink } from 'fs/promises'
 import { tmpdir } from 'os'
 import { join } from 'path'
 import { getServerSession } from 'next-auth'
-import { parseCT2 } from '@/lib/python-runner'
+import { parseCT2TS } from '@/lib/csv-parsers'
 import { createServiceClient } from '@/lib/supabase'
 import { authOptions } from '@/lib/auth'
 
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     await writeFile(tempPath, buffer)
 
     // Fazer parse com Python
-    const result = await parseCT2(tempPath)
+    const result = await parseCT2TS(tempPath)
 
     if (!result.success) {
       return NextResponse.json(

@@ -3,7 +3,7 @@ import { writeFile, unlink } from 'fs/promises'
 import { tmpdir } from 'os'
 import { join } from 'path'
 import { getServerSession } from 'next-auth'
-import { parseCTT } from '@/lib/python-runner'
+import { parseCTTTS } from '@/lib/csv-parsers'
 import { createServiceClient } from '@/lib/supabase'
 import { authOptions } from '@/lib/auth'
 
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     tempPath = join(tmpdir(), `ctt-${Date.now()}.csv`)
     await writeFile(tempPath, buffer)
 
-    const result = await parseCTT(tempPath)
+    const result = await parseCTTTS(tempPath)
     if (!result.success) {
       return NextResponse.json({ error: result.error }, { status: 400 })
     }

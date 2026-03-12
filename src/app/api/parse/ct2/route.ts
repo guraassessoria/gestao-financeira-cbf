@@ -111,6 +111,26 @@ export async function POST(request: NextRequest) {
 
     uploadId = uploadData.id
 
+    const { error: deleteError } = await supabase
+      .from('lancamentos_contabeis')
+      .delete()
+      .not('id', 'is', null)
+
+    if (deleteError) {
+      await supabase
+        .from('upload_logs')
+        .update({
+          status: 'erro',
+          erros: JSON.stringify([deleteError.message]),
+        })
+        .eq('id', uploadId)
+
+      return NextResponse.json(
+        { error: `Erro ao limpar lançamentos anteriores: ${deleteError.message}` },
+        { status: 500 }
+      )
+    }
+
     // 2. Inserir lancamentos em chunks de 1000 para evitar timeout
     const chunkSize = 1000
     const chunks = []
@@ -145,9 +165,7 @@ export async function POST(request: NextRequest) {
 
       const { error: insertError } = await supabase
         .from('lancamentos_contabeis')
-        .upsert(lancamentoRecords, {
-          onConflict: 'filial,numero_lote,sub_lote,tipo_lcto,cta_debito,cta_credito'
-        })
+        .insert(lancamentoRecords)
 
       if (insertError) {
         // Atualizar upload_logs com erro

@@ -15,6 +15,7 @@ type NoDRE = {
   nivel: number
   nivelVisualizacao: 1 | 2 | 3
   codigoSuperior: string | null
+  ordem: number
   valorAtualBase: number
   valorAnteriorBase: number
   filhos: NoDRE[]
@@ -81,19 +82,6 @@ function addSaldo(map: Map<string, Saldo>, key: string, tipo: 'debito' | 'credit
   const atual = map.get(key) || { debito: 0, credito: 0 }
   atual[tipo] += Number(valor || 0)
   map.set(key, atual)
-}
-
-function compareCodigoConta(a: string, b: string): number {
-  return a.localeCompare(b, 'pt-BR', { numeric: true, sensitivity: 'base' })
-}
-
-function sortTree(nodes: NoDRE[]) {
-  nodes.sort((a, b) => compareCodigoConta(a.codigoConta, b.codigoConta))
-  for (const node of nodes) {
-    if (node.filhos.length > 0) {
-      sortTree(node.filhos)
-    }
-  }
 }
 
 function montarArvore(estrutura: NoDRE[]): NoDRE[] {
@@ -173,11 +161,15 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: periodError.message }, { status: 500 })
     }
 
-    const periodosDisponiveis = Array.from(new Set((periodRows || []).map((r) => r.periodo))).sort((a, b) => {
+    const periodosMensaisDisponiveis = Array.from(new Set((periodRows || []).map((r) => r.periodo))).sort((a, b) => {
       return periodToDate(b).getTime() - periodToDate(a).getTime()
     })
 
-    if (periodosDisponiveis.length === 0) {
+    const periodosDisponiveis = Array.from(
+      new Set(periodosMensaisDisponiveis.map((periodo) => periodo.slice(0, 4)))
+    ).sort((a, b) => Number(b) - Number(a))
+
+    if (periodosMensaisDisponiveis.length === 0) {
       return NextResponse.json(
         {
           periodosDisponiveis: [],
@@ -200,9 +192,11 @@ export async function GET(request: NextRequest) {
       ? periodosDisponiveis[idxAtual + 1]
       : null
 
-    const periodosConsulta = periodoComparativo
-      ? [periodoAtual, periodoComparativo]
-      : [periodoAtual]
+    const periodosConsultaAtual = periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoAtual}-`))
+    const periodosConsultaComparativo = periodoComparativo
+      ? periodosMensaisDisponiveis.filter((periodo) => periodo.startsWith(`${periodoComparativo}-`))
+      : []
+    const periodosConsulta = [...new Set([...periodosConsultaAtual, ...periodosConsultaComparativo])]
 
     const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes] = await Promise.all([
       supabase
@@ -459,12 +453,18 @@ export async function GET(request: NextRequest) {
         continue
       }
 
-      const valorAtual = getValorMapeamento(periodoAtual, conta, cc)
-      somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtual)
+      let valorAtualTotal = 0
+      for (const periodo of periodosConsultaAtual) {
+        valorAtualTotal += getValorMapeamento(periodo, conta, cc)
+      }
+      somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
 
       if (periodoComparativo) {
-        const valorAnterior = getValorMapeamento(periodoComparativo, conta, cc)
-        somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnterior)
+        let valorAnteriorTotal = 0
+        for (const periodo of periodosConsultaComparativo) {
+          valorAnteriorTotal += getValorMapeamento(periodo, conta, cc)
+        }
+        somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
       }
     }
 
@@ -474,13 +474,13 @@ export async function GET(request: NextRequest) {
       nivel: e.nivel,
       nivelVisualizacao: (e.nivel_visualizacao as 1 | 2 | 3) || 1,
       codigoSuperior: e.codigo_cta_superior,
+      ordem: e.id,
       valorAtualBase: acumuladoPorLinhaAtual.get(e.codigo_conta) || 0,
       valorAnteriorBase: acumuladoPorLinhaAnterior.get(e.codigo_conta) || 0,
       filhos: [],
     }))
 
     const arvore = montarArvore(nosBase)
-    sortTree(arvore)
     for (const raiz of arvore) {
       consolidarValores(raiz)
     }

@@ -1,0 +1,36 @@
+{
+  "name": "gestao-financeira-cbf",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "ingest": "ts-node --project tsconfig.scripts.json scripts/ingest-data.ts"
+  },
+  "dependencies": {
+    "next": "14.2.4",
+    "@supabase/supabase-js": "^2.43.4",
+    "recharts": "^2.12.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "lucide-react": "^0.395.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "papaparse": "^5.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/papaparse": "^5.3.14",
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "ts-node": "^10.9.2"
+  }
+}

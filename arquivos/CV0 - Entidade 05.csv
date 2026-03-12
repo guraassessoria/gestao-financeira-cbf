@@ -1,0 +1,23 @@
+CV0;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;
+Filial;Plano Contáb;Item;Codigo;Descrição;Classe;Cond.Normal;Entid.Sup.;Bloqueada;Dt.Inic.Blq;Dt.Final Blq;Data Inicial;Data Final.;Cod.Livros;Lucros/Perda;Conta Ponte.;Red.Var.M.
+01;05;;;PLANO 05;;;;;  /  /    ;06/12/2023;  /  /    ;  /  /    ;;;;
+01;05;000002;01;SELECÃO PRINCIPAL;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000003;02;SELECOES DE BASE;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000004;03;SELECOES FEMININAS;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000005;04;BRASILEIRO - SERIE A;Analitica;Credora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000006;05;BRASILEIRO - SERIE B;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000007;06;BRASILEIRO - SERIE C;Analitica;Devedora;;;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000008;07;BRASILEIRO - SERIE D;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000009;08;COPA DO BRASIL - MASCULINO;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000010;09;COPA DO BRASIL - FEMININO;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000011;10;COPA DO BRASIL - SUB 20;Analitica;Devedora;;;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000012;11;COPA DO NORDESTE;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000013;12;COPA DO BRASIL - SUB 17;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000014;13;BRASILEIRO - FEMININO;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000015;14;COPA VERDE;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000016;15;BRASILEIRO - SUB 20;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000017;16;OUTRAS COMPETICOES;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000018;17;CONTRIBUICÃO AO FOMENTO DO FUT;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000019;18;GERAIS E ADMINISTRATIVAS;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;
+01;05;000020;19;SUPER COPA DO BRASIL;Analitica;Devedora;;Nao;  /  /    ;  /  /    ;06/12/2023;  /  /    ;;;;

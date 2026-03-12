@@ -1,0 +1,1074 @@
+
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    <style>
+                        table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; }
+                        th, td { border: 1px solid #ddd; padding: 8px; font-size: 11px; }
+                    </style>
+                </head>
+                <body>
+                    <table id="de_para_dre_table">
+                        <thead>
+                            <tr>
+                                <th style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 700; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: center;">Codigo De Para</th>
+                                <th style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 700; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: center;">Descrição Conta DRE</th>
+                                <th style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 700; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: center;">Codigo Conta Contabil</th>
+                                <th style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 700; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: center;">Codigo Centro Custo</th>                                
+                            </tr>
+                        </thead>
+                        <tbody><tr>
+                                <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;"></td>
+                                <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                                <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                                <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>                                
+                            </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2052</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1605 -|- Nike European Operations </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2053</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1607 -|- Chimica Baruel Ltda </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101012</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2054</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1608 -|- Mastercard </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101014</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2055</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1609 -|- Gol Linhas Aéreas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101015</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2056</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1610 -|- Cia de Bebidas Das Américas - Ambev </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2057</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1611 -|- Banco Itaú S/A </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2058</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1612 -|- Vivo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2059</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1613 -|- Klefer Produções e Promoções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101107</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2060</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1614 -|- Samsung </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101108</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2061</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1615 -|- Ef Language Learning Solutions </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101109</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2062</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1616 -|- Panini </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101111</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2063</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1617 -|- Agmr – Desenvol. Aplicativos Sistema Celular </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101112</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2064</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1618 -|- General Motors </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101113</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2065</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1619 -|- General Motors - Seleções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101116</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2066</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1620 -|- Semp Toshiba </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101118</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2067</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1621 -|- Ultrafarma Saúde </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101119</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2068</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1622 -|- Grupo Cimed </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101120</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2069</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1623 -|- Konami Digital Entertainment </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101121</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2070</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1624 -|- Universidade Brasil </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101122</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2071</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1625 -|- Café Três Corações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101123</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2072</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1626 -|- RM Estatistica </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101124</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2073</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1627 -|- Xiamen Kingdomnay </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101125</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2074</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1628 -|- Semp Toshiba - Arbitragem </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101126</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2075</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1629 -|- Fiat </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101027</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2076</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1630 -|- Sky Serviços de Banda Larga </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101028</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2077</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1631 -|- Itaucard </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101029</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2078</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1632 -|- Empreendimentos Pague Menos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101127</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2079</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1633 -|- Lojas Riachuelo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101128</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2080</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1634 -|- BITCI Teknoloji A.S </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101129</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2081</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1635 -|- Neoenergia </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101130</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2082</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1636 -|- Fans Tokens </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101131</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2083</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1637 -|- Garena Online </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101132</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2084</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1638 -|- Kwai </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101133</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2085</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1639 -|- Kavak </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101134</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2086</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1640 -|- Outros Patrocinadores </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101099</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2087</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1641 -|- Rappi </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101135</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2088</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1643 -|- Seleção Principal </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2089</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1644 -|- Seleções de Base e Feminina </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2090</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1645 -|- Copa do Brasil - Masculina </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2091</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1646 -|- Campeonato Brasileiro Serie B </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102004</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2092</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1647 -|- Campeonato Brasileiro Serie C </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102005</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2093</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1648 -|- Copa do Brasil - Feminina </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102006</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2094</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1649 -|- Campeonato Brasileiro Serie D </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102007</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2095</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1650 -|- Brasileiro Feminino </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102008</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2096</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1651 -|- Campeonato Brasileiro Serie A </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102009</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2097</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1652 -|- E-brasileirão </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102010</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2098</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1653 -|- Categoria de Base </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102011</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2099</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1654 -|- Super Copa do Brasil </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102012</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2100</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1655 -|- Copa Verde </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102013</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1656 -|- Copa Do Nordeste </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102014</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1657 -|- Outras Competições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311102015</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1659 -|- Partidas Nacionais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311103001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1660 -|- Partidas Internacionais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311103002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2105</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1661 -|- Super Copa do Brasil </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311103003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2106</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1662 -|- Seleção Principal </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311104001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2107</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1663 -|- Seleções de Base e Feminina </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311104002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2108</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1664 -|- Seleção Principal (Exterior) </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311104003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2109</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1666 -|- Inscrições Atletas Profissionais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311105001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2110</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1667 -|- Inscrições de Clubes </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311105002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2111</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1668 -|- Rescisão Contratual </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311105003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2112</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1669 -|- Formação De Atleta </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311105004</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2113</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1670 -|- Taxa de Cadastramento de Intermediários </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311105005</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2114</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1671 -|- Expedição de Certidões </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311105006</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2115</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1672 -|- Licenças e Transferências </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311106001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2116</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1674 -|- Legado </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311108005</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2117</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1676 -|- FIFA Foward </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311108001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2118</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1677 -|- Evolución </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311108003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2119</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1678 -|- Competições Continentais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311108004</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2120</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1680 -|- CBF Academy </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311109001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2121</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1681 -|- CBF Academy 2 </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110004</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2136</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1704 -|- Salários e Honorários </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2137</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1705 -|- Encargos Sociais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2138</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1706 -|- Ferias e 13 Salário </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2139</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1707 -|- Benefícios </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2140</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1709 -|- Alugueis e Condomínio </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2141</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1710 -|- Depreciações E Amortizações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2142</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1711 -|- Manutenção e Reparos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321203</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2143</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1713 -|- Utilidades E Servicos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321301</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2144</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1715 -|- Viagens e Representações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321401</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2145</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1716 -|- Material De Consumo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321402</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2146</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1717 -|- Conduções, Lanches e Refeições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321403</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2147</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1718 -|- Revistas, Assinaturas e Publicações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321404</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2148</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1719 -|- Propaganda e Publicidade </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321405</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2149</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1720 -|- Subvenções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321408</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2150</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1721 -|- Outros </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321409</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2123</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311113001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2124</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311107002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2126</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311199001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2127</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311201003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2128</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2129</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2130</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110005</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2131</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110006</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2132</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110007</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2133</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110010</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2134</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110099</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2151</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1722 -|- Perdas de Créditos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321410</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2152</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1724 -|- Pessoas Físicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321501</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2153</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1725 -|- Pessoas Jurídicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321502</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">01</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2154</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1728 -|- Salários e Honorários </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2155</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1729 -|- Encargos Sociais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2156</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1730 -|- Ferias e 13 Salário </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2157</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1731 -|- Benefícios </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2158</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1733 -|- Alugueis e Condomínio </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2159</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1734 -|- Depreciações E Amortizações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2160</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1735 -|- Manutenção e Reparos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321203</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2161</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1737 -|- Utilidades E Servicos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321301</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2162</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1739 -|- Viagens e Representações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321401</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2163</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1740 -|- Material De Consumo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321402</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2164</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1741 -|- Conduções, Lanches e Refeições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321403</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2165</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1742 -|- Revistas, Assinaturas e Publicações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321404</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2166</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1743 -|- Propaganda e Publicidade </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321405</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2167</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1744 -|- Subvenções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321408</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2168</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1745 -|- Outros </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321409</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2169</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1746 -|- Perdas de Créditos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321410</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2170</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1748 -|- Pessoas Físicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321501</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2171</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1749 -|- Pessoas Jurídicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321502</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">02</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2172</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1752 -|- Salários e Honorários </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2173</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1753 -|- Encargos Sociais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2174</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1754 -|- Ferias e 13 Salário </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2175</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1755 -|- Benefícios </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2176</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1757 -|- Alugueis e Condomínio </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2177</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1758 -|- Depreciações E Amortizações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2178</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1759 -|- Manutenção e Reparos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321203</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2179</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1761 -|- Utilidades E Servicos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321301</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2180</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1763 -|- Viagens e Representações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321401</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2181</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1764 -|- Material De Consumo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321402</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2182</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1765 -|- Conduções, Lanches e Refeições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321403</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2183</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1766 -|- Revistas, Assinaturas e Publicações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321404</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2184</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1767 -|- Propaganda e Publicidade </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321405</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2185</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1768 -|- Subvenções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321408</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2186</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1769 -|- Outros </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321409</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2187</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1770 -|- Perdas de Créditos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321410</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2188</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1772 -|- Pessoas Físicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321501</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2189</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1773 -|- Pessoas Jurídicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321502</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">03</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2190</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1776 -|- Salários e Honorários </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2191</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1777 -|- Encargos Sociais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2192</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1778 -|- Ferias e 13 Salário </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2193</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1779 -|- Benefícios </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2194</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1781 -|- Alugueis e Condomínio </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2195</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1782 -|- Depreciações E Amortizações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2196</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1783 -|- Manutenção e Reparos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321203</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2197</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1785 -|- Utilidades E Servicos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321301</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2198</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1787 -|- Viagens e Representações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321401</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2199</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1788 -|- Material De Consumo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321402</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2200</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1789 -|- Conduções, Lanches e Refeições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321403</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1790 -|- Revistas, Assinaturas e Publicações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321404</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1791 -|- Propaganda e Publicidade </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321405</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2203</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1792 -|- Subvenções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321408</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2204</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1793 -|- Outros </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321409</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2205</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1794 -|- Perdas de Créditos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321410</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2206</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1796 -|- Pessoas Físicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321501</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2207</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1797 -|- Pessoas Jurídicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321502</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2208</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1799 -|- Federações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321701</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2209</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1800 -|- Arbitragem </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321702</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2210</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1801 -|- Clubes </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321703</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">17</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2211</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1803 -|- Brasileiro - Serie A </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">04</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2212</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1804 -|- Brasileiro - Serie B </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">05</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2213</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1805 -|- Brasileiro - Serie C </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">06</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2214</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1806 -|- Brasileiro - Serie D </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">07</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2215</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1807 -|- Copa Do Brasil - Masculino </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">08</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2216</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1808 -|- Copa Do Brasil - Feminino </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">09</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2217</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1809 -|- Copa Do Brasil - Sub 20 </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">10</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2218</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1810 -|- Copa Do Nordeste </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">11</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2219</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1811 -|- Copa Do Brasil - Sub 17 </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">12</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2220</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1812 -|- Brasileiro - Feminino </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">13</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2221</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1813 -|- Copa Verde </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">14</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2222</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1814 -|- Brasileiro - Sub 20 </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">15</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2223</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1815 -|- Super Copa do Brasil </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">19</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2224</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1816 -|- Outras Competições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">321</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">16</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2225</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1821 -|- Salários e Honorários </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2226</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1822 -|- Encargos Sociais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2227</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1823 -|- Ferias e 13 Salario </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322103</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2228</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1824 -|- Benefícios </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322104</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2229</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1826 -|- Alugueis e Condomínio </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2230</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1827 -|- Depreciações E Amortizações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2231</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1828 -|- Manutenção e Reparos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322203</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2232</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1830 -|- Utilidades E Servicos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322301</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2233</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1832 -|- Viagens e Representações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322401</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2234</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1833 -|- Material De Consumo </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322402</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2235</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1834 -|- Conduções, Lanches e Refeições </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322403</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2236</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1835 -|- Revistas, Assinaturas e Publicações </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322404</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2237</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1836 -|- Propaganda e Publicidade </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322405</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2238</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1837 -|- Subvenções </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322408</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2239</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1838 -|- Outros </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322409</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2240</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1839 -|- Perdas de Créditos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322410</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2241</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1841 -|- Pessoas Físicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322501</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2242</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1842 -|- Pessoas Jurídicas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">322502</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">18</td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2244</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1847 -|- Despesas Financeiras </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">324102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2245</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1848 -|- Receitas Financeiras </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">324101</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2246</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1849 -|- Variação Cambial </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">324201</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2250</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1702 -|- Deduções da Receita - COFINS/ISS </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311201002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2251</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1849 -|- Variação Cambial </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">324202</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2256</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1853 -|- Imposto de Renda e Contribuição Social </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">341102</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2262</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2122</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311111001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2125</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1851 -|- Outras Receitas e Despesas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311114001</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2280</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101002</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2281</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101003</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2282</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101005</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2283</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101006</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2284</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1702 -|- Deduções da Receita - COFINS/ISS </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101004</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">2285</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101007</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">548713</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">1845 -|- Impostos e Taxas </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">323101008</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">604838</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">604837 -|- Springer Carrier LTDA (MIDEA) </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101138</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">604863</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">604862 -|- Uber do Brasil Tecnologia LTDA </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101136</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">604868</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">604864 -|- Ifood Agência de Serviços de Restaurante </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101137</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">604874</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">604870 -|- Volkswagen do Brasil Ind de Veículos </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311101007</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr><tr>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: left;">612120</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">612118 -|- Mídias Sociais </td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;">311110009</td>
+                            <td style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); font-weight: 400; border: 1px solid rgb(221, 221, 221); padding: 8px; font-size: 11px; text-align: right;"></td>
+                        </tr></tbody>
+                    </table>
+                </body>
+                </html>
+            

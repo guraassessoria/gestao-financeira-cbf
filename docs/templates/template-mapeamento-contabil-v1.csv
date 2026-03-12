@@ -1,0 +1,12 @@
+demonstracao,secao,subsecao,ordem,conta_protheus_inicio,conta_protheus_fim,conta_protheus_lista,classe_conta,cond_normal,sinal_apresentacao,regra_soma,usa_ccusto,usa_entidade05,usa_de_para_dre,observacao,owner_validacao,status
+BP,ATIVO,Circulante,10,,,,,,positivo,faixa,sim,nao,nao,,Contabilidade,pendente
+BP,ATIVO,Nao Circulante,20,,,,,,positivo,faixa,sim,nao,nao,,Contabilidade,pendente
+BP,PASSIVO,Circulante,30,,,,,,positivo,faixa,sim,nao,nao,,Contabilidade,pendente
+BP,PASSIVO,Nao Circulante,40,,,,,,positivo,faixa,sim,nao,nao,,Contabilidade,pendente
+BP,PATRIMONIO LIQUIDO,Capital e Reservas,50,,,,,,positivo,faixa,nao,nao,nao,,Contabilidade,pendente
+DFC,OPERACIONAL,Lucro Liquido e Ajustes,60,,,,,,positivo,regra,sim,nao,nao,metodo indireto,Contabilidade,pendente
+DFC,OPERACIONAL,Variacao de Ativos e Passivos Operacionais,70,,,,,,positivo,regra,sim,nao,nao,metodo indireto,Contabilidade,pendente
+DFC,INVESTIMENTO,Entradas e Saidas,80,,,,,,positivo,regra,sim,nao,nao,,Contabilidade,pendente
+DFC,FINANCIAMENTO,Entradas e Saidas,90,,,,,,positivo,regra,sim,nao,nao,,Contabilidade,pendente
+DRA,OCI,Componentes a Definir,100,,,,,,positivo,regra,nao,nao,nao,pendente definicao OCI,Contabilidade,pendente
+DRE,RECEITAS,Conforme de_para,110,,,,,,positivo,de_para,sim,sim,sim,usar DRE - De_Para.xls,Controladoria,aprovado

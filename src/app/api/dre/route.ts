@@ -163,13 +163,24 @@ export async function GET(request: NextRequest) {
     const requestedPeriod = url.searchParams.get('periodo')
     const visao = normalizeVisaoPeriodo(url.searchParams.get('visao'))
 
-    const { data: periodRows, error: periodError } = await supabase
-      .from('lancamentos_contabeis')
-      .select('periodo')
-
-    if (periodError) {
-      return NextResponse.json({ error: periodError.message }, { status: 500 })
+    // Busca todos os períodos distintos com paginação (Supabase limita 1000 rows por query)
+    let allPeriodRows: { periodo: string }[] = []
+    let periodPage = 0
+    const PAGE_SIZE = 1000
+    while (true) {
+      const { data: pageData, error: periodError } = await supabase
+        .from('lancamentos_contabeis')
+        .select('periodo')
+        .range(periodPage * PAGE_SIZE, (periodPage + 1) * PAGE_SIZE - 1)
+      if (periodError) {
+        return NextResponse.json({ error: periodError.message }, { status: 500 })
+      }
+      if (!pageData || pageData.length === 0) break
+      allPeriodRows = allPeriodRows.concat(pageData)
+      if (pageData.length < PAGE_SIZE) break
+      periodPage++
     }
+    const periodRows = allPeriodRows
 
     const periodosMensaisDisponiveis = Array.from(new Set((periodRows || []).map((r) => r.periodo))).sort((a, b) => {
       return periodToDate(b).getTime() - periodToDate(a).getTime()
@@ -228,10 +239,24 @@ export async function GET(request: NextRequest) {
       supabase
         .from('contas_contabeis')
         .select('cod_conta, cond_normal'),
-      supabase
-        .from('lancamentos_contabeis')
-        .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
-        .in('periodo', periodosConsulta),
+      (async () => {
+        // Lê lançamentos com paginação — Supabase limita 1000 rows por query
+        let allLancamentos: any[] = []
+        let lancPage = 0
+        while (true) {
+          const { data: pageData, error: lancError } = await supabase
+            .from('lancamentos_contabeis')
+            .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
+            .in('periodo', periodosConsulta)
+            .range(lancPage * PAGE_SIZE, (lancPage + 1) * PAGE_SIZE - 1)
+          if (lancError) return { data: null, error: lancError }
+          if (!pageData || pageData.length === 0) break
+          allLancamentos = allLancamentos.concat(pageData)
+          if (pageData.length < PAGE_SIZE) break
+          lancPage++
+        }
+        return { data: allLancamentos, error: null }
+      })(),
       supabase
         .from('entidades_dre')
         .select('codigo, descricao'),

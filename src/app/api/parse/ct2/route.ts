@@ -7,6 +7,8 @@ import { parseCT2TS } from '@/lib/csv-parsers'
 import { createServiceClient } from '@/lib/supabase'
 import { authOptions } from '@/lib/auth'
 
+export const maxDuration = 300 // 5 minutos — necessário para arquivos grandes (Vercel Pro/Hobby limita a 60s se não configurado)
+
 export const config = {
   api: {
     bodyParser: {
@@ -131,8 +133,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 2. Inserir lancamentos em chunks de 1000 para evitar timeout
-    const chunkSize = 1000
+    // 2. Inserir lancamentos em chunks de 5000 (Supabase suporta até ~10MB por POST)
+    const chunkSize = 5000
     const chunks = []
 
     for (let i = 0; i < lancamentos.length; i += chunkSize) {

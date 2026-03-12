@@ -15,11 +15,16 @@ type DREApiResponse = {
   error?: string
 }
 
+const EPSILON = 0.005
+
+function hasDisplayValue(node: LinhaDRECalculada): boolean {
+  return Math.abs(node.valor) > EPSILON || Math.abs(node.valorAnterior || 0) > EPSILON
+}
+
 export default function DREPage() {
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold mb-2">Demonstração do Resultado (DRE)</h1>
-      <p className="text-slate-600 mb-8">ITG 2002 (R1) — Entidade sem fins lucrativos</p>
+      <h1 className="text-4xl font-bold mb-8">Demonstração do Resultado (DRE)</h1>
 
       <DREList />
     </div>
@@ -77,9 +82,13 @@ function DREList() {
     void carregarDRE()
   }, [carregarDRE])
 
-  const linhasByCodigo = React.useMemo(() => {
-    return new Map(linhas.map((linha) => [linha.codigoConta, linha]))
+  const linhasComValor = React.useMemo(() => {
+    return linhas.filter(hasDisplayValue)
   }, [linhas])
+
+  const linhasByCodigo = React.useMemo(() => {
+    return new Map(linhasComValor.map((linha) => [linha.codigoConta, linha]))
+  }, [linhasComValor])
 
   const linhasVisiveis = React.useMemo(() => {
     const isVisible = (linha: LinhaDRECalculada) => {
@@ -99,8 +108,8 @@ function DREList() {
       return true
     }
 
-    return linhas.filter(isVisible)
-  }, [expandedRows, linhas, linhasByCodigo])
+    return linhasComValor.filter(isVisible)
+  }, [expandedRows, linhasByCodigo, linhasComValor])
 
   const toggleRow = React.useCallback((codigoConta: string) => {
     setExpandedRows((current) => ({
@@ -122,8 +131,8 @@ function DREList() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="bg-white rounded-lg border border-slate-200 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="space-y-3">
+      <div className="bg-white rounded-lg border border-slate-200 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
           <p className="text-sm text-slate-600">Visão: <span className="font-semibold text-slate-900 capitalize">{visao}</span></p>
           <p className="text-sm text-slate-600">Período atual: <span className="font-semibold text-slate-900">{periodoAtual || '-'}</span></p>
@@ -163,11 +172,11 @@ function DREList() {
       </div>
 
       <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-        {linhas.length === 0 ? (
+        {linhasVisiveis.length === 0 ? (
           <p className="text-slate-600 p-6">Nenhuma linha de DRE calculada para o período selecionado.</p>
         ) : (
           <>
-            <div className="grid grid-cols-[1fr_180px_180px_120px] gap-3 px-6 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500 border-b border-slate-200 bg-slate-50">
+            <div className="grid grid-cols-[1fr_180px_180px_120px] gap-3 px-5 py-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 border-b border-slate-200 bg-slate-50">
               <div>Conta</div>
               <div className="text-right">Atual</div>
               <div className="text-right">Comparativo</div>
@@ -202,7 +211,7 @@ function DREOrderedRow({
 }) {
   const isResultadoFinal = node.codigoConta === '1854'
   const isGrupo = Boolean(node.temFilhos)
-  const paddingLeft = Math.max(0, (node.nivel - 1) * 18)
+  const paddingLeft = Math.max(0, (node.nivel - 1) * 14)
   const variacaoTexto =
     node.variacaoPercentual === null
       ? '—'
@@ -211,7 +220,7 @@ function DREOrderedRow({
   return (
     <div
       className={[
-        'grid grid-cols-[1fr_180px_180px_120px] gap-3 px-6 py-3 items-center',
+        'grid grid-cols-[1fr_180px_180px_120px] gap-3 px-5 py-2 items-center',
         isResultadoFinal ? 'bg-blue-900 text-white' : '',
         !isResultadoFinal && isGrupo ? 'bg-blue-50/70' : '',
         !isResultadoFinal && !isGrupo ? 'bg-white' : '',
@@ -241,14 +250,13 @@ function DREOrderedRow({
         )}
 
         <div className="min-w-0">
-          <p className={`truncate ${isResultadoFinal || isGrupo ? 'font-semibold' : 'font-medium'} ${isResultadoFinal ? 'text-white' : 'text-slate-800'}`}>
+          <p className={`truncate text-sm ${isResultadoFinal || isGrupo ? 'font-semibold' : 'font-medium'} ${isResultadoFinal ? 'text-white' : 'text-slate-800'}`}>
             {node.descricao}
           </p>
-          <p className={`text-xs mt-1 ${isResultadoFinal ? 'text-blue-100' : 'text-slate-500'}`}>Código: {node.codigoConta}</p>
         </div>
       </div>
 
-      <div className={`text-right font-semibold tabular-nums ${isResultadoFinal ? 'text-white' : 'text-slate-900'}`}>
+      <div className={`text-right text-sm font-semibold tabular-nums ${isResultadoFinal ? 'text-white' : 'text-slate-900'}`}>
         {formatCurrency(node.valor)}
       </div>
       <div className={`text-right tabular-nums ${isResultadoFinal ? 'text-blue-100' : 'text-slate-600'}`}>

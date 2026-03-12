@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { Sidebar } from '@/components/nav/Sidebar'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -30,6 +30,13 @@ export default function ImportacaoPage() {
     arquivosEsperados.map((a) => ({ ...a, status: 'aguardando' as const }))
   )
   const [dragging, setDragging] = useState(false)
+  const intervalsRef = useRef<ReturnType<typeof setInterval>[]>([])
+
+  useEffect(() => {
+    return () => {
+      intervalsRef.current.forEach(clearInterval)
+    }
+  }, [])
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -61,6 +68,7 @@ export default function ImportacaoPage() {
         )
         if (progress >= 100) {
           clearInterval(interval)
+          intervalsRef.current = intervalsRef.current.filter((i) => i !== interval)
           setArquivos((prev) =>
             prev.map((a) =>
               a.tipo === tipo
@@ -70,6 +78,7 @@ export default function ImportacaoPage() {
           )
         }
       }, 200)
+      intervalsRef.current.push(interval)
     })
   }, [])
 

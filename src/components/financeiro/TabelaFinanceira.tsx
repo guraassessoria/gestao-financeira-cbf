@@ -65,7 +65,7 @@ export function TabelaFinanceira({ linhas, moeda, titulo }: TabelaFinanceiraProp
             <TableHead>{titulo || 'Descrição'}</TableHead>
             <TableHead className="text-right">Exercício Atual</TableHead>
             <TableHead className="text-right">Exercício Anterior</TableHead>
-            <TableHead className="text-right">Variação (R$)</TableHead>
+            <TableHead className="text-right">Variação ({moeda === 'BRL' ? 'R$' : 'USD'})</TableHead>
             <TableHead className="text-right">Variação (%)</TableHead>
           </TableRow>
         </TableHeader>

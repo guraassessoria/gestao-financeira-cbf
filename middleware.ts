@@ -10,19 +10,27 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   // Rotas públicas que não precisam de autenticação
-  const publicRoutes = ['/login', '/api/auth']
+  const publicRoutes = ['/login', '/acesso', '/api/auth']
 
   // Se é rota pública, continua
   if (publicRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.next()
   }
 
-  // Verificar se tem sessão (cookie nextauth.session-token)
-  const token = request.cookies.get('next-auth.session-token')
+  // Verificar sessão em ambos os formatos de cookie do NextAuth
+  const token =
+    request.cookies.get('next-auth.session-token')?.value ||
+    request.cookies.get('__Secure-next-auth.session-token')?.value
 
   // Se não tem token e não é rota pública, redireciona para login
   if (!token && !publicRoutes.includes(pathname)) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
+    }
+
+    const loginUrl = new URL('/login', request.url)
+    loginUrl.searchParams.set('from', pathname)
+    return NextResponse.redirect(loginUrl)
   }
 
   return NextResponse.next()

@@ -83,11 +83,11 @@ CREATE TABLE IF NOT EXISTS lancamentos_contabeis (
 );
 
 -- Índices para performance
-CREATE INDEX idx_lancamentos_periodo ON lancamentos_contabeis(periodo);
-CREATE INDEX idx_lancamentos_cta_deb ON lancamentos_contabeis(cta_debito);
-CREATE INDEX idx_lancamentos_cta_cred ON lancamentos_contabeis(cta_credito);
-CREATE INDEX idx_lancamentos_cc_deb ON lancamentos_contabeis(c_custo_deb);
-CREATE INDEX idx_lancamentos_cc_cred ON lancamentos_contabeis(c_custo_crd);
+CREATE INDEX IF NOT EXISTS idx_lancamentos_periodo ON lancamentos_contabeis(periodo);
+CREATE INDEX IF NOT EXISTS idx_lancamentos_cta_deb ON lancamentos_contabeis(cta_debito);
+CREATE INDEX IF NOT EXISTS idx_lancamentos_cta_cred ON lancamentos_contabeis(cta_credito);
+CREATE INDEX IF NOT EXISTS idx_lancamentos_cc_deb ON lancamentos_contabeis(c_custo_deb);
+CREATE INDEX IF NOT EXISTS idx_lancamentos_cc_cred ON lancamentos_contabeis(c_custo_crd);
 
 -- ─────────────────────────────────────────────
 -- 4. Tabela de Uploads
@@ -223,11 +223,31 @@ ALTER TABLE upload_logs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE logs_relatorios ENABLE ROW LEVEL SECURITY;
 
 -- Política: Users podem ver apenas seus próprios uploads
-CREATE POLICY usuarios_own_uploads ON upload_logs
-  FOR SELECT
-  USING (uploaded_by::text = auth.uid()::text);
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies
+    WHERE schemaname = 'public'
+      AND tablename = 'upload_logs'
+      AND policyname = 'usuarios_own_uploads'
+  ) THEN
+    CREATE POLICY usuarios_own_uploads ON upload_logs
+      FOR SELECT
+      USING (uploaded_by::text = auth.uid()::text);
+  END IF;
+END $$;
 
 -- Política: Users podem ver apenas seus próprios logs de relatórios
-CREATE POLICY usuarios_own_reports ON logs_relatorios
-  FOR SELECT
-  USING (gerado_por::text = auth.uid()::text);
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies
+    WHERE schemaname = 'public'
+      AND tablename = 'logs_relatorios'
+      AND policyname = 'usuarios_own_reports'
+  ) THEN
+    CREATE POLICY usuarios_own_reports ON logs_relatorios
+      FOR SELECT
+      USING (gerado_por::text = auth.uid()::text);
+  END IF;
+END $$;

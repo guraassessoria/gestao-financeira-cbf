@@ -45,3 +45,6 @@ dist/
 venv/
 ENV/
 .pytest_cache/
+
+# Supabase CLI local metadata
+supabase/.temp/

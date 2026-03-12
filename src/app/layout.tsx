@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Sidebar } from '@/components/layout/Sidebar'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
+import { AppFrame } from '@/components/layout/AppFrame'
 import { AuthSessionProvider } from '@/components/providers/SessionProvider'
 
 export const metadata: Metadata = {
@@ -19,14 +17,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="bg-slate-50">
         <AuthSessionProvider>
-          <div className="flex min-h-screen flex-col md:flex-row">
-            <Sidebar />
-            <div className="flex-1 flex flex-col">
-              <Header />
-              <main className="flex-1 overflow-auto">{children}</main>
-              <Footer />
-            </div>
-          </div>
+          <AppFrame>{children}</AppFrame>
         </AuthSessionProvider>
       </body>
     </html>

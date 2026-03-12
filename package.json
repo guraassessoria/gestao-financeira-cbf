@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supabase:link": "supabase link --project-ref ifsyeqzodimustnxgwyt",
+    "supabase:push": "supabase db push",
+    "supabase:migrations": "supabase migration list"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.15.0",

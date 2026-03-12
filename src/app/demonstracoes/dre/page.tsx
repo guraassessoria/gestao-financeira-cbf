@@ -3,6 +3,15 @@
 import React from 'react'
 import { LinhaDRECalculada } from '@/types'
 
+type DREApiResponse = {
+  periodosDisponiveis: string[]
+  periodo: string | null
+  periodoComparativo: string | null
+  linhas: LinhaDRECalculada[]
+  mensagem?: string
+  error?: string
+}
+
 export default function DREPage() {
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto">
@@ -15,61 +24,88 @@ export default function DREPage() {
 }
 
 function DRETree() {
-  // Mock DRE structure
-  const mockDRE: LinhaDRECalculada = {
-    codigoConta: '1854',
-    descricao: 'Superávit do Exercício',
-    nivel: 1,
-    nivelVisualizacao: 1,
-    codigoSuperior: null,
-    valor: 2150000,
-    valorAnterior: 1950000,
-    variacaoAbsoluta: 200000,
-    variacaoPercentual: 10.26,
-    filhos: [
-      {
-        codigoConta: '1852',
-        descricao: 'Resultado Antes dos Impostos',
-        nivel: 2,
-        nivelVisualizacao: 1,
-        codigoSuperior: '1854',
-        valor: 2350000,
-        valorAnterior: 2100000,
-        variacaoAbsoluta: 250000,
-        variacaoPercentual: 11.9,
-        filhos: [
-          {
-            codigoConta: '1703',
-            descricao: 'Total da Receita Líquida',
-            nivel: 3,
-            nivelVisualizacao: 2,
-            codigoSuperior: '1852',
-            valor: 8500000,
-            valorAnterior: 7850000,
-            variacaoAbsoluta: 650000,
-            variacaoPercentual: 8.28,
-            filhos: [],
-          },
-          {
-            codigoConta: '1819',
-            descricao: 'Total dos Custos e Despesas',
-            nivel: 3,
-            nivelVisualizacao: 2,
-            codigoSuperior: '1852',
-            valor: -6150000,
-            valorAnterior: -5750000,
-            variacaoAbsoluta: -400000,
-            variacaoPercentual: -6.96,
-            filhos: [],
-          },
-        ],
-      },
-    ],
+  const [linhas, setLinhas] = React.useState<LinhaDRECalculada[]>([])
+  const [periodosDisponiveis, setPeriodosDisponiveis] = React.useState<string[]>([])
+  const [periodoAtual, setPeriodoAtual] = React.useState<string>('')
+  const [periodoComparativo, setPeriodoComparativo] = React.useState<string | null>(null)
+  const [mensagem, setMensagem] = React.useState<string>('')
+  const [erro, setErro] = React.useState<string>('')
+  const [loading, setLoading] = React.useState<boolean>(true)
+
+  const carregarDRE = React.useCallback(async (periodo?: string) => {
+    setLoading(true)
+    setErro('')
+
+    try {
+      const query = periodo ? `?periodo=${encodeURIComponent(periodo)}` : ''
+      const res = await fetch(`/api/dre${query}`, { cache: 'no-store' })
+      const data = (await res.json()) as DREApiResponse
+
+      if (!res.ok) {
+        setErro(data.error || 'Erro ao carregar DRE')
+        setLinhas([])
+        return
+      }
+
+      setLinhas(data.linhas || [])
+      setPeriodosDisponiveis(data.periodosDisponiveis || [])
+      setPeriodoAtual(data.periodo || '')
+      setPeriodoComparativo(data.periodoComparativo || null)
+      setMensagem(data.mensagem || '')
+    } catch {
+      setErro('Falha de comunicação ao carregar a DRE')
+      setLinhas([])
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    void carregarDRE()
+  }, [carregarDRE])
+
+  if (loading) {
+    return <div className="bg-white rounded-lg border border-slate-200 p-6 text-slate-600">Carregando DRE...</div>
+  }
+
+  if (erro) {
+    return <div className="bg-red-50 rounded-lg border border-red-200 p-6 text-red-700">{erro}</div>
+  }
+
+  if (mensagem) {
+    return <div className="bg-amber-50 rounded-lg border border-amber-200 p-6 text-amber-800">{mensagem}</div>
   }
 
   return (
-    <div className="bg-white rounded-lg border border-slate-200 p-6">
-      <DRETreeNode node={mockDRE} />
+    <div className="space-y-4">
+      <div className="bg-white rounded-lg border border-slate-200 p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <p className="text-sm text-slate-600">Período atual: <span className="font-semibold text-slate-900">{periodoAtual || '-'}</span></p>
+          <p className="text-xs text-slate-500">Comparativo: {periodoComparativo || 'Não disponível'}</p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <label htmlFor="periodo-dre" className="text-sm text-slate-700">Período:</label>
+          <select
+            id="periodo-dre"
+            value={periodoAtual}
+            onChange={(e) => void carregarDRE(e.target.value)}
+            className="border border-slate-300 rounded-md px-3 py-2 text-sm bg-white"
+          >
+            {periodosDisponiveis.map((p) => (
+              <option key={p} value={p}>{p}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg border border-slate-200 p-6">
+        {linhas.length === 0 ? (
+          <p className="text-slate-600">Nenhuma linha de DRE calculada para o período selecionado.</p>
+        ) : (
+          linhas.map((linha) => <DRETreeNode key={linha.codigoConta} node={linha} />)
+        )}
+      </div>
     </div>
   )
 }

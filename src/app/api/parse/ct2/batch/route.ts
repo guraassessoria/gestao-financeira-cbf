@@ -29,7 +29,8 @@ export interface CT2BatchRecord {
 export interface CT2BatchRequest {
   records: CT2BatchRecord[]
   batchIndex: number
-  totalBatches: number
+  totalBatches?: number
+  isFinal?: boolean
   uploadId?: number
   nomeArquivo?: string
   totalLancamentos?: number
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const supabase = createServiceClient()
 
     const body: CT2BatchRequest = await request.json()
-    const { records, batchIndex, totalBatches, nomeArquivo, totalLancamentos, totalValor, periodos } = body
+    const { records, batchIndex, totalBatches, isFinal, nomeArquivo, totalLancamentos, totalValor, periodos } = body
     let { uploadId } = body
 
     // Primeiro batch: criar log + deletar dados antigos
@@ -104,12 +105,30 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }
     }
 
-    // Último batch: marcar como concluído
-    if (batchIndex === totalBatches - 1 && uploadId) {
-      await supabase.from('upload_logs').update({ status: 'ok' }).eq('id', uploadId)
+    // Último batch: marcar como concluído e persistir totais finais
+    const shouldFinalize = isFinal === true || (typeof totalBatches === 'number' && batchIndex === totalBatches - 1)
+    if (shouldFinalize && uploadId) {
+      const updatePayload: {
+        status: 'ok'
+        total_lancamentos?: number
+        total_valor?: number
+        periodos?: string
+      } = { status: 'ok' }
+
+      if (typeof totalLancamentos === 'number') {
+        updatePayload.total_lancamentos = totalLancamentos
+      }
+      if (typeof totalValor === 'number') {
+        updatePayload.total_valor = totalValor
+      }
+      if (Array.isArray(periodos)) {
+        updatePayload.periodos = JSON.stringify([...new Set(periodos)].sort())
+      }
+
+      await supabase.from('upload_logs').update(updatePayload).eq('id', uploadId)
     }
 
-    return NextResponse.json({ success: true, uploadId, batchIndex, totalBatches })
+    return NextResponse.json({ success: true, uploadId, batchIndex, totalBatches, isFinal: shouldFinalize })
   } catch (error) {
     return NextResponse.json(
       { error: `Erro interno: ${error instanceof Error ? error.message : 'desconhecido'}` },

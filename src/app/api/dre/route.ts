@@ -4,6 +4,8 @@ import { authOptions } from '@/lib/auth'
 import { createServiceClient } from '@/lib/supabase'
 import type { LinhaDRECalculada } from '@/types'
 
+export const maxDuration = 300
+
 type Saldo = {
   debito: number
   credito: number
@@ -162,29 +164,79 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url)
     const requestedPeriod = url.searchParams.get('periodo')
     const visao = normalizeVisaoPeriodo(url.searchParams.get('visao'))
-
-    // Busca todos os períodos distintos com paginação (Supabase limita 1000 rows por query)
-    let allPeriodRows: { periodo: string }[] = []
-    let periodPage = 0
     const PAGE_SIZE = 1000
-    while (true) {
-      const { data: pageData, error: periodError } = await supabase
-        .from('lancamentos_contabeis')
-        .select('periodo')
-        .range(periodPage * PAGE_SIZE, (periodPage + 1) * PAGE_SIZE - 1)
-      if (periodError) {
-        return NextResponse.json({ error: periodError.message }, { status: 500 })
-      }
-      if (!pageData || pageData.length === 0) break
-      allPeriodRows = allPeriodRows.concat(pageData)
-      if (pageData.length < PAGE_SIZE) break
-      periodPage++
-    }
-    const periodRows = allPeriodRows
+    const FETCH_CONCURRENCY = 8
 
-    const periodosMensaisDisponiveis = Array.from(new Set((periodRows || []).map((r) => r.periodo))).sort((a, b) => {
-      return periodToDate(b).getTime() - periodToDate(a).getTime()
-    })
+    // Caminho rápido: reaproveita períodos já calculados no upload CT2 (evita varrer toda a tabela)
+    let periodosMensaisDisponiveis: string[] = []
+    const { data: latestCt2Upload } = await supabase
+      .from('upload_logs')
+      .select('periodos')
+      .eq('tipo_arquivo', 'CT2')
+      .eq('status', 'ok')
+      .order('uploaded_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    const periodosFromLog = latestCt2Upload?.periodos
+    if (typeof periodosFromLog === 'string' && periodosFromLog.trim() !== '') {
+      try {
+        const parsed = JSON.parse(periodosFromLog)
+        if (Array.isArray(parsed)) {
+          periodosMensaisDisponiveis = parsed
+            .map((item) => String(item || '').trim())
+            .filter(Boolean)
+            .sort((a, b) => periodToDate(b).getTime() - periodToDate(a).getTime())
+        }
+      } catch {
+        periodosMensaisDisponiveis = []
+      }
+    }
+
+    // Fallback: sem log válido, busca períodos com paginação paralela
+    if (periodosMensaisDisponiveis.length === 0) {
+      const { count: totalLancRows, error: periodCountError } = await supabase
+        .from('lancamentos_contabeis')
+        .select('*', { count: 'exact', head: true })
+
+      if (periodCountError) {
+        return NextResponse.json({ error: periodCountError.message }, { status: 500 })
+      }
+
+      const totalPages = Math.ceil((totalLancRows || 0) / PAGE_SIZE)
+      const allPeriodRows: { periodo: string }[] = []
+
+      for (let pageStart = 0; pageStart < totalPages; pageStart += FETCH_CONCURRENCY) {
+        const pageEnd = Math.min(pageStart + FETCH_CONCURRENCY, totalPages)
+        const pageIndexes: number[] = []
+        for (let page = pageStart; page < pageEnd; page++) {
+          pageIndexes.push(page)
+        }
+
+        const pageResults = await Promise.all(
+          pageIndexes.map((page) =>
+            supabase
+              .from('lancamentos_contabeis')
+              .select('periodo')
+              .order('id', { ascending: true })
+              .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
+          )
+        )
+
+        for (const result of pageResults) {
+          if (result.error) {
+            return NextResponse.json({ error: result.error.message }, { status: 500 })
+          }
+          if (result.data?.length) {
+            allPeriodRows.push(...result.data)
+          }
+        }
+      }
+
+      periodosMensaisDisponiveis = Array.from(new Set(allPeriodRows.map((r) => r.periodo))).sort((a, b) => {
+        return periodToDate(b).getTime() - periodToDate(a).getTime()
+      })
+    }
 
     const periodosDisponiveis = Array.from(
       new Set(periodosMensaisDisponiveis.map((periodo) => periodo.slice(0, 4)))
@@ -240,21 +292,43 @@ export async function GET(request: NextRequest) {
         .from('contas_contabeis')
         .select('cod_conta, cond_normal'),
       (async () => {
-        // Lê lançamentos com paginação — Supabase limita 1000 rows por query
+        // Lê lançamentos com paginação paralela (limite de 1000 rows por query no Supabase)
+        const { count: totalRows, error: countError } = await supabase
+          .from('lancamentos_contabeis')
+          .select('*', { count: 'exact', head: true })
+          .in('periodo', periodosConsulta)
+
+        if (countError) return { data: null, error: countError }
+
+        const totalPages = Math.ceil((totalRows || 0) / PAGE_SIZE)
         let allLancamentos: any[] = []
-        let lancPage = 0
-        while (true) {
-          const { data: pageData, error: lancError } = await supabase
-            .from('lancamentos_contabeis')
-            .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
-            .in('periodo', periodosConsulta)
-            .range(lancPage * PAGE_SIZE, (lancPage + 1) * PAGE_SIZE - 1)
-          if (lancError) return { data: null, error: lancError }
-          if (!pageData || pageData.length === 0) break
-          allLancamentos = allLancamentos.concat(pageData)
-          if (pageData.length < PAGE_SIZE) break
-          lancPage++
+
+        for (let pageStart = 0; pageStart < totalPages; pageStart += FETCH_CONCURRENCY) {
+          const pageEnd = Math.min(pageStart + FETCH_CONCURRENCY, totalPages)
+          const pageIndexes: number[] = []
+          for (let page = pageStart; page < pageEnd; page++) {
+            pageIndexes.push(page)
+          }
+
+          const pageResults = await Promise.all(
+            pageIndexes.map((page) =>
+              supabase
+                .from('lancamentos_contabeis')
+                .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
+                .in('periodo', periodosConsulta)
+                .order('id', { ascending: true })
+                .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
+            )
+          )
+
+          for (const result of pageResults) {
+            if (result.error) return { data: null, error: result.error }
+            if (result.data?.length) {
+              allLancamentos = allLancamentos.concat(result.data)
+            }
+          }
         }
+
         return { data: allLancamentos, error: null }
       })(),
       supabase

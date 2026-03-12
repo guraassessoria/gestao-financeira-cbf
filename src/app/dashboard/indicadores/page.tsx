@@ -88,14 +88,14 @@ function getVariacaoColor(variacao: number, nome: string): string {
 
 function formatValue(indicador: IndicadorFinanceiro): string {
   if (indicador.unidade === 'percentual') return `${indicador.valor.toFixed(1)}%`
-  if (indicador.unidade === 'indice') return indicador.valor.toFixed(2) + 'x'
+  if (indicador.unidade === 'indice') return indicador.valor.toFixed(2) + ' x'
   return indicador.valor.toLocaleString('pt-BR')
 }
 
 function formatVariacao(indicador: IndicadorFinanceiro): string {
   const sign = indicador.variacao > 0 ? '+' : ''
   if (indicador.unidade === 'percentual') return `${sign}${indicador.variacao.toFixed(1)} p.p.`
-  if (indicador.unidade === 'indice') return `${sign}${indicador.variacao.toFixed(2)}x`
+  if (indicador.unidade === 'indice') return `${sign}${indicador.variacao.toFixed(2)} x`
   return `${sign}${indicador.variacao.toFixed(1)}`
 }
 

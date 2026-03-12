@@ -31,6 +31,12 @@ type SaldoContaCcEntry = {
   saldo: Saldo
 }
 
+type SaldoContaEntidadeEntry = {
+  conta: string
+  entidade: string
+  saldo: Saldo
+}
+
 function normalizeCode(value: string | null | undefined): string {
   return String(value || '').trim().replace(/[^0-9A-Za-z]/g, '')
 }
@@ -211,7 +217,7 @@ export async function GET(request: NextRequest) {
         .select('cod_conta, cond_normal'),
       supabase
         .from('lancamentos_contabeis')
-        .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, valor')
+        .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
         .in('periodo', periodosConsulta),
       supabase
         .from('entidades_dre')
@@ -278,6 +284,7 @@ export async function GET(request: NextRequest) {
 
     const saldoContaPeriodo = new Map<string, Saldo>()
     const saldoContaCcPeriodo = new Map<string, Saldo>()
+    const saldoContaEntidadePeriodo = new Map<string, Saldo>()
 
     for (const l of lancamentos) {
       const periodo = l.periodo
@@ -294,6 +301,14 @@ export async function GET(request: NextRequest) {
             valor
           )
         }
+        if (l.ocorren_deb) {
+          addSaldo(
+            saldoContaEntidadePeriodo,
+            `${periodo}|${contaDeb}|${normalizeCode(l.ocorren_deb)}`,
+            'debito',
+            valor
+          )
+        }
       }
 
       if (l.cta_credito) {
@@ -303,6 +318,14 @@ export async function GET(request: NextRequest) {
           addSaldo(
             saldoContaCcPeriodo,
             `${periodo}|${contaCred}|${normalizeCode(l.c_custo_crd)}`,
+            'credito',
+            valor
+          )
+        }
+        if (l.ocorren_crd) {
+          addSaldo(
+            saldoContaEntidadePeriodo,
+            `${periodo}|${contaCred}|${normalizeCode(l.ocorren_crd)}`,
             'credito',
             valor
           )
@@ -328,6 +351,15 @@ export async function GET(request: NextRequest) {
       saldoContaCcEntriesByPeriodo.get(periodo)!.push({ conta, cc, saldo })
     }
 
+    const saldoContaEntidadeEntriesByPeriodo = new Map<string, SaldoContaEntidadeEntry[]>()
+    for (const [key, saldo] of saldoContaEntidadePeriodo.entries()) {
+      const [periodo, conta, entidade] = key.split('|')
+      if (!saldoContaEntidadeEntriesByPeriodo.has(periodo)) {
+        saldoContaEntidadeEntriesByPeriodo.set(periodo, [])
+      }
+      saldoContaEntidadeEntriesByPeriodo.get(periodo)!.push({ conta, entidade, saldo })
+    }
+
     const acumuladoPorLinhaAtual = new Map<string, number>()
     const acumuladoPorLinhaAnterior = new Map<string, number>()
 
@@ -340,6 +372,31 @@ export async function GET(request: NextRequest) {
       const cc = normalizeComparableCode(ccRaw)
 
       if (cc) {
+        const saldoEntidadeExato = saldoContaEntidadePeriodo.get(`${periodo}|${normalizeCode(contaRaw)}|${normalizeCode(ccRaw)}`)
+        if (saldoEntidadeExato) {
+          const cond = condNormalByConta.get(conta)
+          return getSaldoNatureza(saldoEntidadeExato, cond)
+        }
+
+        const entidadeEntries = saldoContaEntidadeEntriesByPeriodo.get(periodo) || []
+        let totalEntidade = 0
+        let encontrouEntidade = false
+
+        for (const entry of entidadeEntries) {
+          if (!codesMatch(entry.conta, conta) || !codesMatch(entry.entidade, cc)) {
+            continue
+          }
+          encontrouEntidade = true
+          const cond =
+            condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
+            condNormalByConta.get(conta)
+          totalEntidade += getSaldoNatureza(entry.saldo, cond)
+        }
+
+        if (encontrouEntidade) {
+          return totalEntidade
+        }
+
         const saldoCcExato = saldoContaCcPeriodo.get(`${periodo}|${normalizeCode(contaRaw)}|${normalizeCode(ccRaw)}`)
         if (saldoCcExato) {
           const cond = condNormalByConta.get(conta)

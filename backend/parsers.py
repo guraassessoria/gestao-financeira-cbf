@@ -6,6 +6,7 @@ Suporta: CT1, CTT, CV0, DE_PARA DRE, ESTRUTURA DRE, CT2
 import csv
 import json
 import re
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -93,11 +94,39 @@ def _read_csv(path: str) -> tuple[list[str], list[dict]]:
 
 def _pick(r: dict[str, str], keys: list[str], default: str = "") -> str:
     """Retorna primeiro campo existente entre aliases possíveis."""
-    normalized = {k.strip().lower(): v for k, v in r.items()}
+
+    def _normalize_key(s: str) -> str:
+        s = (s or "").strip().lower()
+        s = unicodedata.normalize("NFD", s)
+        s = "".join(ch for ch in s if unicodedata.category(ch) != "Mn")
+        s = re.sub(r"[^a-z0-9]+", " ", s)
+        s = re.sub(r"\s+", " ", s).strip()
+        return s
+
+    normalized_items = [(_normalize_key(k), v) for k, v in r.items()]
+    normalized = {k: v for k, v in normalized_items}
+
     for key in keys:
-        val = normalized.get(key.lower())
+        n_key = _normalize_key(key)
+
+        # 1) match exato
+        val = normalized.get(n_key)
         if val is not None and str(val).strip() != "":
             return str(val).strip()
+
+        # 2) match por inclusão textual
+        for header_key, header_val in normalized_items:
+            if n_key and n_key in header_key and str(header_val).strip() != "":
+                return str(header_val).strip()
+
+        # 3) match por tokens
+        key_tokens = [t for t in n_key.split(" ") if t]
+        if key_tokens:
+            for header_key, header_val in normalized_items:
+                header_tokens = set(header_key.split(" "))
+                if all(t in header_tokens for t in key_tokens) and str(header_val).strip() != "":
+                    return str(header_val).strip()
+
     return default
 
 

@@ -5,7 +5,6 @@ import {
   Trophy,
   Briefcase,
   Upload,
-  Settings,
   LogOut,
   LucideIcon,
 } from 'lucide-react'
@@ -76,12 +75,6 @@ export const mainNavigation: NavItem[] = [
     href: '/upload',
     icon: Upload,
     description: 'Ingestão de dados CT2',
-  },
-  {
-    label: 'Admin',
-    href: '/admin',
-    icon: Settings,
-    description: 'Usuários e permissões',
   },
 ]
 

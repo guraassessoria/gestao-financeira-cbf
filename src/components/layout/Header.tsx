@@ -1,11 +1,26 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronRight, Bell, User } from 'lucide-react'
+import { signOut } from 'next-auth/react'
+import { ChevronRight, Bell, User, Settings, LogOut } from 'lucide-react'
 
 export function Header() {
   const pathname = usePathname()
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const userMenuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => document.removeEventListener('mousedown', handleOutsideClick)
+  }, [])
 
   // Generate breadcrumb
   const segments = pathname
@@ -43,9 +58,37 @@ export function Header() {
           <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors" aria-label="Notifications">
             <Bell size={20} className="text-slate-600" />
           </button>
-          <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors" aria-label="User menu">
-            <User size={20} className="text-slate-600" />
-          </button>
+
+          <div ref={userMenuRef} className="relative">
+            <button
+              className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+              aria-label="User menu"
+              onClick={() => setIsUserMenuOpen((prev) => !prev)}
+            >
+              <User size={20} className="text-slate-600" />
+            </button>
+
+            {isUserMenuOpen && (
+              <div className="absolute right-0 mt-2 w-40 rounded-lg border border-slate-200 bg-white shadow-md py-1 z-50">
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                  onClick={() => setIsUserMenuOpen(false)}
+                >
+                  <Settings size={16} />
+                  <span>Admin</span>
+                </Link>
+
+                <button
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100"
+                  onClick={() => signOut({ callbackUrl: '/login' })}
+                >
+                  <LogOut size={16} />
+                  <span>Sair</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

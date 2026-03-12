@@ -4,6 +4,8 @@ import { Upload as UploadIcon, AlertCircle, CheckCircle } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import Papa from 'papaparse'
+import type { CT2BatchRecord, CT2BatchRequest } from '@/app/api/parse/ct2/batch/route'
 
 interface UploadResponse {
   success: boolean
@@ -72,6 +74,7 @@ export default function UploadPage() {
   const [uploadResult, setUploadResult] = useState<UploadResponse | null>(null)
   const [fileName, setFileName] = useState('')
   const [isDragging, setIsDragging] = useState(false)
+  const [batchProgress, setBatchProgress] = useState<{ current: number; total: number } | null>(null)
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -83,11 +86,181 @@ export default function UploadPage() {
     return null
   }
 
+  // Helpers de parse client-side (espelha parseCT2TS do servidor)
+  function parseValorBR(value: string): number {
+    const normalized = String(value || '').trim().replace(/\./g, '').replace(',', '.')
+    const parsed = parseFloat(normalized)
+    return isNaN(parsed) ? 0 : parsed
+  }
+
+  function parseDateBR(value: string): string {
+    const raw = String(value || '').trim()
+    const match = raw.match(/^(\d{2})\/(\d{2})\/(\d{4})$/)
+    if (!match) return new Date().toISOString().slice(0, 10)
+    const [, dd, mm, yyyy] = match
+    return `${yyyy}-${mm}-${dd}`
+  }
+
+  async function handleCT2Upload(file: File) {
+    setUploading(true)
+    setUploadStatus('uploading')
+    setFileName(file.name)
+    setUploadResult(null)
+    setBatchProgress(null)
+
+    try {
+      // Ler o arquivo como texto (suporta latin-1)
+      const buffer = await file.arrayBuffer()
+      const decoder = new TextDecoder('utf-8')
+      let text = decoder.decode(buffer)
+      // Se tiver muitos caracteres de substituição, tentar latin-1
+      if ((text.match(/\uFFFD/g) || []).length > 10) {
+        text = new TextDecoder('iso-8859-1').decode(buffer)
+      }
+
+      // Parsear CSV com PapaParse
+      const parsed = Papa.parse<Record<string, string>>(text, {
+        delimiter: ';',
+        header: true,
+        skipEmptyLines: true,
+        // Pular as 2 primeiras linhas de cabeçalho inválidas do Protheus
+        // PapaParse usa a primeira linha como header; precisamos achar a linha "Filial"
+        transformHeader: (h) => h.trim(),
+        // beforeFirstChunk não existe; vamos pré-processar o texto
+      })
+
+      // Se o header não tiver 'Filial', o arquivo tem linhas de junk antes
+      // Vamos encontrar a linha com 'Filial' manualmente
+      let records: Record<string, string>[] = parsed.data
+
+      if (!parsed.meta.fields?.includes('Filial')) {
+        // Encontrar linha com 'Filial'
+        const lines = text.split(/\r?\n/)
+        const headerIdx = lines.findIndex((l) => l.includes('Filial'))
+        if (headerIdx < 0) {
+          throw new Error('Header "Filial" não encontrado no arquivo CT2')
+        }
+        const cleanText = lines.slice(headerIdx).join('\n')
+        const reparsed = Papa.parse<Record<string, string>>(cleanText, {
+          delimiter: ';',
+          header: true,
+          skipEmptyLines: true,
+          transformHeader: (h) => h.trim(),
+        })
+        records = reparsed.data
+      }
+
+      // Transformar registros
+      const lancamentos: CT2BatchRecord[] = []
+      const periodos = new Set<string>()
+      let totalValor = 0
+
+      for (const r of records) {
+        const tipoLcto = (r['Tipo Lcto'] || '').trim()
+        if (tipoLcto === 'Cont.Hist') continue
+
+        const ctaDebito = r['Cta Debito']?.trim() || null
+        const ctaCredito = r['Cta Credito']?.trim() || null
+        if (!ctaDebito && !ctaCredito) continue
+
+        const dataLcto = parseDateBR(r['Data Lcto'] || '')
+        const periodoRef = dataLcto.slice(0, 7)
+        periodos.add(periodoRef)
+
+        const valor = parseValorBR(r['Valor'] || '0')
+        const valorMoeda1 = parseValorBR(r['Valor Moeda1'] || String(valor))
+        totalValor += valor
+
+        lancamentos.push({
+          filial: r['Filial']?.trim() || '01',
+          data_lcto: dataLcto,
+          periodo: periodoRef,
+          numero_lote: r['Numero Lote']?.trim() || null,
+          sub_lote: r['Sub Lote']?.trim() || null,
+          numero_doc: r['Numero Doc']?.trim() || null,
+          moeda: r['Moeda Lancto']?.trim() || '01',
+          tipo_lcto: tipoLcto || null,
+          cta_debito: ctaDebito,
+          cta_credito: ctaCredito,
+          valor,
+          hist_pad: r['Hist Pad']?.trim() || null,
+          hist_lanc: r['Hist Lanc']?.trim() || null,
+          c_custo_deb: r['C Custo Deb']?.trim() || null,
+          c_custo_crd: r['C Custo Crd']?.trim() || null,
+          ocorren_deb: r['Ocorren Deb']?.trim() || null,
+          ocorren_crd: r['Ocorren Crd']?.trim() || null,
+          valor_moeda1: valorMoeda1,
+        })
+      }
+
+      if (lancamentos.length === 0) {
+        throw new Error('Nenhum lançamento válido encontrado no arquivo')
+      }
+
+      // Enviar em batches de 5000
+      const BATCH_SIZE = 5000
+      const batches: CT2BatchRecord[][] = []
+      for (let i = 0; i < lancamentos.length; i += BATCH_SIZE) {
+        batches.push(lancamentos.slice(i, i + BATCH_SIZE))
+      }
+
+      let uploadId: number | undefined
+      const periodosArr = [...periodos].sort()
+
+      for (let i = 0; i < batches.length; i++) {
+        setBatchProgress({ current: i + 1, total: batches.length })
+
+        const payload: CT2BatchRequest = {
+          records: batches[i],
+          batchIndex: i,
+          totalBatches: batches.length,
+          uploadId,
+          nomeArquivo: file.name,
+          totalLancamentos: lancamentos.length,
+          totalValor,
+          periodos: periodosArr,
+        }
+
+        const response = await fetch('/api/parse/ct2/batch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+
+        const data = await response.json()
+        if (!response.ok) {
+          throw new Error(data.error || `Erro no batch ${i + 1}`)
+        }
+
+        if (i === 0 && data.uploadId) {
+          uploadId = data.uploadId
+        }
+      }
+
+      setUploadStatus('success')
+      setUploadResult({ success: true, uploadId, totalLancamentos: lancamentos.length, totalValor })
+    } catch (error) {
+      setUploadStatus('error')
+      setUploadResult({
+        success: false,
+        error: error instanceof Error ? error.message : 'Erro desconhecido',
+      })
+    } finally {
+      setUploading(false)
+      setBatchProgress(null)
+    }
+  }
+
   async function handleFileUpload(file: File) {
     if (!file.name.endsWith('.csv')) {
       setUploadStatus('error')
       setUploadResult({ success: false, error: 'Apenas arquivos CSV sao aceitos' })
       return
+    }
+
+    // CT2 é grande demais para enviar ao servidor: parsear no browser e enviar em batches
+    if (selectedType === 'CT2') {
+      return handleCT2Upload(file)
     }
 
     const formData = new FormData()
@@ -205,7 +378,13 @@ export default function UploadPage() {
               }}
             />
             <p className="text-slate-600">
-              {uploading ? 'Processando...' : isDragging ? 'Solte o arquivo aqui' : 'Clique ou arraste o arquivo CSV aqui'}
+              {uploading
+                ? batchProgress
+                  ? `Enviando lote ${batchProgress.current} de ${batchProgress.total}...`
+                  : 'Processando...'
+                : isDragging
+                  ? 'Solte o arquivo aqui'
+                  : 'Clique ou arraste o arquivo CSV aqui'}
             </p>
             <p className="text-xs text-slate-400 mt-2">Arquivo esperado: {config.hint}</p>
           </div>

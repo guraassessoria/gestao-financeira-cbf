@@ -61,6 +61,36 @@ function codesMatch(left: string | null | undefined, right: string | null | unde
   return a === b
 }
 
+function contaMatchesMapeamento(
+  contaLancamento: string | null | undefined,
+  contaMapeada: string | null | undefined,
+  classeContaMapeada: string | null | undefined,
+  contaSuperiorByConta: Map<string, string>
+): boolean {
+  const lanc = normalizeComparableCode(contaLancamento)
+  const mapa = normalizeComparableCode(contaMapeada)
+  if (!lanc || !mapa) return false
+  if (lanc === mapa) return true
+
+  const classe = (classeContaMapeada || '').toLowerCase()
+  if (!classe.startsWith('sint')) {
+    return false
+  }
+
+  // Se a conta mapeada é sintética, aceita contas analíticas descendentes via CT1.
+  const visited = new Set<string>()
+  let atual = lanc
+  while (atual && !visited.has(atual)) {
+    visited.add(atual)
+    const superior = contaSuperiorByConta.get(atual)
+    if (!superior) break
+    if (superior === mapa) return true
+    atual = superior
+  }
+
+  return false
+}
+
 function fixMojibake(value: string | null | undefined): string {
   const text = String(value || '')
   if (!/[ÃÂ]/.test(text)) return text
@@ -324,7 +354,7 @@ export async function GET(request: NextRequest) {
         .select('codigo_linha_dre, codigo_conta_contabil, codigo_centro_custo'),
       supabase
         .from('contas_contabeis')
-        .select('cod_conta, cond_normal'),
+        .select('cod_conta, cond_normal, classe, cta_superior'),
       (async () => {
         // Lê lançamentos com paginação paralela (limite de 1000 rows por query no Supabase)
         const { count: totalRows, error: countError } = await supabase
@@ -426,8 +456,15 @@ export async function GET(request: NextRequest) {
     }
 
     const condNormalByConta = new Map<string, string>()
+    const classeByConta = new Map<string, string>()
+    const contaSuperiorByConta = new Map<string, string>()
     for (const c of contas) {
-      condNormalByConta.set(normalizeComparableCode(c.cod_conta), c.cond_normal || 'Credora')
+      const codNorm = normalizeComparableCode(c.cod_conta)
+      condNormalByConta.set(codNorm, c.cond_normal || 'Credora')
+      classeByConta.set(codNorm, c.classe || '')
+      if (c.cta_superior) {
+        contaSuperiorByConta.set(codNorm, normalizeComparableCode(c.cta_superior))
+      }
     }
 
     const saldoContaPeriodo = new Map<string, Saldo>()
@@ -523,7 +560,12 @@ export async function GET(request: NextRequest) {
       mapa.set(key, arr)
     }
 
-    const getValorMapeamento = (periodo: string, contaRaw: string, ccRaw: string): number => {
+    const getValorMapeamento = (
+      periodo: string,
+      contaRaw: string,
+      ccRaw: string,
+      classeContaMapeada: string | null | undefined
+    ): number => {
       const conta = normalizeComparableCode(contaRaw)
       const cc = normalizeComparableCode(ccRaw)
 
@@ -539,7 +581,7 @@ export async function GET(request: NextRequest) {
         let encontrouEntidade = false
 
         for (const entry of entidadeEntries) {
-          if (!codesMatch(entry.conta, conta) || !codesMatch(entry.entidade, cc)) {
+          if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.entidade, cc)) {
             continue
           }
           encontrouEntidade = true
@@ -563,7 +605,7 @@ export async function GET(request: NextRequest) {
         let total = 0
 
         for (const entry of entries) {
-          if (!codesMatch(entry.conta, conta) || !codesMatch(entry.cc, cc)) {
+          if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.cc, cc)) {
             continue
           }
           const cond =
@@ -585,7 +627,7 @@ export async function GET(request: NextRequest) {
       let total = 0
 
       for (const entry of entries) {
-        if (!codesMatch(entry.conta, conta)) {
+        if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta)) {
           continue
         }
         const cond =
@@ -610,6 +652,7 @@ export async function GET(request: NextRequest) {
       }
 
       const cc = normalizeComparableCode(m.codigo_centro_custo)
+      const classeContaMapeada = classeByConta.get(conta) || null
 
       if (!linha) {
         continue
@@ -619,7 +662,7 @@ export async function GET(request: NextRequest) {
         let valorAtualTotal = 0
         for (let i = 0; i < MONTH_KEYS.length; i++) {
           const periodoMes = `${periodoAtual}-${MONTH_KEYS[i]}`
-          const valorMes = getValorMapeamento(periodoMes, conta, cc)
+          const valorMes = getValorMapeamento(periodoMes, conta, cc, classeContaMapeada)
           valorAtualTotal += valorMes
           somarNoMapaMensal(acumuladoPorLinhaMensalAtual, linha, i, valorMes)
         }
@@ -629,7 +672,7 @@ export async function GET(request: NextRequest) {
           let valorAnteriorTotal = 0
           for (let i = 0; i < MONTH_KEYS.length; i++) {
             const periodoMesAnterior = `${periodoComparativo}-${MONTH_KEYS[i]}`
-            const valorMesAnterior = getValorMapeamento(periodoMesAnterior, conta, cc)
+            const valorMesAnterior = getValorMapeamento(periodoMesAnterior, conta, cc, classeContaMapeada)
             valorAnteriorTotal += valorMesAnterior
             somarNoMapaMensal(acumuladoPorLinhaMensalAnterior, linha, i, valorMesAnterior)
           }
@@ -638,14 +681,14 @@ export async function GET(request: NextRequest) {
       } else {
         let valorAtualTotal = 0
         for (const periodo of periodosConsultaAtual) {
-          valorAtualTotal += getValorMapeamento(periodo, conta, cc)
+          valorAtualTotal += getValorMapeamento(periodo, conta, cc, classeContaMapeada)
         }
         somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
 
         if (periodoComparativo) {
           let valorAnteriorTotal = 0
           for (const periodo of periodosConsultaComparativo) {
-            valorAnteriorTotal += getValorMapeamento(periodo, conta, cc)
+            valorAnteriorTotal += getValorMapeamento(periodo, conta, cc, classeContaMapeada)
           }
           somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
         }

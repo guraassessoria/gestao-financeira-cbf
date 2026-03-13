@@ -258,45 +258,16 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Fallback: sem log válido, busca períodos com paginação paralela
+    // Fallback: sem log válido, busca períodos distintos via RPC
     if (periodosMensaisDisponiveis.length === 0) {
-      const { count: totalLancRows, error: periodCountError } = await supabase
-        .from('lancamentos_contabeis')
-        .select('*', { count: 'exact', head: true })
+      const { data: periodosData, error: periodCountError } = await supabase
+        .rpc('get_periodos_disponiveis')
 
       if (periodCountError) {
         return NextResponse.json({ error: periodCountError.message }, { status: 500 })
       }
 
-      const totalPages = Math.ceil((totalLancRows || 0) / PAGE_SIZE)
-      const allPeriodRows: { periodo: string }[] = []
-
-      for (let pageStart = 0; pageStart < totalPages; pageStart += FETCH_CONCURRENCY) {
-        const pageEnd = Math.min(pageStart + FETCH_CONCURRENCY, totalPages)
-        const pageIndexes: number[] = []
-        for (let page = pageStart; page < pageEnd; page++) {
-          pageIndexes.push(page)
-        }
-
-        const pageResults = await Promise.all(
-          pageIndexes.map((page) =>
-            supabase
-              .from('lancamentos_contabeis')
-              .select('periodo')
-              .order('id', { ascending: true })
-              .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
-          )
-        )
-
-        for (const result of pageResults) {
-          if (result.error) {
-            return NextResponse.json({ error: result.error.message }, { status: 500 })
-          }
-          if (result.data?.length) {
-            allPeriodRows.push(...result.data)
-          }
-        }
-      }
+      const allPeriodRows: { periodo: string }[] = periodosData || []
 
       periodosMensaisDisponiveis = Array.from(new Set(allPeriodRows.map((r) => r.periodo))).sort((a, b) => {
         return periodToDate(b).getTime() - periodToDate(a).getTime()

@@ -348,13 +348,16 @@ export async function GET(request: NextRequest) {
       supabase
         .from('estrutura_dre')
         .select('id, codigo_conta, descricao_conta, codigo_cta_superior, nivel, nivel_visualizacao')
-        .order('id', { ascending: true }),
+        .order('id', { ascending: true })
+        .limit(10000),
       supabase
         .from('de_para_dre')
-        .select('codigo_linha_dre, codigo_conta_contabil, codigo_centro_custo'),
+        .select('codigo_linha_dre, codigo_conta_contabil, codigo_centro_custo')
+        .limit(10000),
       supabase
         .from('contas_contabeis')
-        .select('cod_conta, cond_normal, classe, cta_superior'),
+        .select('cod_conta, cond_normal, classe, cta_superior')
+        .limit(10000),
       (async () => {
         // Lê lançamentos com paginação paralela (limite de 1000 rows por query no Supabase)
         const { count: totalRows, error: countError } = await supabase
@@ -397,10 +400,12 @@ export async function GET(request: NextRequest) {
       })(),
       supabase
         .from('entidades_dre')
-        .select('codigo, descricao'),
+        .select('codigo, descricao')
+        .limit(10000),
       supabase
         .from('centros_custo')
-        .select('cod_cc, ocorrencia'),
+        .select('cod_cc, ocorrencia')
+        .limit(10000),
     ])
 
     if (estruturaRes.error) return NextResponse.json({ error: estruturaRes.error.message }, { status: 500 })

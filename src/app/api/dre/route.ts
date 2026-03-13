@@ -618,7 +618,8 @@ export async function GET(request: NextRequest) {
         let total = 0
 
         for (const entry of entries) {
-          if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.cc, cc)) {
+          const ocorrenciaDoCC = ocorrenciaByCc.get(normalizeCode(entry.cc))
+          if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(ocorrenciaDoCC, cc)) {
             continue
           }
           const cond =

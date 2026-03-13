@@ -35,9 +35,6 @@ type CT2Parse = {
   periodos: string[]
   total_lancamentos: number
   total_valor: number
-  total_linhas_arquivo: number
-  ignoradas_cont_hist: number
-  ignoradas_sem_conta: number
   erros: string[]
 }
 
@@ -345,26 +342,14 @@ export async function parseCT2TS(path: string): Promise<PythonResult<CT2Parse>> 
     const lancamentos: Array<Record<string, unknown>> = []
     const erros: string[] = []
     const periodos = new Set<string>()
-    let ignoradasContHist = 0
-    let ignoradasSemConta = 0
 
     records.forEach((r, index) => {
       const tipo = pick(r, ['Tipo Lcto'])
+      if (tipo === 'Cont.Hist') return
 
       const ctaDebito = pick(r, ['Cta Debito']) || null
       const ctaCredito = pick(r, ['Cta Credito']) || null
-      const valor = parseValor(pick(r, ['Valor'], '0'))
-
-      // Não descarta linha apenas pelo tipo. Só ignora continuação histórica sem conta e sem valor.
-      if (tipo === 'Cont.Hist' && !ctaDebito && !ctaCredito && Math.abs(valor) < 0.0000001) {
-        ignoradasContHist += 1
-        return
-      }
-
-      if (!ctaDebito && !ctaCredito) {
-        ignoradasSemConta += 1
-        return
-      }
+      if (!ctaDebito && !ctaCredito) return
 
       const dataLcto = parseDate(pick(r, ['Data Lcto']))
       if (!dataLcto) {
@@ -375,6 +360,7 @@ export async function parseCT2TS(path: string): Promise<PythonResult<CT2Parse>> 
       const periodoRef = periodo(dataLcto)
       periodos.add(periodoRef)
 
+      const valor = parseValor(pick(r, ['Valor'], '0'))
       const valorMoeda1 = parseValor(pick(r, ['Valor Moeda1'], String(valor)))
 
       lancamentos.push({
@@ -407,9 +393,6 @@ export async function parseCT2TS(path: string): Promise<PythonResult<CT2Parse>> 
         periodos: [...periodos].sort(),
         total_lancamentos: lancamentos.length,
         total_valor: lancamentos.reduce((sum, item) => sum + Number(item.valor || 0), 0),
-        total_linhas_arquivo: records.length,
-        ignoradas_cont_hist: ignoradasContHist,
-        ignoradas_sem_conta: ignoradasSemConta,
         erros,
       },
     }

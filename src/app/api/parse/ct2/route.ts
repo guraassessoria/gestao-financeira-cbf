@@ -36,8 +36,6 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData()
     const file = formData.get('file') as File
-    const clearMode = String(formData.get('clearMode') || 'period').trim().toLowerCase() // all | period | none
-    const clearPeriodo = String(formData.get('clearPeriodo') || formData.get('clearPeriodos') || '').trim()
 
     if (!file) {
       return NextResponse.json(
@@ -144,56 +142,24 @@ export async function POST(request: NextRequest) {
 
     uploadId = uploadData.id
 
-    // Limpeza opcional da base antes da carga:
-    // - all: limpa tudo
-    // - period: limpa apenas períodos informados (clearPeriodo/clearPeriodos) ou períodos do arquivo
-    // - none: não limpa nada
-    if (clearMode === 'all') {
-      const { error: deleteError } = await supabase
-        .from('lancamentos_contabeis')
-        .delete()
-        .not('id', 'is', null)
+    const { error: deleteError } = await supabase
+      .from('lancamentos_contabeis')
+      .delete()
+      .not('id', 'is', null)
 
-      if (deleteError) {
-        await supabase
-          .from('upload_logs')
-          .update({
-            status: 'erro',
-            erros: JSON.stringify([deleteError.message]),
-          })
-          .eq('id', uploadId)
+    if (deleteError) {
+      await supabase
+        .from('upload_logs')
+        .update({
+          status: 'erro',
+          erros: JSON.stringify([deleteError.message]),
+        })
+        .eq('id', uploadId)
 
-        return NextResponse.json(
-          { error: `Erro ao limpar lançamentos anteriores: ${deleteError.message}` },
-          { status: 500 }
-        )
-      }
-    } else if (clearMode === 'period') {
-      const periodosLimpeza = clearPeriodo
-        ? clearPeriodo.split(',').map((p) => p.trim()).filter(Boolean)
-        : periodosUpload
-
-      if (periodosLimpeza.length > 0) {
-        const { error: deleteError } = await supabase
-          .from('lancamentos_contabeis')
-          .delete()
-          .in('periodo', periodosLimpeza)
-
-        if (deleteError) {
-          await supabase
-            .from('upload_logs')
-            .update({
-              status: 'erro',
-              erros: JSON.stringify([deleteError.message]),
-            })
-            .eq('id', uploadId)
-
-          return NextResponse.json(
-            { error: `Erro ao limpar períodos (${periodosLimpeza.join(', ')}): ${deleteError.message}` },
-            { status: 500 }
-          )
-        }
-      }
+      return NextResponse.json(
+        { error: `Erro ao limpar lançamentos anteriores: ${deleteError.message}` },
+        { status: 500 }
+      )
     }
 
     // 2. Inserir lancamentos em chunks de 5000 (Supabase suporta até ~10MB por POST)
@@ -274,11 +240,6 @@ export async function POST(request: NextRequest) {
       uploadId,
       totalLancamentos: lancamentos.length,
       totalValor: lancamentos.reduce((sum: number, l: any) => sum + (l.valor || 0), 0),
-      clearMode,
-      clearPeriodo: clearPeriodo || null,
-      totalLinhasArquivo: parseResult.total_linhas_arquivo ?? null,
-      ignoradasContHist: parseResult.ignoradas_cont_hist ?? 0,
-      ignoradasSemConta: parseResult.ignoradas_sem_conta ?? 0,
     })
   } catch (error) {
     // Marcar upload como erro se foi criado

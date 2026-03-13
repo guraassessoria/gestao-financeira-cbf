@@ -44,35 +44,6 @@ type SaldoContaEntidadeEntry = {
 
 type VisaoPeriodo = 'anual' | 'mensal'
 const MONTH_KEYS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-const DRE_CACHE_TTL_MS = 2 * 60 * 1000
-
-type DRECachedPayload = {
-  periodosDisponiveis: string[]
-  periodo: string | null
-  periodoComparativo: string | null
-  visao: VisaoPeriodo
-  linhas: LinhaDRECalculada[]
-  mensagem?: string
-}
-
-type DRECacheEntry = {
-  expiresAt: number
-  payload: DRECachedPayload
-}
-
-type LancamentoRow = {
-  id: number
-  periodo: string
-  cta_debito: string | null
-  cta_credito: string | null
-  c_custo_deb: string | null
-  c_custo_crd: string | null
-  ocorren_deb: string | null
-  ocorren_crd: string | null
-  valor: number | string | null
-}
-
-const dreResponseCache = new Map<string, DRECacheEntry>()
 
 function normalizeCode(value: string | null | undefined): string {
   return String(value || '').trim().replace(/[^0-9A-Za-z]/g, '')
@@ -144,35 +115,6 @@ function normalizeContaNaturezaCode(value: string | null | undefined): string {
     .trim()
     .replace(/\D/g, '')
     .replace(/^0+(?=\d)/, '')
-}
-
-async function fetchLancamentosByPeriodos(
-  supabase: ReturnType<typeof createServiceClient>,
-  periodosConsulta: string[]
-): Promise<{ data: LancamentoRow[] | null; error: { message: string } | null }> {
-  const PAGE_SIZE = 5000
-  let lastId = 0
-  const rows: LancamentoRow[] = []
-
-  while (true) {
-    const { data, error } = await supabase
-      .from('lancamentos_contabeis')
-      .select('id, periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
-      .in('periodo', periodosConsulta)
-      .gt('id', lastId)
-      .order('id', { ascending: true })
-      .limit(PAGE_SIZE)
-
-    if (error) return { data: null, error }
-    if (!data || data.length === 0) break
-
-    rows.push(...(data as LancamentoRow[]))
-    lastId = Number((data[data.length - 1] as LancamentoRow).id || lastId)
-
-    if (data.length < PAGE_SIZE) break
-  }
-
-  return { data: rows, error: null }
 }
 
 function inferCondNormalByConta(contaCode: string | null | undefined, condNormal: string | null | undefined): 'Devedora' | 'Credora' {
@@ -281,9 +223,6 @@ function toLinhaDRE(no: NoDRE): LinhaDRECalculada {
 
 export async function GET(request: NextRequest) {
   try {
-      const PAGE_SIZE = 1000
-      const FETCH_CONCURRENCY = 8
-
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
@@ -293,12 +232,14 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url)
     const requestedPeriod = url.searchParams.get('periodo')
     const visao = normalizeVisaoPeriodo(url.searchParams.get('visao'))
+    const PAGE_SIZE = 1000
+    const FETCH_CONCURRENCY = 8
 
     // Caminho rápido: reaproveita períodos já calculados no upload CT2 (evita varrer toda a tabela)
     let periodosMensaisDisponiveis: string[] = []
     const { data: latestCt2Upload } = await supabase
       .from('upload_logs')
-      .select('periodos, uploaded_at')
+      .select('periodos')
       .eq('tipo_arquivo', 'CT2')
       .eq('status', 'ok')
       .order('uploaded_at', { ascending: false })
@@ -403,21 +344,6 @@ export async function GET(request: NextRequest) {
 
     const periodosConsulta = [...new Set([...periodosConsultaAtual, ...periodosConsultaComparativo])]
 
-    const cacheKey = `${requestedPeriod || 'auto'}|${visao}|${periodoAtual}|${periodoComparativo || 'none'}|${latestCt2Upload?.uploaded_at || 'no-upload-log'}`
-    const cached = dreResponseCache.get(cacheKey)
-    if (cached && cached.expiresAt > Date.now()) {
-      return NextResponse.json(cached.payload)
-    }
-
-    if (dreResponseCache.size > 30) {
-      const now = Date.now()
-      for (const [key, entry] of dreResponseCache.entries()) {
-        if (entry.expiresAt <= now) {
-          dreResponseCache.delete(key)
-        }
-      }
-    }
-
     const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes] = await Promise.all([
       supabase
         .from('estrutura_dre')
@@ -429,7 +355,46 @@ export async function GET(request: NextRequest) {
       supabase
         .from('contas_contabeis')
         .select('cod_conta, cond_normal, classe, cta_superior'),
-      fetchLancamentosByPeriodos(supabase, periodosConsulta),
+      (async () => {
+        // Lê lançamentos com paginação paralela (limite de 1000 rows por query no Supabase)
+        const { count: totalRows, error: countError } = await supabase
+          .from('lancamentos_contabeis')
+          .select('*', { count: 'exact', head: true })
+          .in('periodo', periodosConsulta)
+
+        if (countError) return { data: null, error: countError }
+
+        const totalPages = Math.ceil((totalRows || 0) / PAGE_SIZE)
+        let allLancamentos: any[] = []
+
+        for (let pageStart = 0; pageStart < totalPages; pageStart += FETCH_CONCURRENCY) {
+          const pageEnd = Math.min(pageStart + FETCH_CONCURRENCY, totalPages)
+          const pageIndexes: number[] = []
+          for (let page = pageStart; page < pageEnd; page++) {
+            pageIndexes.push(page)
+          }
+
+          const pageResults = await Promise.all(
+            pageIndexes.map((page) =>
+              supabase
+                .from('lancamentos_contabeis')
+                .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
+                .in('periodo', periodosConsulta)
+                .order('id', { ascending: true })
+                .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
+            )
+          )
+
+          for (const result of pageResults) {
+            if (result.error) return { data: null, error: result.error }
+            if (result.data?.length) {
+              allLancamentos = allLancamentos.concat(result.data)
+            }
+          }
+        }
+
+        return { data: allLancamentos, error: null }
+      })(),
       supabase
         .from('entidades_dre')
         .select('codigo, descricao'),
@@ -595,52 +560,7 @@ export async function GET(request: NextRequest) {
       mapa.set(key, arr)
     }
 
-    const analiticoLinhasByContaCc = new Map<string, Set<string>>()
-    for (const mapItem of dePara) {
-      const contaMapeada = normalizeComparableCode(mapItem.codigo_conta_contabil)
-      if (!contaMapeada) continue
-
-      const classeMapeada = (classeByConta.get(contaMapeada) || '').toLowerCase()
-      if (!classeMapeada.startsWith('anal')) continue
-
-      const linhaMapeada = normalizeCode(mapItem.codigo_linha_dre)
-      const ccMapeado = normalizeComparableCode(mapItem.codigo_centro_custo)
-      const key = `${contaMapeada}|${ccMapeado || '*'}`
-
-      if (!analiticoLinhasByContaCc.has(key)) {
-        analiticoLinhasByContaCc.set(key, new Set<string>())
-      }
-      analiticoLinhasByContaCc.get(key)!.add(linhaMapeada)
-    }
-
-    const hasAnaliticoDestinoDiferente = (
-      contaLancamento: string,
-      ccMapeadoRaw: string,
-      linhaAtualRaw: string
-    ): boolean => {
-      const conta = normalizeComparableCode(contaLancamento)
-      if (!conta) return false
-
-      const cc = normalizeComparableCode(ccMapeadoRaw)
-      const linhaAtual = normalizeCode(linhaAtualRaw)
-      const keys = cc ? [`${conta}|${cc}`, `${conta}|*`] : [`${conta}|*`]
-
-      for (const key of keys) {
-        const linhas = analiticoLinhasByContaCc.get(key)
-        if (!linhas || linhas.size === 0) continue
-
-        for (const linha of linhas) {
-          if (linha !== linhaAtual) {
-            return true
-          }
-        }
-      }
-
-      return false
-    }
-
     const getValorMapeamento = (
-      linhaRaw: string,
       periodo: string,
       contaRaw: string,
       ccRaw: string,
@@ -664,16 +584,6 @@ export async function GET(request: NextRequest) {
           if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.entidade, cc)) {
             continue
           }
-
-          // Regra de negócio: conta analítica com destino próprio prevalece sobre agregado sintético.
-          if (
-            normalizeComparableCode(entry.conta) !== conta &&
-            String(classeContaMapeada || '').toLowerCase().startsWith('sint') &&
-            hasAnaliticoDestinoDiferente(entry.conta, ccRaw, linhaRaw)
-          ) {
-            continue
-          }
-
           encontrouEntidade = true
           const cond =
             condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
@@ -698,15 +608,6 @@ export async function GET(request: NextRequest) {
           if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.cc, cc)) {
             continue
           }
-
-          if (
-            normalizeComparableCode(entry.conta) !== conta &&
-            String(classeContaMapeada || '').toLowerCase().startsWith('sint') &&
-            hasAnaliticoDestinoDiferente(entry.conta, ccRaw, linhaRaw)
-          ) {
-            continue
-          }
-
           const cond =
             condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
             condNormalByConta.get(conta)
@@ -729,15 +630,6 @@ export async function GET(request: NextRequest) {
         if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta)) {
           continue
         }
-
-        if (
-          normalizeComparableCode(entry.conta) !== conta &&
-          String(classeContaMapeada || '').toLowerCase().startsWith('sint') &&
-          hasAnaliticoDestinoDiferente(entry.conta, ccRaw, linhaRaw)
-        ) {
-          continue
-        }
-
         const cond =
           condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
           condNormalByConta.get(conta)
@@ -770,7 +662,7 @@ export async function GET(request: NextRequest) {
         let valorAtualTotal = 0
         for (let i = 0; i < MONTH_KEYS.length; i++) {
           const periodoMes = `${periodoAtual}-${MONTH_KEYS[i]}`
-          const valorMes = getValorMapeamento(linhaNorm, periodoMes, conta, cc, classeContaMapeada)
+          const valorMes = getValorMapeamento(periodoMes, conta, cc, classeContaMapeada)
           valorAtualTotal += valorMes
           somarNoMapaMensal(acumuladoPorLinhaMensalAtual, linha, i, valorMes)
         }
@@ -780,7 +672,7 @@ export async function GET(request: NextRequest) {
           let valorAnteriorTotal = 0
           for (let i = 0; i < MONTH_KEYS.length; i++) {
             const periodoMesAnterior = `${periodoComparativo}-${MONTH_KEYS[i]}`
-            const valorMesAnterior = getValorMapeamento(linhaNorm, periodoMesAnterior, conta, cc, classeContaMapeada)
+            const valorMesAnterior = getValorMapeamento(periodoMesAnterior, conta, cc, classeContaMapeada)
             valorAnteriorTotal += valorMesAnterior
             somarNoMapaMensal(acumuladoPorLinhaMensalAnterior, linha, i, valorMesAnterior)
           }
@@ -789,14 +681,14 @@ export async function GET(request: NextRequest) {
       } else {
         let valorAtualTotal = 0
         for (const periodo of periodosConsultaAtual) {
-          valorAtualTotal += getValorMapeamento(linhaNorm, periodo, conta, cc, classeContaMapeada)
+          valorAtualTotal += getValorMapeamento(periodo, conta, cc, classeContaMapeada)
         }
         somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
 
         if (periodoComparativo) {
           let valorAnteriorTotal = 0
           for (const periodo of periodosConsultaComparativo) {
-            valorAnteriorTotal += getValorMapeamento(linhaNorm, periodo, conta, cc, classeContaMapeada)
+            valorAnteriorTotal += getValorMapeamento(periodo, conta, cc, classeContaMapeada)
           }
           somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
         }
@@ -824,20 +716,13 @@ export async function GET(request: NextRequest) {
 
     const linhas = estrutura.map((linha) => toLinhaDRE(byCodigo.get(linha.codigo_conta)!))
 
-    const payload: DRECachedPayload = {
+    return NextResponse.json({
       periodosDisponiveis: periodosExibicao,
       periodo: periodoAtual,
       periodoComparativo,
       visao,
       linhas,
-    }
-
-    dreResponseCache.set(cacheKey, {
-      expiresAt: Date.now() + DRE_CACHE_TTL_MS,
-      payload,
     })
-
-    return NextResponse.json(payload)
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Erro interno' },

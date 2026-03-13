@@ -337,15 +337,12 @@ def parse_ct2(path: str) -> dict[str, Any]:
     for i, r in enumerate(records):
         tipo = r.get("Tipo Lcto", "").strip()
 
+        # Ignorar linhas de continuação de histórico
+        if tipo == "Cont.Hist":
+            continue
+
         cta_deb = r.get("Cta Debito", "").strip() or None
         cta_crd = r.get("Cta Credito", "").strip() or None
-
-        valor_raw = r.get("Valor", "0")
-        valor_pre = _parse_valor(valor_raw)
-
-        # Ignorar linhas de continuação de histórico SEM conta e SEM valor
-        if tipo == "Cont.Hist" and not cta_deb and not cta_crd and abs(valor_pre) < 0.0000001:
-            continue
 
         # Ignorar linhas sem contas
         if not cta_deb and not cta_crd:
@@ -360,7 +357,8 @@ def parse_ct2(path: str) -> dict[str, Any]:
         if periodo:
             periodos.add(periodo)
 
-        valor = valor_pre
+        valor_raw = r.get("Valor", "0")
+        valor = _parse_valor(valor_raw)
         valor_m1 = _parse_valor(r.get("Valor Moeda1", valor_raw))
 
         lancamentos.append({

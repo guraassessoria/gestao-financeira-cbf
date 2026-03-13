@@ -358,46 +358,8 @@ export async function GET(request: NextRequest) {
         .from('contas_contabeis')
         .select('cod_conta, cond_normal, classe, cta_superior')
         .limit(10000),
-      (async () => {
-        // Lê lançamentos com paginação paralela (limite de 1000 rows por query no Supabase)
-        const { count: totalRows, error: countError } = await supabase
-          .from('lancamentos_contabeis')
-          .select('*', { count: 'exact', head: true })
-          .in('periodo', periodosConsulta)
-
-        if (countError) return { data: null, error: countError }
-
-        const totalPages = Math.ceil((totalRows || 0) / PAGE_SIZE)
-        let allLancamentos: any[] = []
-
-        for (let pageStart = 0; pageStart < totalPages; pageStart += FETCH_CONCURRENCY) {
-          const pageEnd = Math.min(pageStart + FETCH_CONCURRENCY, totalPages)
-          const pageIndexes: number[] = []
-          for (let page = pageStart; page < pageEnd; page++) {
-            pageIndexes.push(page)
-          }
-
-          const pageResults = await Promise.all(
-            pageIndexes.map((page) =>
-              supabase
-                .from('lancamentos_contabeis')
-                .select('periodo, cta_debito, cta_credito, c_custo_deb, c_custo_crd, ocorren_deb, ocorren_crd, valor')
-                .in('periodo', periodosConsulta)
-                .order('id', { ascending: true })
-                .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
-            )
-          )
-
-          for (const result of pageResults) {
-            if (result.error) return { data: null, error: result.error }
-            if (result.data?.length) {
-              allLancamentos = allLancamentos.concat(result.data)
-            }
-          }
-        }
-
-        return { data: allLancamentos, error: null }
-      })(),
+      // Agrega saldos diretamente no banco via RPC — substitui fetch de 200k+ linhas brutas
+      supabase.rpc('get_saldos_dre', { periodos: periodosConsulta }).limit(200000),
       supabase
         .from('entidades_dre')
         .select('codigo, descricao')

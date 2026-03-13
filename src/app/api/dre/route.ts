@@ -344,7 +344,7 @@ export async function GET(request: NextRequest) {
 
     const periodosConsulta = [...new Set([...periodosConsultaAtual, ...periodosConsultaComparativo])]
 
-    const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes] = await Promise.all([
+    const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes, centrosCustoRes] = await Promise.all([
       supabase
         .from('estrutura_dre')
         .select('id, codigo_conta, descricao_conta, codigo_cta_superior, nivel, nivel_visualizacao')

@@ -595,7 +595,52 @@ export async function GET(request: NextRequest) {
       mapa.set(key, arr)
     }
 
+    const analiticoLinhasByContaCc = new Map<string, Set<string>>()
+    for (const mapItem of dePara) {
+      const contaMapeada = normalizeComparableCode(mapItem.codigo_conta_contabil)
+      if (!contaMapeada) continue
+
+      const classeMapeada = (classeByConta.get(contaMapeada) || '').toLowerCase()
+      if (!classeMapeada.startsWith('anal')) continue
+
+      const linhaMapeada = normalizeCode(mapItem.codigo_linha_dre)
+      const ccMapeado = normalizeComparableCode(mapItem.codigo_centro_custo)
+      const key = `${contaMapeada}|${ccMapeado || '*'}`
+
+      if (!analiticoLinhasByContaCc.has(key)) {
+        analiticoLinhasByContaCc.set(key, new Set<string>())
+      }
+      analiticoLinhasByContaCc.get(key)!.add(linhaMapeada)
+    }
+
+    const hasAnaliticoDestinoDiferente = (
+      contaLancamento: string,
+      ccMapeadoRaw: string,
+      linhaAtualRaw: string
+    ): boolean => {
+      const conta = normalizeComparableCode(contaLancamento)
+      if (!conta) return false
+
+      const cc = normalizeComparableCode(ccMapeadoRaw)
+      const linhaAtual = normalizeCode(linhaAtualRaw)
+      const keys = cc ? [`${conta}|${cc}`, `${conta}|*`] : [`${conta}|*`]
+
+      for (const key of keys) {
+        const linhas = analiticoLinhasByContaCc.get(key)
+        if (!linhas || linhas.size === 0) continue
+
+        for (const linha of linhas) {
+          if (linha !== linhaAtual) {
+            return true
+          }
+        }
+      }
+
+      return false
+    }
+
     const getValorMapeamento = (
+      linhaRaw: string,
       periodo: string,
       contaRaw: string,
       ccRaw: string,
@@ -619,6 +664,16 @@ export async function GET(request: NextRequest) {
           if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.entidade, cc)) {
             continue
           }
+
+          // Regra de negócio: conta analítica com destino próprio prevalece sobre agregado sintético.
+          if (
+            normalizeComparableCode(entry.conta) !== conta &&
+            String(classeContaMapeada || '').toLowerCase().startsWith('sint') &&
+            hasAnaliticoDestinoDiferente(entry.conta, ccRaw, linhaRaw)
+          ) {
+            continue
+          }
+
           encontrouEntidade = true
           const cond =
             condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
@@ -643,6 +698,15 @@ export async function GET(request: NextRequest) {
           if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta) || !codesMatch(entry.cc, cc)) {
             continue
           }
+
+          if (
+            normalizeComparableCode(entry.conta) !== conta &&
+            String(classeContaMapeada || '').toLowerCase().startsWith('sint') &&
+            hasAnaliticoDestinoDiferente(entry.conta, ccRaw, linhaRaw)
+          ) {
+            continue
+          }
+
           const cond =
             condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
             condNormalByConta.get(conta)
@@ -665,6 +729,15 @@ export async function GET(request: NextRequest) {
         if (!contaMatchesMapeamento(entry.conta, conta, classeContaMapeada, contaSuperiorByConta)) {
           continue
         }
+
+        if (
+          normalizeComparableCode(entry.conta) !== conta &&
+          String(classeContaMapeada || '').toLowerCase().startsWith('sint') &&
+          hasAnaliticoDestinoDiferente(entry.conta, ccRaw, linhaRaw)
+        ) {
+          continue
+        }
+
         const cond =
           condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
           condNormalByConta.get(conta)
@@ -697,7 +770,7 @@ export async function GET(request: NextRequest) {
         let valorAtualTotal = 0
         for (let i = 0; i < MONTH_KEYS.length; i++) {
           const periodoMes = `${periodoAtual}-${MONTH_KEYS[i]}`
-          const valorMes = getValorMapeamento(periodoMes, conta, cc, classeContaMapeada)
+          const valorMes = getValorMapeamento(linhaNorm, periodoMes, conta, cc, classeContaMapeada)
           valorAtualTotal += valorMes
           somarNoMapaMensal(acumuladoPorLinhaMensalAtual, linha, i, valorMes)
         }
@@ -707,7 +780,7 @@ export async function GET(request: NextRequest) {
           let valorAnteriorTotal = 0
           for (let i = 0; i < MONTH_KEYS.length; i++) {
             const periodoMesAnterior = `${periodoComparativo}-${MONTH_KEYS[i]}`
-            const valorMesAnterior = getValorMapeamento(periodoMesAnterior, conta, cc, classeContaMapeada)
+            const valorMesAnterior = getValorMapeamento(linhaNorm, periodoMesAnterior, conta, cc, classeContaMapeada)
             valorAnteriorTotal += valorMesAnterior
             somarNoMapaMensal(acumuladoPorLinhaMensalAnterior, linha, i, valorMesAnterior)
           }
@@ -716,14 +789,14 @@ export async function GET(request: NextRequest) {
       } else {
         let valorAtualTotal = 0
         for (const periodo of periodosConsultaAtual) {
-          valorAtualTotal += getValorMapeamento(periodo, conta, cc, classeContaMapeada)
+          valorAtualTotal += getValorMapeamento(linhaNorm, periodo, conta, cc, classeContaMapeada)
         }
         somarNoMapa(acumuladoPorLinhaAtual, linha, valorAtualTotal)
 
         if (periodoComparativo) {
           let valorAnteriorTotal = 0
           for (const periodo of periodosConsultaComparativo) {
-            valorAnteriorTotal += getValorMapeamento(periodo, conta, cc, classeContaMapeada)
+            valorAnteriorTotal += getValorMapeamento(linhaNorm, periodo, conta, cc, classeContaMapeada)
           }
           somarNoMapa(acumuladoPorLinhaAnterior, linha, valorAnteriorTotal)
         }

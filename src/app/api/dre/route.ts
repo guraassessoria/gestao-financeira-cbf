@@ -380,7 +380,7 @@ export async function GET(request: NextRequest) {
     const estrutura = estruturaRes.data || []
     const dePara = deParaRes.data || []
     const contas = contasRes.data || []
-    const lancamentos = lancamentosRes.data || []
+    const saldosRpc: Array<{ periodo: string; conta: string; cc: string; entidade: string; total_deb: number; total_cred: number }> = lancamentosRes.data || []
     const entidades = entidadesRes.data || []
     const centrosCusto = centrosCustoRes.data || []
 

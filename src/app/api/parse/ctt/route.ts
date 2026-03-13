@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
       classe: c.classe,
       cond_normal: c.cond_normal,
       cc_superior: c.cc_superior,
+      ocorrencia: c.ocorrencia ?? null,
       bloqueado: c.bloqueado,
     }))
 

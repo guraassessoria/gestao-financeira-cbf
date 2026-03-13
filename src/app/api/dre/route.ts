@@ -232,9 +232,6 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url)
     const requestedPeriod = url.searchParams.get('periodo')
     const visao = normalizeVisaoPeriodo(url.searchParams.get('visao'))
-    const PAGE_SIZE = 1000
-    const FETCH_CONCURRENCY = 8
-
     // Caminho rápido: reaproveita períodos já calculados no upload CT2 (evita varrer toda a tabela)
     let periodosMensaisDisponiveis: string[] = []
     const { data: latestCt2Upload } = await supabase
@@ -451,50 +448,27 @@ export async function GET(request: NextRequest) {
     const saldoContaCcPeriodo = new Map<string, Saldo>()
     const saldoContaEntidadePeriodo = new Map<string, Saldo>()
 
-    for (const l of lancamentos) {
-      const periodo = l.periodo
-      const valor = Number(l.valor || 0)
+    // saldosRpc já vem pré-agregado pelo banco (GROUP BY conta+cc+entidade)
+    for (const row of saldosRpc) {
+      const { periodo, conta, cc, entidade } = row
+      const deb = Number(row.total_deb || 0)
+      const cred = Number(row.total_cred || 0)
+      const contaNorm = normalizeCode(conta)
 
-      if (l.cta_debito) {
-        const contaDeb = normalizeCode(l.cta_debito)
-        addSaldo(saldoContaPeriodo, `${periodo}|${contaDeb}`, 'debito', valor)
-        if (l.c_custo_deb) {
-          addSaldo(
-            saldoContaCcPeriodo,
-            `${periodo}|${contaDeb}|${normalizeCode(l.c_custo_deb)}`,
-            'debito',
-            valor
-          )
-        }
-        if (l.ocorren_deb) {
-          addSaldo(
-            saldoContaEntidadePeriodo,
-            `${periodo}|${contaDeb}|${normalizeCode(l.ocorren_deb)}`,
-            'debito',
-            valor
-          )
-        }
+      // Saldo por conta (sem dimensão CC/entidade)
+      addSaldo(saldoContaPeriodo, `${periodo}|${contaNorm}`, 'debito', deb)
+      addSaldo(saldoContaPeriodo, `${periodo}|${contaNorm}`, 'credito', cred)
+
+      // Saldo por conta + CC
+      if (cc) {
+        addSaldo(saldoContaCcPeriodo, `${periodo}|${contaNorm}|${normalizeCode(cc)}`, 'debito', deb)
+        addSaldo(saldoContaCcPeriodo, `${periodo}|${contaNorm}|${normalizeCode(cc)}`, 'credito', cred)
       }
 
-      if (l.cta_credito) {
-        const contaCred = normalizeCode(l.cta_credito)
-        addSaldo(saldoContaPeriodo, `${periodo}|${contaCred}`, 'credito', valor)
-        if (l.c_custo_crd) {
-          addSaldo(
-            saldoContaCcPeriodo,
-            `${periodo}|${contaCred}|${normalizeCode(l.c_custo_crd)}`,
-            'credito',
-            valor
-          )
-        }
-        if (l.ocorren_crd) {
-          addSaldo(
-            saldoContaEntidadePeriodo,
-            `${periodo}|${contaCred}|${normalizeCode(l.ocorren_crd)}`,
-            'credito',
-            valor
-          )
-        }
+      // Saldo por conta + entidade (ocorrência)
+      if (entidade) {
+        addSaldo(saldoContaEntidadePeriodo, `${periodo}|${contaNorm}|${normalizeCode(entidade)}`, 'debito', deb)
+        addSaldo(saldoContaEntidadePeriodo, `${periodo}|${contaNorm}|${normalizeCode(entidade)}`, 'credito', cred)
       }
     }
 

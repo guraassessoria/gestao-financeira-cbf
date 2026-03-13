@@ -360,8 +360,7 @@ def parse_ct2(path: str) -> dict[str, Any]:
         if periodo:
             periodos.add(periodo)
 
-        valor_raw = r.get("Valor", "0")
-        valor = _parse_valor(valor_raw)
+        valor = valor_pre
         valor_m1 = _parse_valor(r.get("Valor Moeda1", valor_raw))
 
         lancamentos.append({

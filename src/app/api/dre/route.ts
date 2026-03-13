@@ -398,6 +398,9 @@ export async function GET(request: NextRequest) {
       supabase
         .from('entidades_dre')
         .select('codigo, descricao'),
+      supabase
+        .from('centros_custo')
+        .select('cod_cc, ocorrencia'),
     ])
 
     if (estruturaRes.error) return NextResponse.json({ error: estruturaRes.error.message }, { status: 500 })
@@ -405,12 +408,22 @@ export async function GET(request: NextRequest) {
     if (contasRes.error) return NextResponse.json({ error: contasRes.error.message }, { status: 500 })
     if (lancamentosRes.error) return NextResponse.json({ error: lancamentosRes.error.message }, { status: 500 })
     if (entidadesRes.error) return NextResponse.json({ error: entidadesRes.error.message }, { status: 500 })
+    if (centrosCustoRes.error) return NextResponse.json({ error: centrosCustoRes.error.message }, { status: 500 })
 
     const estrutura = estruturaRes.data || []
     const dePara = deParaRes.data || []
     const contas = contasRes.data || []
     const lancamentos = lancamentosRes.data || []
     const entidades = entidadesRes.data || []
+    const centrosCusto = centrosCustoRes.data || []
+
+    // Mapa: cod_cc normalizado → código de ocorrência normalizado (do campo "Ocorrencia" do CTT)
+    const ocorrenciaByCc = new Map<string, string>()
+    for (const cc of centrosCusto) {
+      if (cc.ocorrencia) {
+        ocorrenciaByCc.set(normalizeCode(cc.cod_cc), normalizeComparableCode(cc.ocorrencia))
+      }
+    }
 
     const estruturaByCodeNormalized = new Map<string, string>()
     for (const e of estrutura) {

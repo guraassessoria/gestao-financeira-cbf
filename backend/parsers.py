@@ -213,6 +213,7 @@ def parse_ctt(path: str) -> list[dict[str, Any]]:
             "classe":      _normalizar_classe_cc(r.get("Classe", "Analítico")),
             "cond_normal": r.get("Cond Normal", "Despesa") if r.get("Cond Normal", "") in ("Receita", "Despesa") else "Despesa",
             "cc_superior": r.get("CC Superior", "") or None,
+            "ocorrencia":  r.get("Ocorrencia", "") or None,
             "bloqueado":   r.get("CC Bloq", "").lower() in ("s", "sim", "bloqueado", "1"),
         })
     return ccs

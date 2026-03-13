@@ -21,7 +21,8 @@
     "check-unused": "node scripts/js/find-unused-files.js",
     "organize-unused": "node scripts/js/organize-unused-files.js",
     "cleanup": "npm run check-unused && npm run organize-unused",
-    "sync": "powershell -ExecutionPolicy Bypass -File scripts/commit.ps1"
+    "sync": "powershell -ExecutionPolicy Bypass -File scripts/commit.ps1",
+    "sync:auto": "powershell -ExecutionPolicy Bypass -File scripts/auto-sync.ps1"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.15.0",

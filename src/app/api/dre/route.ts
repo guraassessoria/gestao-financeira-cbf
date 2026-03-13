@@ -57,7 +57,8 @@ function codesMatch(left: string | null | undefined, right: string | null | unde
   const a = normalizeComparableCode(left)
   const b = normalizeComparableCode(right)
   if (!a || !b) return false
-  return a === b || a.startsWith(b) || b.startsWith(a)
+  // Comparação estrita para evitar agregação indevida entre contas/CC parecidos.
+  return a === b
 }
 
 function fixMojibake(value: string | null | undefined): string {
@@ -79,11 +80,35 @@ function normalizeVisaoPeriodo(value: string | null): VisaoPeriodo {
   return value === 'mensal' ? 'mensal' : 'anual'
 }
 
+function normalizeContaNaturezaCode(value: string | null | undefined): string {
+  return String(value || '')
+    .trim()
+    .replace(/\D/g, '')
+    .replace(/^0+(?=\d)/, '')
+}
+
+function inferCondNormalByConta(contaCode: string | null | undefined, condNormal: string | null | undefined): 'Devedora' | 'Credora' {
+  const cond = (condNormal || '').toLowerCase()
+  if (cond.startsWith('dev')) return 'Devedora'
+  if (cond.startsWith('cred')) return 'Credora'
+
+  // Regras por grupo de conta sem considerar separadores (ex.: 3.1, 3.1.01 -> 31, 3101)
+  const code = normalizeContaNaturezaCode(contaCode)
+  if (code.startsWith('31')) return 'Credora' // Receita
+  if (code.startsWith('2')) return 'Credora' // Passivo
+  if (code.startsWith('32') || code.startsWith('33') || code.startsWith('34')) return 'Devedora' // Custos/Despesas
+  if (code.startsWith('1')) return 'Devedora' // Ativo
+
+  return 'Credora'
+}
+
 function getSaldoNatureza(
   saldo: Saldo,
-  condNormal: string | null | undefined
+  condNormal: string | null | undefined,
+  contaCode: string | null | undefined
 ): number {
-  if ((condNormal || '').toLowerCase().startsWith('dev')) {
+  const natureza = inferCondNormalByConta(contaCode, condNormal)
+  if (natureza === 'Devedora') {
     return saldo.debito - saldo.credito
   }
   return saldo.credito - saldo.debito
@@ -506,7 +531,7 @@ export async function GET(request: NextRequest) {
         const saldoEntidadeExato = saldoContaEntidadePeriodo.get(`${periodo}|${normalizeCode(contaRaw)}|${normalizeCode(ccRaw)}`)
         if (saldoEntidadeExato) {
           const cond = condNormalByConta.get(conta)
-          return getSaldoNatureza(saldoEntidadeExato, cond)
+          return getSaldoNatureza(saldoEntidadeExato, cond, contaRaw)
         }
 
         const entidadeEntries = saldoContaEntidadeEntriesByPeriodo.get(periodo) || []
@@ -521,7 +546,7 @@ export async function GET(request: NextRequest) {
           const cond =
             condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
             condNormalByConta.get(conta)
-          totalEntidade += getSaldoNatureza(entry.saldo, cond)
+          totalEntidade += getSaldoNatureza(entry.saldo, cond, entry.conta)
         }
 
         if (encontrouEntidade) {
@@ -531,7 +556,7 @@ export async function GET(request: NextRequest) {
         const saldoCcExato = saldoContaCcPeriodo.get(`${periodo}|${normalizeCode(contaRaw)}|${normalizeCode(ccRaw)}`)
         if (saldoCcExato) {
           const cond = condNormalByConta.get(conta)
-          return getSaldoNatureza(saldoCcExato, cond)
+          return getSaldoNatureza(saldoCcExato, cond, contaRaw)
         }
 
         const entries = saldoContaCcEntriesByPeriodo.get(periodo) || []
@@ -544,7 +569,7 @@ export async function GET(request: NextRequest) {
           const cond =
             condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
             condNormalByConta.get(conta)
-          total += getSaldoNatureza(entry.saldo, cond)
+          total += getSaldoNatureza(entry.saldo, cond, entry.conta)
         }
 
         return total
@@ -553,7 +578,7 @@ export async function GET(request: NextRequest) {
       const saldoContaExato = saldoContaPeriodo.get(`${periodo}|${normalizeCode(contaRaw)}`)
       if (saldoContaExato) {
         const cond = condNormalByConta.get(conta)
-        return getSaldoNatureza(saldoContaExato, cond)
+        return getSaldoNatureza(saldoContaExato, cond, contaRaw)
       }
 
       const entries = saldoContaEntriesByPeriodo.get(periodo) || []
@@ -566,7 +591,7 @@ export async function GET(request: NextRequest) {
         const cond =
           condNormalByConta.get(normalizeComparableCode(entry.conta)) ||
           condNormalByConta.get(conta)
-        total += getSaldoNatureza(entry.saldo, cond)
+        total += getSaldoNatureza(entry.saldo, cond, entry.conta)
       }
 
       return total

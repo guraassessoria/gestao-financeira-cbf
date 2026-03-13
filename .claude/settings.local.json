@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node .tmp/reimport_ctt.js)"
+      "Bash(node .tmp/reimport_ctt.js)",
+      "Bash(node .tmp/verify_selecao_principal.js)"
     ]
   }
 }

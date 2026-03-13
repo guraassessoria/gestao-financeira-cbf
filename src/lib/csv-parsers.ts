@@ -219,6 +219,7 @@ export async function parseCTTTS(path: string): Promise<PythonResult<Array<Recor
           classe: normalizarClasseCC(pick(r, ['Classe'], 'Analítico')),
           cond_normal: cond === 'Receita' || cond === 'Despesa' ? cond : 'Despesa',
           cc_superior: pick(r, ['CC Superior']) || null,
+          ocorrencia: pick(r, ['Ocorrencia']) || null,
           bloqueado: ['s', 'sim', 'bloqueado', '1'].includes(normalizeKey(pick(r, ['CC Bloq']))),
         }
       })

@@ -53,7 +53,7 @@ function DREList() {
       if (params?.visao) searchParams.set('visao', params.visao)
 
       const query = searchParams.toString() ? `?${searchParams.toString()}` : ''
-      const res = await fetch(`/api/dre${query}`, { cache: 'no-store' })
+      const res = await fetch(`/api/dre${query}`)
       const data = (await res.json()) as DREApiResponse
 
       if (!res.ok) {

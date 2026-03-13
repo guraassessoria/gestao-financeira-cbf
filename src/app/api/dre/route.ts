@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { createServiceClient } from '@/lib/supabase'
+import { dreCache } from '@/lib/dre-cache'
 import type { LinhaDRECalculada } from '@/types'
 
 export const maxDuration = 300

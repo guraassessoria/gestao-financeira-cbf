@@ -16,41 +16,38 @@ function env() {
 
 (async () => {
   const e = env();
+  // Extract project ref from URL: https://<ref>.supabase.co
+  const match = (e.NEXT_PUBLIC_SUPABASE_URL || '').match(/https:\/\/([^.]+)\.supabase\.co/);
+  if (!match) { console.error('Could not extract project ref from URL'); process.exit(1); }
+  const projectRef = match[1];
+
+  const sql = `ALTER TABLE centros_custo ADD COLUMN IF NOT EXISTS ocorrencia VARCHAR(20) DEFAULT NULL;
+COMMENT ON COLUMN centros_custo.ocorrencia IS 'Código de ocorrência/entidade (CV0) associado a este centro de custo. Campo Ocorrencia do arquivo CTT TOTVS.';`;
+
+  const apiUrl = `https://api.supabase.com/v1/projects/${projectRef}/database/query`;
+
+  console.log('Project ref:', projectRef);
+  console.log('Running SQL via Management API...');
+
+  const resp = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + e.SUPABASE_SERVICE_ROLE_KEY,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query: sql }),
+  });
+  const text = await resp.text();
+  console.log('Status:', resp.status);
+  console.log('Response:', text);
+
+  // Verify
   const sb = createClient(e.NEXT_PUBLIC_SUPABASE_URL, e.SUPABASE_SERVICE_ROLE_KEY);
-
-  const sql = `ALTER TABLE centros_custo ADD COLUMN IF NOT EXISTS ocorrencia VARCHAR(20) DEFAULT NULL`;
-
-  // Try via Supabase SQL API (requires pg_net or direct postgres)
-  const url = e.NEXT_PUBLIC_SUPABASE_URL.replace('.supabase.co', '.supabase.co') + '/rest/v1/';
-
-  // Use the pg REST endpoint
-  const pgUrl = e.NEXT_PUBLIC_SUPABASE_URL + '/pg/query';
-
-  try {
-    const resp = await fetch(pgUrl, {
-      method: 'POST',
-      headers: {
-        'apikey': e.SUPABASE_SERVICE_ROLE_KEY,
-        'Authorization': 'Bearer ' + e.SUPABASE_SERVICE_ROLE_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query: sql }),
-    });
-    const text = await resp.text();
-    console.log('pg/query status:', resp.status, text);
-  } catch (err) {
-    console.log('pg/query failed:', err.message);
-  }
-
-  // Verify current state
   const { data, error } = await sb.from('centros_custo').select('ocorrencia').limit(1);
   if (error) {
-    console.log('Column check error:', error.message);
-    if (error.message.includes('ocorrencia')) {
-      console.log('=> Column does NOT exist yet.');
-    }
+    console.log('\nVerification: column still missing -', error.message);
   } else {
-    console.log('=> Column "ocorrencia" already EXISTS in centros_custo.');
-    console.log('Sample row:', JSON.stringify(data));
+    console.log('\nVerification: column "ocorrencia" EXISTS.');
+    console.log('Sample:', JSON.stringify(data));
   }
 })();

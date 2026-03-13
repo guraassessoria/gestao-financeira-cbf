@@ -7,6 +7,7 @@ import { getServerSession } from 'next-auth'
 import { parseCT2TS } from '@/lib/csv-parsers'
 import { createServiceClient } from '@/lib/supabase'
 import { authOptions } from '@/lib/auth'
+import { dreCache } from '@/lib/dre-cache'
 
 export const maxDuration = 300 // 5 minutos — necessário para arquivos grandes (Vercel Pro/Hobby limita a 60s se não configurado)
 

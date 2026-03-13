@@ -1,11 +1,12 @@
-﻿import csv
-import json
+﻿import json
 import os
+import sys
 from pathlib import Path
 import requests
+
+sys.path.append(str(Path('.').resolve()))
 from backend.parsers import parse_ct2
 
-# Load env
 env = {}
 env_path = Path('.env.local')
 if env_path.exists():
@@ -15,7 +16,6 @@ if env_path.exists():
             continue
         k, v = t.split('=', 1)
         env[k.strip()] = v.strip()
-
 env.update(os.environ)
 
 base_url = env.get('NEXT_PUBLIC_SUPABASE_URL')
@@ -40,7 +40,6 @@ print('Parser errors:', len(parsed.get('erros', [])))
 if not rows:
     raise SystemExit('No rows parsed from CT2 base file')
 
-# Replace base
 print('Deleting existing lancamentos_contabeis...')
 del_resp = requests.delete(
     f'{base_url}/rest/v1/lancamentos_contabeis?id=not.is.null',
@@ -53,7 +52,6 @@ if del_resp.status_code >= 300:
 
 chunk_size = 1000
 inserted = 0
-
 print('Inserting chunks...')
 for i in range(0, len(rows), chunk_size):
     chunk = rows[i:i+chunk_size]
@@ -93,7 +91,7 @@ for i in range(0, len(rows), chunk_size):
         raise SystemExit(1)
 
     inserted += len(payload)
-    if inserted % 10000 == 0:
+    if inserted % 20000 == 0:
         print('Inserted', inserted)
 
 print('DONE. Inserted rows:', inserted)

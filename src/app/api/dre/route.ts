@@ -233,6 +233,13 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url)
     const requestedPeriod = url.searchParams.get('periodo')
     const visao = normalizeVisaoPeriodo(url.searchParams.get('visao'))
+
+    const cache = dreCache()
+    const cacheKey = `dre|${requestedPeriod ?? ''}|${visao}`
+    const cached = cache.get(cacheKey)
+    if (cached) {
+      return NextResponse.json(cached)
+    }
     // Caminho rápido: reaproveita períodos já calculados no upload CT2 (evita varrer toda a tabela)
     let periodosMensaisDisponiveis: string[] = []
     const { data: latestCt2Upload } = await supabase
@@ -643,13 +650,15 @@ export async function GET(request: NextRequest) {
 
     const linhas = estrutura.map((linha) => toLinhaDRE(byCodigo.get(linha.codigo_conta)!))
 
-    return NextResponse.json({
+    const responseData = {
       periodosDisponiveis: periodosExibicao,
       periodo: periodoAtual,
       periodoComparativo,
       visao,
       linhas,
-    })
+    }
+    cache.set(cacheKey, responseData)
+    return NextResponse.json(responseData)
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Erro interno' },

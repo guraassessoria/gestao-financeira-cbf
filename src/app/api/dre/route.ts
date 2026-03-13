@@ -281,6 +281,9 @@ function toLinhaDRE(no: NoDRE): LinhaDRECalculada {
 
 export async function GET(request: NextRequest) {
   try {
+      const PAGE_SIZE = 1000
+      const FETCH_CONCURRENCY = 8
+
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Não autenticado' }, { status: 401 })
@@ -295,7 +298,7 @@ export async function GET(request: NextRequest) {
     let periodosMensaisDisponiveis: string[] = []
     const { data: latestCt2Upload } = await supabase
       .from('upload_logs')
-      .select('periodos')
+      .select('periodos, uploaded_at')
       .eq('tipo_arquivo', 'CT2')
       .eq('status', 'ok')
       .order('uploaded_at', { ascending: false })

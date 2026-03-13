@@ -236,6 +236,7 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    dreCache().invalidateAll()
     return NextResponse.json({
       success: true,
       uploadId,

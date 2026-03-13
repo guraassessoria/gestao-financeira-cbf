@@ -320,7 +320,8 @@ export async function GET(request: NextRequest) {
 
     const periodosConsulta = [...new Set([...periodosConsultaAtual, ...periodosConsultaComparativo])]
 
-    const [estruturaRes, deParaRes, contasRes, lancamentosRes, entidadesRes, centrosCustoRes] = await Promise.all([
+    // Busca tabelas de referência em paralelo com o RPC de saldos paginado
+    const [estruturaRes, deParaRes, contasRes, entidadesRes, centrosCustoRes] = await Promise.all([
       supabase
         .from('estrutura_dre')
         .select('id, codigo_conta, descricao_conta, codigo_cta_superior, nivel, nivel_visualizacao')
@@ -334,8 +335,6 @@ export async function GET(request: NextRequest) {
         .from('contas_contabeis')
         .select('cod_conta, cond_normal, classe, cta_superior')
         .limit(10000),
-      // Agrega saldos diretamente no banco via RPC — substitui fetch de 200k+ linhas brutas
-      supabase.rpc('get_saldos_dre', { periodos: periodosConsulta }).limit(200000),
       supabase
         .from('entidades_dre')
         .select('codigo, descricao')
@@ -345,6 +344,18 @@ export async function GET(request: NextRequest) {
         .select('cod_cc, ocorrencia')
         .limit(10000),
     ])
+
+    // Busca saldos agregados via RPC com paginação (Supabase limita a 1000 linhas por request)
+    const RPC_PAGE = 1000
+    let saldosRpc: Array<{ periodo: string; conta: string; cc: string; entidade: string; total_deb: number; total_cred: number }> = []
+    for (let start = 0; ; start += RPC_PAGE) {
+      const { data: page, error: rpcErr } = await supabase
+        .rpc('get_saldos_dre', { periodos: periodosConsulta })
+        .range(start, start + RPC_PAGE - 1)
+      if (rpcErr) return NextResponse.json({ error: rpcErr.message }, { status: 500 })
+      if (page?.length) saldosRpc = saldosRpc.concat(page)
+      if (!page || page.length < RPC_PAGE) break
+    }
 
     if (estruturaRes.error) return NextResponse.json({ error: estruturaRes.error.message }, { status: 500 })
     if (deParaRes.error) return NextResponse.json({ error: deParaRes.error.message }, { status: 500 })
